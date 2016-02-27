@@ -2,15 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#ifndef GOOGLE_PROTOBUF_RPC_ENV_H__
-#define GOOGLE_PROTOBUF_RPC_ENV_H__
+#ifndef PROTORPC_ENV_H__
+#define PROTORPC_ENV_H__
 
 #include <stdarg.h>
 #include <google/protobuf/stubs/common.h>
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 class LIBPROTOBUF_EXPORT Env {
  public:
@@ -44,9 +42,7 @@ class LIBPROTOBUF_EXPORT Env {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Env);
 };
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
 
-#endif // GOOGLE_PROTOBUF_RPC_ENV_H__
+#endif // PROTORPC_ENV_H__
 

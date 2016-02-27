@@ -41,7 +41,7 @@ set(PB_RPC_HDR
     #./src/protorpc/rpc_wire.h
     #./src/protorpc/rpc_conn.h
 
-    #./src/protorpc/rpc_env.h
+    ./src/protorpc/rpc_env.h
     ./src/protorpc/rpc_crc32.h
 )
 set(PB_RPC_SRC
@@ -53,7 +53,7 @@ set(PB_RPC_SRC
     #./src/protorpc/rpc_wire.cc
     #./src/protorpc/rpc_conn.cc
 
-    #./src/protorpc/rpc_env.cc
+    ./src/protorpc/rpc_env.cc
     ./src/protorpc/rpc_crc32.cc
 )
 

@@ -2,17 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "google/protobuf/rpc/rpc_env.h"
+#include "protorpc/rpc_env.h"
 
 #if (defined(_WIN32) || defined(_WIN64))
-#  include "google/protobuf/rpc/rpc_env_windows.cc"
+#  include "protorpc/rpc_env_windows.cc"
 #else
-#  include "google/protobuf/rpc/rpc_env_posix.cc"
+#  include "protorpc/rpc_env_posix.cc"
 #endif
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 void Env::Logf(const char* fmt, ...) {
   va_list ap;
@@ -21,6 +19,4 @@ void Env::Logf(const char* fmt, ...) {
   va_end(ap);
 }
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
