@@ -2,7 +2,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package google.protobuf.rpc.wire;
+syntax = "proto3";
+
+package protorpc.wire;
 
 //
 // protorpc wire format wrapper
@@ -27,29 +29,21 @@ package google.protobuf.rpc.wire;
 // Recv ResponseHeader: recvFrame(zsock, hdr, max_hdr_len, 0)
 // Recv Response: recvFrame(zsock, body, hdr.snappy_compressed_response_len, 0)
 //
-// 5. Header Size
-// len(RequestHeader)  < Const.max_header_len.default
-// len(ResponseHeader) < Const.max_header_len.default
-//
-
-message Const {
-	optional uint32 max_header_len = 1 [default = 1024];
-}
 
 message RequestHeader {
-	optional uint64 id = 1;
-	optional string method = 2;
+	uint64 id = 1;
+	string method = 2;
 
-	optional uint32 raw_request_len = 3;
-	optional uint32 snappy_compressed_request_len = 4;
-	optional uint32 checksum = 5;
+	uint32 raw_request_len = 3;
+	uint32 snappy_compressed_request_len = 4;
+	uint32 checksum = 5;
 }
 
 message ResponseHeader {
-	optional uint64 id = 1;
-	optional string error = 2;
+	uint64 id = 1;
+	string error = 2;
 
-	optional uint32 raw_response_len = 3;
-	optional uint32 snappy_compressed_response_len = 4;
-	optional uint32 checksum = 5;
+	uint32 raw_response_len = 3;
+	uint32 snappy_compressed_response_len = 4;
+	uint32 checksum = 5;
 }
