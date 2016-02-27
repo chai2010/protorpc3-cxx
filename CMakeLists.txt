@@ -8,9 +8,14 @@ if (NOT WIN32)
     add_definitions(-DHAVE_PTHREAD)
 endif()
 
-set(protobuf_source_dir ${CMAKE_CURRENT_SOURCE_DIR}/protobuf/protobuf-3.0.0-beta-2)
+set(protobuf_source_dir
+    ${CMAKE_CURRENT_SOURCE_DIR}/protobuf/protobuf-3.0.0-beta-2
+)
 
-include_directories(AFTER ${protobuf_source_dir}/src)
+include_directories(AFTER
+    ${protobuf_source_dir}/src
+    ./src
+)
 
 include(libprotobuf-lite.cmake)
 include(libprotobuf.cmake)
@@ -29,32 +34,32 @@ set(SNAPPY_SRC
 # rpc
 set(PB_RPC_HDR
     ./src/protorpc/wire.pb/wire.pb.h
-    ./src/protorpc/rpc_service.h
-    ./src/protorpc/rpc_server.h
-    ./src/protorpc/rpc_server_conn.h
-    ./src/protorpc/rpc_client.h
-    ./src/protorpc/rpc_wire.h
-    ./src/protorpc/rpc_conn.h
+    #./src/protorpc/rpc_service.h
+    #./src/protorpc/rpc_server.h
+    #./src/protorpc/rpc_server_conn.h
+    #./src/protorpc/rpc_client.h
+    #./src/protorpc/rpc_wire.h
+    #./src/protorpc/rpc_conn.h
 
-    ./src/protorpc/rpc_env.h
+    #./src/protorpc/rpc_env.h
     ./src/protorpc/rpc_crc32.h
 )
 set(PB_RPC_SRC
     ./src/protorpc/wire.pb/wire.pb.cc
-    ./src/protorpc/rpc_service.cc
-    ./src/protorpc/rpc_server.cc
-    ./src/protorpc/rpc_server_conn.cc
-    ./src/protorpc/rpc_client.cc
-    ./src/protorpc/rpc_wire.cc
-    ./src/protorpc/rpc_conn.cc
+    #./src/protorpc/rpc_service.cc
+    #./src/protorpc/rpc_server.cc
+    #./src/protorpc/rpc_server_conn.cc
+    #./src/protorpc/rpc_client.cc
+    #./src/protorpc/rpc_wire.cc
+    #./src/protorpc/rpc_conn.cc
 
-    ./src/protorpc/rpc_env.cc
+    #./src/protorpc/rpc_env.cc
     ./src/protorpc/rpc_crc32.cc
 )
 
-add_library(protorrpclib
-	#${PB_RPC_SRC}
-    #${PB_RPC_HDR}
+add_library(protorpclib
+	${PB_RPC_SRC}
+    ${PB_RPC_HDR}
 
     ${SNAPPY_SRC}
     ${SNAPPY_HDR}
@@ -84,4 +89,8 @@ add_executable(hiuis3hello
 
 	${libprotobuf_lite_files}
 	${libprotobuf_files}
+)
+
+target_link_libraries(hiuis3hello
+	protorpclib
 )

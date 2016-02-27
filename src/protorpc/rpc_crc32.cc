@@ -2,11 +2,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "google/protobuf/rpc/rpc_crc32.h"
+#include "protorpc/rpc_crc32.h"
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 /* The crc32 functions and data was originally written by Spencer
  * Garrett <srg@quick.com> and was gleaned from the PostgreSQL source
@@ -93,6 +91,4 @@ uint32_t HashCRC32(const char* data, size_t data_len) {
   return ~crc;
 }
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
