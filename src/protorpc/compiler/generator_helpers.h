@@ -7,8 +7,6 @@
 
 #include "protorpc/compiler/config.h"
 
-#include <google/protobuf/stubs/strutil.h>
-
 namespace protorpc_generator {
 
 inline bool StripSuffix(std::string *filename, const std::string &suffix) {
@@ -39,7 +37,7 @@ inline std::vector<std::string> tokenize(const std::string &input, const std::st
     return google::protobuf::Split(input, delimiters.c_str());
 }
 
-inline std::string CapitalizeFirstLetter(grpc::string s) {
+inline std::string CapitalizeFirstLetter(std::string s) {
     if (s.empty()) {
         return s;
     }
@@ -55,7 +53,7 @@ inline std::string LowercaseFirstLetter(std::string s) {
     return s;
 }
 
-inline grpc::string LowerUnderscoreToUpperCamel(std::string str) {
+inline std::string LowerUnderscoreToUpperCamel(std::string str) {
     std::vector<std::string> tokens = tokenize(str, "_");
     std::string result = "";
     for (unsigned int i = 0; i < tokens.size(); i++) {
