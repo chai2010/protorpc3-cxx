@@ -93,6 +93,10 @@ add_executable(protoc-gen-protorpc
 
 add_executable(hiuis3hello
 	./examples/hello.cc
+    ./examples/service.pb/echo.pb.h
+    ./examples/service.pb/echo.pb.cc
+    ./examples/service.pb/echo.protorpc.golden.h
+    ./examples/service.pb/echo.protorpc.golden.cc
 
 	${libprotobuf_lite_files}
 	${libprotobuf_files}
