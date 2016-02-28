@@ -82,7 +82,9 @@ add_executable(protoc-gen-protorpc
 	./src/protorpc/compiler/cpp_generator_helpers.h
 	./src/protorpc/compiler/cpp_generator.cc
 	./src/protorpc/compiler/cpp_generator.h
+    ./src/protorpc/compiler/cpp_plugin.h
     ./src/protorpc/compiler/cpp_plugin.cc
+    ./src/protorpc/compiler/main.cc
 
 	${libprotobuf_lite_files}
     ${libprotobuf_files}

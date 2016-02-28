@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+#pragma once
+
 #ifndef PROTORPC_COMPILER_GENERATOR_HELPERS_H
 #define PROTORPC_COMPILER_GENERATOR_HELPERS_H
 

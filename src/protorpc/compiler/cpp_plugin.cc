@@ -5,6 +5,8 @@
 // Generates cpp protorpc service interface out of Protobuf IDL.
 //
 
+#include "protorpc/compiler/cpp_plugin.h"
+
 #include "protorpc/compiler/config.h"
 #include "protorpc/compiler/cpp_generator_helpers.h"
 #include "protorpc/compiler/cpp_generator.h"
@@ -84,7 +86,7 @@ class CppProtorpcGenerator : public google::protobuf::compiler::CodeGenerator {
   }
 };
 
-int main(int argc, char *argv[]) {
-  CppProtorpcGenerator generator;
-  return google::protobuf::compiler::PluginMain(argc, argv, &generator);
+int cpp_plugin_Main(int argc, char* argv[]) {
+    CppProtorpcGenerator generator;
+    return google::protobuf::compiler::PluginMain(argc, argv, &generator);
 }
