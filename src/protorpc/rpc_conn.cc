@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "google/protobuf/rpc/rpc_conn.h"
+#include "protorpc/rpc_conn.h"
 
 #if (defined(_WIN32) || defined(_WIN64))
 #  include "./rpc_conn_windows.cc"
@@ -10,9 +10,7 @@
 #  include "./rpc_conn_posix.cc"
 #endif
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 // MaxVarintLenN is the maximum length of a varint-encoded N-bit integer.
 static const int maxVarintLen16 = 3;
@@ -21,21 +19,21 @@ static const int maxVarintLen64 = 10;
 
 // PutUvarint encodes a uint64 into buf and returns the number of bytes written.
 // If the buffer is too small, PutUvarint will panic.
-static int putUvarint(uint8 buf[], uint64 x) {
+static int putUvarint(uint8_t buf[], uint64_t x) {
   auto i = 0;
   while(x >= 0x80) {
-    buf[i] = uint8(x) | 0x80;
+    buf[i] = uint8_t(x) | 0x80;
     x >>= 7;
     i++;
   }
-  buf[i] = uint8(x);
+  buf[i] = uint8_t(x);
   return i + 1;
 }
 
 // ReadUvarint reads an encoded unsigned integer from r and returns it as a uint64.
-bool Conn::ReadUvarint(uint64* rx) {
-  uint64 x;
-  uint8 s, b;
+bool Conn::ReadUvarint(uint64_t* rx) {
+  uint64_t x;
+  uint8_t s, b;
 
   *rx = 0;
   x = 0;
@@ -50,10 +48,10 @@ bool Conn::ReadUvarint(uint64* rx) {
         logf("protorpc.Conn.ReadUvarint: varint overflows a 64-bit integer\n");
         return false;
       }
-      *rx = (x | uint64(b)<<s);
+      *rx = (x | uint64_t(b)<<s);
       return true;
     }
-    x |= (uint64(b&0x7f) << s);
+    x |= (uint64_t(b&0x7f) << s);
     s += 7;
   }
   logf("not reachable!\n");
@@ -62,8 +60,8 @@ bool Conn::ReadUvarint(uint64* rx) {
 
 // PutUvarint encodes a uint64 into buf and returns the number of bytes written.
 // If the buffer is too small, PutUvarint will panic.
-bool Conn::WriteUvarint(uint64 x) {
-  uint8 buf[maxVarintLen64];
+bool Conn::WriteUvarint(uint64_t x) {
+  uint8_t buf[maxVarintLen64];
   int n = putUvarint(buf, x);
   return Write(buf, n);
 }
@@ -71,7 +69,7 @@ bool Conn::WriteUvarint(uint64 x) {
 // readProto reads a uvarint size and then a protobuf from r.
 // If the size read is zero, nothing more is read.
 bool Conn::ReadProto(::google::protobuf::Message* pb) {
-  uint64 size;
+  uint64_t size;
   if(!ReadUvarint(&size)) {
     return false;
   }
@@ -92,14 +90,14 @@ bool Conn::ReadProto(::google::protobuf::Message* pb) {
 // only a zero size is written.
 bool Conn::WritePorto(const ::google::protobuf::Message* pb) {
   if(pb == NULL) {
-    return WriteUvarint(uint64(0));
+    return WriteUvarint(uint64_t(0));
   }
 
   std::string data;
   if(!pb->SerializeToString(&data)) {
     return false;
   }
-  if(!WriteUvarint(uint64(data.size()))) {
+  if(!WriteUvarint(uint64_t(data.size()))) {
     return false;
   }
   if(!Write((void*)data.data(), data.size())) {
@@ -109,7 +107,7 @@ bool Conn::WritePorto(const ::google::protobuf::Message* pb) {
 }
 
 bool Conn::RecvFrame(::std::string* data) {
-  uint64 size;
+  uint64_t size;
   if(!ReadUvarint(&size)) {
     return false;
   }
@@ -125,10 +123,10 @@ bool Conn::RecvFrame(::std::string* data) {
 
 bool Conn::SendFrame(const ::std::string* data) {
   if(data == NULL) {
-    return WriteUvarint(uint64(0));
+    return WriteUvarint(uint64_t(0));
   }
 
-  if(!WriteUvarint(uint64(data->size()))) {
+  if(!WriteUvarint(uint64_t(data->size()))) {
     return false;
   }
   if(!Write((void*)data->data(), data->size())) {
@@ -146,6 +144,4 @@ void Conn::logf(const char* fmt, ...) {
   }
 }
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc

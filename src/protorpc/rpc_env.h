@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+#pragma once
+
 #ifndef PROTORPC_ENV_H__
 #define PROTORPC_ENV_H__
 

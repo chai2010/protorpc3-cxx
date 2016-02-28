@@ -2,16 +2,16 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#ifndef GOOGLE_PROTOBUF_RPC_SERVER_CONN_H__
-#define GOOGLE_PROTOBUF_RPC_SERVER_CONN_H__
+#pragma once
 
-#include <google/protobuf/rpc/rpc_env.h>
-#include <google/protobuf/rpc/rpc_conn.h>
-#include <google/protobuf/rpc/rpc_service.h>
+#ifndef PROTORPC_SERVER_CONN_H__
+#define PROTORPC_SERVER_CONN_H__
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+#include "protorpc/rpc_env.h"
+#include "protorpc/rpc_conn.h"
+#include "protorpc/rpc_service.h"
+
+namespace protorpc {
 
 class Server;
 
@@ -26,7 +26,7 @@ class ServerConn {
   static void ServeProc(void* p);
   Error ProcessOneCall(Conn* receiver);
 
-  const ::google::protobuf::rpc::Error callMethod(
+  const ::protorpc::Error callMethod(
     const std::string& method,
     const ::google::protobuf::Message* request,
     ::google::protobuf::Message* response);
@@ -39,9 +39,7 @@ class ServerConn {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ServerConn);
 };
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
 
-#endif  // GOOGLE_PROTOBUF_RPC_SERVER_CONN_H__
+#endif  // PROTORPC_SERVER_CONN_H__
 

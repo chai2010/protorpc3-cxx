@@ -2,12 +2,10 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "google/protobuf/rpc/rpc_client.h"
-#include <google/protobuf/rpc/rpc_wire.h>
+#include "protorpc/rpc_client.h"
+#include "protorpc/rpc_wire.h"
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 Client::Client(const char* host, int port, Env* env):
   conn_(0,env), host_(host), port_(port), seq_(0) {
@@ -17,26 +15,26 @@ Client::~Client() {
   Close();
 }
 
-const ::google::protobuf::rpc::Error Client::CallMethod(
+const ::protorpc::Error Client::CallMethod(
   const std::string& method,
   const ::google::protobuf::Message* request,
   ::google::protobuf::Message* response
 ) {
   if(!checkMothdValid(method, request, response)) {
-    return ::google::protobuf::rpc::Error::New(
+    return ::protorpc::Error::New(
       std::string("protorpc.Client.CallMethod: Invalid method, method: ") + method
     );
   }
   return callMethod(method, request, response);
 }
 
-const ::google::protobuf::rpc::Error Client::CallMethod(
+const ::protorpc::Error Client::CallMethod(
   const ::google::protobuf::MethodDescriptor* method,
   const ::google::protobuf::Message* request,
   ::google::protobuf::Message* response
 ) {
   if(!checkMothdValid(method, request, response)) {
-    return ::google::protobuf::rpc::Error::New(
+    return ::protorpc::Error::New(
       std::string("protorpc.Client.CallMethod: Invalid method, method: ") + Service::GetServiceMethodName(method)
     );
   }
@@ -50,14 +48,14 @@ void Client::Close() {
 
 // --------------------------------------------------------
 
-const ::google::protobuf::rpc::Error Client::callMethod(
+const ::protorpc::Error Client::callMethod(
   const std::string& method,
   const ::google::protobuf::Message* request,
   ::google::protobuf::Message* response
 ) {
   if(!conn_.IsValid()) {
     if(!conn_.DialTCP(host_.c_str(), port_)) {
-      return ::google::protobuf::rpc::Error::New(
+      return ::protorpc::Error::New(
         std::string("protorpc.Client.callMethod: DialTCP fail, ") +
         std::string("host: ") + host_ + std::string(":") + std::to_string(static_cast<long long>(port_))
       );
@@ -66,7 +64,7 @@ const ::google::protobuf::rpc::Error Client::callMethod(
 
   Error err;
 
-  uint64 id = seq_++;
+  uint64_t id = seq_++;
   wire::ResponseHeader respHeader;
 
   // send request
@@ -120,7 +118,5 @@ bool Client::checkMothdValid(
   return true;
 }
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
 

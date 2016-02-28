@@ -2,16 +2,17 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#ifndef GOOGLE_PROTOBUF_RPC_SERVICE_H__
-#define GOOGLE_PROTOBUF_RPC_SERVICE_H__
+#pragma once
+
+#ifndef PROTORPC_SERVICE_H__
+#define PROTORPC_SERVICE_H__
+
+#include "protorpc/wire.pb/wire.pb.h"
 
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/stubs/common.h>
-#include <google/protobuf/rpc/wire.pb/wire.pb.h>
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 // Error
 class LIBPROTOBUF_EXPORT Error {
@@ -53,7 +54,7 @@ class LIBPROTOBUF_EXPORT Caller {
   // * If the RPC succeeded, "response" contains the response returned by
   //   the server.
   // * If the RPC failed, "response"'s contents are undefined.
-  virtual const ::google::protobuf::rpc::Error CallMethod(
+  virtual const ::protorpc::Error CallMethod(
     const ::google::protobuf::MethodDescriptor* method,
     const ::google::protobuf::Message* request,
     ::google::protobuf::Message* response) = 0;
@@ -113,8 +114,6 @@ class LIBPROTOBUF_EXPORT Service: public Caller {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Service);
 };
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
 
-#endif  // GOOGLE_PROTOBUF_RPC_SERVICE_H__
+#endif  // PROTORPC_SERVICE_H__

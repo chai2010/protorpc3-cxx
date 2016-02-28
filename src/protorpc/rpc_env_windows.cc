@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "google/protobuf/rpc/rpc_env.h"
+#include "protorpc/rpc_env.h"
 
 #include <google/protobuf/stubs/once.h>
 
@@ -13,9 +13,7 @@
 #  pragma warning(disable:4996)
 #endif
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 namespace {
 struct ThreadParam {
@@ -84,6 +82,4 @@ Env* Env::Default() {
   return static_cast<Env *>(g_env_default);
 }
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc

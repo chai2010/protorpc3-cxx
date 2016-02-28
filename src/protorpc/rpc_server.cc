@@ -2,15 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "google/protobuf/rpc/rpc_server.h"
-#include "google/protobuf/rpc/rpc_env.h"
+#include "protorpc/rpc_server.h"
+#include "protorpc/rpc_env.h"
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 Server::Server(Env* env): env_(env) {
-  MutexLock locker(&mutex_);
+  ::google::protobuf::internal::MutexLock locker(&mutex_);
   if(env_ == NULL) {
     env_ = Env::Default();
   }
@@ -54,7 +52,7 @@ Service* Server::FindService(const std::string& method) {
 }
 
 // Find method descriptor by method name
-MethodDescriptor* Server::FindMethodDescriptor(const std::string& method) {
+::google::protobuf::MethodDescriptor* Server::FindMethodDescriptor(const std::string& method) {
   auto method_desc = findMethodDescriptor(method);
   if(method_desc == NULL) {
     return NULL;
@@ -77,7 +75,7 @@ void Server::BindAndServe(int port, int backlog) {
   }
 }
 
-MethodDescriptor* Server::findMethodDescriptor(const std::string& method) {
+::google::protobuf::MethodDescriptor* Server::findMethodDescriptor(const std::string& method) {
   auto it = service_method_map_.find(Service::CamelCase(method));
   if(it == service_method_map_.end()) {
     return NULL;
@@ -93,7 +91,7 @@ Service* Server::findService(const ::google::protobuf::MethodDescriptor* method)
 }
 
 // Call Service
-const ::google::protobuf::rpc::Error Server::CallMethod(
+const ::protorpc::Error Server::CallMethod(
   const std::string& method_name,
   const ::google::protobuf::Message* request,
   ::google::protobuf::Message* response
@@ -109,7 +107,7 @@ const ::google::protobuf::rpc::Error Server::CallMethod(
   return service->CallMethod(method, request, response);
 }
 
-const ::google::protobuf::rpc::Error Server::CallMethod(
+const ::protorpc::Error Server::CallMethod(
   const ::google::protobuf::MethodDescriptor* method,
   const ::google::protobuf::Message* request,
   ::google::protobuf::Message* response
@@ -124,7 +122,5 @@ const ::google::protobuf::rpc::Error Server::CallMethod(
   return service->CallMethod(method, request, response);
 }
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
 

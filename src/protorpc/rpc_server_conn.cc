@@ -2,13 +2,11 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "google/protobuf/rpc/rpc_server_conn.h"
-#include <google/protobuf/rpc/rpc_server.h>
-#include <google/protobuf/rpc/rpc_wire.h>
+#include "protorpc/rpc_server_conn.h"
+#include "protorpc/rpc_server.h"
+#include "protorpc/rpc_wire.h"
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 ServerConn::ServerConn(Server* server, Conn* conn, Env* env):
   server_(server), conn_(conn), env_(env) {
@@ -97,7 +95,5 @@ Error ServerConn::ProcessOneCall(Conn* receiver) {
   return Error::Nil();
 }
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
 

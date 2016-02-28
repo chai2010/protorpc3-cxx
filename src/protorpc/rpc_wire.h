@@ -2,18 +2,21 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#ifndef GOOGLE_PROTOBUF_RPC_WIRE_H__
-#define GOOGLE_PROTOBUF_RPC_WIRE_H__
+#pragma once
+
+#ifndef PROTORPC_WIRE_H__
+#define PROTORPC_WIRE_H__
 
 #include <stddef.h>
 #include <stdint.h>
-#include <google/protobuf/rpc/rpc_service.h>
-#include <google/protobuf/rpc/rpc_conn.h>
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+#include "protorpc/rpc_service.h"
+#include "protorpc/rpc_conn.h"
+
+namespace protorpc {
 namespace wire {
+
+static const int kMaxHeaderLen = 1024;
 
 Error SendRequest(Conn* conn,
   uint64_t id, const std::string& serviceMethod,
@@ -40,9 +43,7 @@ Error RecvResponseBody(Conn* conn,
 );
 
 }  // namespace wire
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
 
-#endif // GOOGLE_PROTOBUF_RPC_WIRE_H__
+#endif // PROTORPC_WIRE_H__
 

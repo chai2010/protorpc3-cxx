@@ -2,15 +2,17 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#ifndef GOOGLE_PROTOBUF_RPC_CONN_H__
-#define GOOGLE_PROTOBUF_RPC_CONN_H__
+#pragma once
+
+#ifndef PROTORPC_CONN_H__
+#define PROTORPC_CONN_H__
 
 #include <stdarg.h>
+#include <stdint.h>
+
 #include <google/protobuf/message.h>
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 class Env;
 
@@ -34,8 +36,8 @@ class Conn {
   bool Read(void* buf, int len);
   bool Write(void* buf, int len);
 
-  bool ReadUvarint(uint64* x);
-  bool WriteUvarint(uint64 x);
+  bool ReadUvarint(uint64_t* x);
+  bool WriteUvarint(uint64_t x);
 
   bool ReadProto(::google::protobuf::Message* pb);
   bool WritePorto(const ::google::protobuf::Message* pb);
@@ -50,9 +52,7 @@ class Conn {
   Env* env_;
 };
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc
 
-#endif // GOOGLE_PROTOBUF_RPC_CONN_H__
+#endif // PROTORPC_CONN_H__
 

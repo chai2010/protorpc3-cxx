@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "google/protobuf/rpc/rpc_conn.h"
-#include "google/protobuf/rpc/rpc_env.h"
+#include "protorpc/rpc_conn.h"
+#include "protorpc/rpc_env.h"
 
 #include <string.h>
 #include <errno.h>
@@ -26,9 +26,7 @@
 # define NI_MAXSERV 32
 #endif
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 // [static]
 // Initialize socket services
@@ -145,6 +143,4 @@ bool Conn::Write(void* buf, int len) {
   return true;
 }
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc

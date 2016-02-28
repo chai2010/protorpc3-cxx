@@ -2,13 +2,11 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "google/protobuf/rpc/rpc_service.h"
+#include "protorpc/rpc_service.h"
 
 #include <google/protobuf/descriptor.h>
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 
 // [static]
 // See: goprotobuf/protoc-gen-go/generator/generator.go#CamelCase
@@ -64,6 +62,4 @@ std::string Service::GetServiceMethodName(const ::google::protobuf::MethodDescri
   return CamelCase(method->service()->name()) + "." + CamelCase(method->name());
 }
 
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc

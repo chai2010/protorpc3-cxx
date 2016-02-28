@@ -2,14 +2,12 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include <google/protobuf/rpc/rpc_wire.h>
-#include <google/protobuf/rpc/rpc_crc32.h>
+#include "protorpc/rpc_wire.h"
+#include "protorpc/rpc_crc32.h"
 
 #include "./snappy/protorpc-snappy.h"
 
-namespace google {
-namespace protobuf {
-namespace rpc {
+namespace protorpc {
 namespace wire {
 
 Error SendRequest(Conn* conn,
@@ -43,7 +41,7 @@ Error SendRequest(Conn* conn,
   if(!header.SerializeToString(&pbHeader)) {
     return Error::New("protorpc.SendRequest: SerializeToString failed.");
   }
-  if(pbHeader.size() > Const::default_instance().max_header_len()) {
+  if(pbHeader.size() > kMaxHeaderLen) {
     return Error::New("protorpc.SendRequest: header larger than max_header_len.");
   }
 
@@ -68,7 +66,7 @@ Error RecvRequestHeader(Conn* conn,
   if(!conn->RecvFrame(&pbHeader)) {
     return Error::New("protorpc.RecvRequestHeader: RecvFrame failed.");
   }
-  if(pbHeader.size() > Const::default_instance().max_header_len()) {
+  if(pbHeader.size() > kMaxHeaderLen) {
     return Error::New("protorpc.RecvRequestHeader: RecvFrame larger than max_header_len.");
   }
 
@@ -145,7 +143,7 @@ Error SendResponse(Conn* conn,
   if(!header.SerializeToString(&pbHeader)) {
     return Error::New("protorpc.SendResponse: SerializeToString failed.");
   }
-  if(pbHeader.size() > Const::default_instance().max_header_len()) {
+  if(pbHeader.size() > kMaxHeaderLen) {
     return Error::New("protorpc.SendResponse: header larger than max_header_len.");
   }
 
@@ -170,7 +168,7 @@ Error RecvResponseHeader(Conn* conn,
   if(!conn->RecvFrame(&pbHeader)) {
     return Error::New("protorpc.RecvResponseHeader: RecvFrame failed.");
   }
-  if(pbHeader.size() > Const::default_instance().max_header_len()) {
+  if(pbHeader.size() > kMaxHeaderLen) {
     return Error::New("protorpc.RecvResponseHeader: RecvFrame larger than max_header_len.");
   }
 
@@ -217,6 +215,4 @@ Error RecvResponseBody(Conn* conn,
 }
 
 }  // namespace wire
-}  // namespace rpc
-}  // namespace protobuf
-}  // namespace google
+}  // namespace protorpc

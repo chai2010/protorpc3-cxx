@@ -34,24 +34,24 @@ set(SNAPPY_SRC
 # rpc
 set(PB_RPC_HDR
     ./src/protorpc/wire.pb/wire.pb.h
-    #./src/protorpc/rpc_service.h
-    #./src/protorpc/rpc_server.h
-    #./src/protorpc/rpc_server_conn.h
-    #./src/protorpc/rpc_client.h
-    #./src/protorpc/rpc_wire.h
-    #./src/protorpc/rpc_conn.h
+    ./src/protorpc/rpc_service.h
+    ./src/protorpc/rpc_server.h
+    ./src/protorpc/rpc_server_conn.h
+    ./src/protorpc/rpc_client.h
+    ./src/protorpc/rpc_wire.h
+    ./src/protorpc/rpc_conn.h
 
     ./src/protorpc/rpc_env.h
     ./src/protorpc/rpc_crc32.h
 )
 set(PB_RPC_SRC
     ./src/protorpc/wire.pb/wire.pb.cc
-    #./src/protorpc/rpc_service.cc
-    #./src/protorpc/rpc_server.cc
-    #./src/protorpc/rpc_server_conn.cc
-    #./src/protorpc/rpc_client.cc
-    #./src/protorpc/rpc_wire.cc
-    #./src/protorpc/rpc_conn.cc
+    ./src/protorpc/rpc_service.cc
+    ./src/protorpc/rpc_server.cc
+    ./src/protorpc/rpc_server_conn.cc
+    ./src/protorpc/rpc_client.cc
+    ./src/protorpc/rpc_wire.cc
+    ./src/protorpc/rpc_conn.cc
 
     ./src/protorpc/rpc_env.cc
     ./src/protorpc/rpc_crc32.cc
