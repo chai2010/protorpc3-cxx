@@ -55,7 +55,7 @@ class CppProtorpcGenerator : public google::protobuf::compiler::CodeGenerator {
         protorpc_cpp_generator::GetHeaderServices(file, generator_parameters) +
         protorpc_cpp_generator::GetHeaderEpilogue(file, generator_parameters);
     std::unique_ptr<google::protobuf::io::ZeroCopyOutputStream> header_output(
-        context->Open(file_name + ".grpc.pb.h"));
+        context->Open(file_name + ".protorpc.h"));
     google::protobuf::io::CodedOutputStream header_coded_out(
         header_output.get());
     header_coded_out.WriteRaw(header_code.data(), header_code.size());
@@ -66,7 +66,7 @@ class CppProtorpcGenerator : public google::protobuf::compiler::CodeGenerator {
         protorpc_cpp_generator::GetSourceServices(file, generator_parameters) +
         protorpc_cpp_generator::GetSourceEpilogue(file, generator_parameters);
     std::unique_ptr<google::protobuf::io::ZeroCopyOutputStream> source_output(
-        context->Open(file_name + ".grpc.pb.cc"));
+        context->Open(file_name + ".protorpc.cc"));
     google::protobuf::io::CodedOutputStream source_coded_out(
         source_output.get());
     source_coded_out.WriteRaw(source_code.data(), source_code.size());
