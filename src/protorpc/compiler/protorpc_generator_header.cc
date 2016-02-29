@@ -34,6 +34,8 @@ std::string GetHeaderPrologue(const google::protobuf::FileDescriptor *file, cons
 		printer.Print(vars, "// If you make any local change, they will be lost.\n");
 		printer.Print(vars, "// source: $filename$\n");
 		printer.Print(vars, "\n");
+		printer.Print(vars, "#pragma once\n");
+		printer.Print(vars, "\n");
 		printer.Print(vars, "#ifndef PROTORPC_$filename_identifier$__INCLUDED\n");
 		printer.Print(vars, "#define PROTORPC_$filename_identifier$__INCLUDED\n");
 		printer.Print(vars, "\n");
@@ -113,19 +115,20 @@ static void PrintHeaderServiceInterface(
 ) {
 	(*vars)["service_name"] = service->name();
 	(*vars)["service_full_name"] = service->full_name();
+	(*vars)["__"] = "\t"; // use tab for indent
 
 	printer->Print(*vars, "class $service_name$_Stub;\n");
 	printer->Print(*vars, "\n");
 	printer->Print(*vars, "class $service_name$: public ::protorpc::Service {\n");
-	printer->Print(*vars, " protected:\n");
-	printer->Print(*vars, "  // This class should be treated as an abstract interface.\n");
-	printer->Print(*vars, "  inline $service_name$() {}\n");
-	printer->Print(*vars, " public:\n");
-	printer->Print(*vars, "  virtual ~EchoService();\n");
+	printer->Print(*vars, "protected:\n");
+	printer->Print(*vars, "$__$// This class should be treated as an abstract interface.\n");
+	printer->Print(*vars, "$__$inline $service_name$() {}\n");
+	printer->Print(*vars, "public:\n");
+	printer->Print(*vars, "$__$virtual ~EchoService();\n");
 	printer->Print(*vars, "\n");
-	printer->Print(*vars, "  typedef EchoService_Stub Stub;\n");
+	printer->Print(*vars, "$__$typedef EchoService_Stub Stub;\n");
 	printer->Print(*vars, "\n");
-	printer->Print(*vars, "  static const ::google::protobuf::ServiceDescriptor* descriptor();\n");
+	printer->Print(*vars, "$__$static const ::google::protobuf::ServiceDescriptor* descriptor();\n");
 	printer->Print(*vars, "\n");
 
 	for(int i = 0; i < service->method_count(); i++) {
@@ -133,30 +136,30 @@ static void PrintHeaderServiceInterface(
 		(*vars)["method_input_type"]  = protorpc_generator::ClassName(service->method(i)->input_type(), true);
 		(*vars)["method_output_type"] = protorpc_generator::ClassName(service->method(i)->output_type(), true);
 
-		printer->Print(*vars, "  virtual const ::protorpc::Error $method_name$(\n");
-		printer->Print(*vars, "    $method_input_type$* request,\n");
-		printer->Print(*vars, "    $method_output_type$* response\n");
-		printer->Print(*vars, "  );\n");
+		printer->Print(*vars, "$__$virtual const ::protorpc::Error $method_name$(\n");
+		printer->Print(*vars, "$__$$__$$method_input_type$* request,\n");
+		printer->Print(*vars, "$__$$__$$method_output_type$* response\n");
+		printer->Print(*vars, "$__$);\n");
 	}
 
 	printer->Print(*vars, "\n");
-	printer->Print(*vars, "  // implements Service ----------------------------------------------\n");
+	printer->Print(*vars, "$__$// implements Service ----------------------------------------------\n");
 	printer->Print(*vars, "\n");
-	printer->Print(*vars, "  const ::google::protobuf::ServiceDescriptor* GetDescriptor();\n");
-	printer->Print(*vars, "  const ::protorpc::Error CallMethod(\n");
-	printer->Print(*vars, "    const ::google::protobuf::MethodDescriptor* method,\n");
-	printer->Print(*vars, "    const ::google::protobuf::Message* request,\n");
-	printer->Print(*vars, "    ::google::protobuf::Message* response\n");
-	printer->Print(*vars, "  );\n");
-	printer->Print(*vars, "  const ::google::protobuf::Message& GetRequestPrototype(\n");
-	printer->Print(*vars, "    const ::google::protobuf::MethodDescriptor* method\n");
-	printer->Print(*vars, "  ) const;\n");
-	printer->Print(*vars, "  const ::google::protobuf::Message& GetResponsePrototype(\n");
-	printer->Print(*vars, "    const ::google::protobuf::MethodDescriptor* method\n");
-	printer->Print(*vars, "  ) const;\n");
+	printer->Print(*vars, "$__$const ::google::protobuf::ServiceDescriptor* GetDescriptor();\n");
+	printer->Print(*vars, "$__$const ::protorpc::Error CallMethod(\n");
+	printer->Print(*vars, "$__$$__$const ::google::protobuf::MethodDescriptor* method,\n");
+	printer->Print(*vars, "$__$$__$const ::google::protobuf::Message* request,\n");
+	printer->Print(*vars, "$__$$__$::google::protobuf::Message* response\n");
+	printer->Print(*vars, "$__$);\n");
+	printer->Print(*vars, "$__$const ::google::protobuf::Message& GetRequestPrototype(\n");
+	printer->Print(*vars, "$__$$__$const ::google::protobuf::MethodDescriptor* method\n");
+	printer->Print(*vars, "$__$) const;\n");
+	printer->Print(*vars, "$__$const ::google::protobuf::Message& GetResponsePrototype(\n");
+	printer->Print(*vars, "$__$$__$const ::google::protobuf::MethodDescriptor* method\n");
+	printer->Print(*vars, "$__$) const;\n");
 	printer->Print(*vars, "\n");
-	printer->Print(*vars, " private:\n");
-	printer->Print(*vars, "  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService);\n");
+	printer->Print(*vars, "private:\n");
+	printer->Print(*vars, "$__$GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService);\n");
 	printer->Print(*vars, "}; // $service_name$\n");
 	printer->Print(*vars, "\n");
 }
@@ -168,14 +171,15 @@ static void PrintHeaderServiceStub(
 ) {
 	(*vars)["service_name"] = service->name();
 	(*vars)["service_full_name"] = service->full_name();
+	(*vars)["__"] = "\t"; // use tab for indent
 
 	printer->Print(*vars, "class $service_name$_Stub : public $service_name$ {\n");
-	printer->Print(*vars, " public:\n");
-	printer->Print(*vars, "  EchoService_Stub(::protorpc::Caller* client);\n");
-	printer->Print(*vars, "  EchoService_Stub(::protorpc::Caller* client, bool client_ownership);\n");
-	printer->Print(*vars, "  ~EchoService_Stub();\n");
+	printer->Print(*vars, "public:\n");
+	printer->Print(*vars, "$__$EchoService_Stub(::protorpc::Caller* client);\n");
+	printer->Print(*vars, "$__$EchoService_Stub(::protorpc::Caller* client, bool client_ownership);\n");
+	printer->Print(*vars, "$__$~EchoService_Stub();\n");
 	printer->Print(*vars, "\n");
-	printer->Print(*vars, "  // implements EchoService ------------------------------------------\n");
+	printer->Print(*vars, "$__$// implements EchoService ------------------------------------------\n");
 	printer->Print(*vars, "\n");
 
 	for(int i = 0; i < service->method_count(); i++) {
@@ -183,17 +187,17 @@ static void PrintHeaderServiceStub(
 		(*vars)["method_input_type"]  = protorpc_generator::ClassName(service->method(i)->input_type(), true);
 		(*vars)["method_output_type"] = protorpc_generator::ClassName(service->method(i)->output_type(), true);
 
-		printer->Print(*vars, "  const ::protorpc::Error $method_name$(\n");
-		printer->Print(*vars, "    $method_input_type$* request,\n");
-		printer->Print(*vars, "    $method_output_type$* response\n");
-		printer->Print(*vars, "  );\n");
+		printer->Print(*vars, "$__$const ::protorpc::Error $method_name$(\n");
+		printer->Print(*vars, "$__$$__$$method_input_type$* request,\n");
+		printer->Print(*vars, "$__$$__$$method_output_type$* response\n");
+		printer->Print(*vars, "$__$);\n");
 	}
 
 	printer->Print(*vars, "\n");
-	printer->Print(*vars, " private:\n");
-	printer->Print(*vars, "  ::protorpc::Caller* client_;\n");
-	printer->Print(*vars, "  bool owns_client_;\n");
-	printer->Print(*vars, "  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS($service_name$_Stub);\n");
+	printer->Print(*vars, "private:\n");
+	printer->Print(*vars, "$__$::protorpc::Caller* client_;\n");
+	printer->Print(*vars, "$__$bool owns_client_;\n");
+	printer->Print(*vars, "$__$GOOGLE_DISALLOW_EVIL_CONSTRUCTORS($service_name$_Stub);\n");
 	printer->Print(*vars, "}; // $service_name$_Stub\n");
 	printer->Print(*vars, "\n");
 }

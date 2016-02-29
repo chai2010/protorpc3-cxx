@@ -2,6 +2,8 @@
 // If you make any local change, they will be lost.
 // source: echo.proto
 
+#pragma once
+
 #ifndef PROTORPC_echo_2eproto__INCLUDED
 #define PROTORPC_echo_2eproto__INCLUDED
 
@@ -15,137 +17,137 @@ namespace service {
 class EchoService_Stub;
 
 class EchoService: public ::protorpc::Service {
- protected:
-  // This class should be treated as an abstract interface.
-  inline EchoService() {}
- public:
-  virtual ~EchoService();
+protected:
+	// This class should be treated as an abstract interface.
+	inline EchoService() {}
+public:
+	virtual ~EchoService();
 
-  typedef EchoService_Stub Stub;
+	typedef EchoService_Stub Stub;
 
-  static const ::google::protobuf::ServiceDescriptor* descriptor();
+	static const ::google::protobuf::ServiceDescriptor* descriptor();
 
-  virtual const ::protorpc::Error Echo(
-    ::service::EchoRequest* request,
-    ::service::EchoResponse* response
-  );
-  virtual const ::protorpc::Error EchoTwice(
-    ::service::EchoRequest* request,
-    ::service::EchoResponse* response
-  );
+	virtual const ::protorpc::Error Echo(
+		::service::EchoRequest* request,
+		::service::EchoResponse* response
+	);
+	virtual const ::protorpc::Error EchoTwice(
+		::service::EchoRequest* request,
+		::service::EchoResponse* response
+	);
 
-  // implements Service ----------------------------------------------
+	// implements Service ----------------------------------------------
 
-  const ::google::protobuf::ServiceDescriptor* GetDescriptor();
-  const ::protorpc::Error CallMethod(
-    const ::google::protobuf::MethodDescriptor* method,
-    const ::google::protobuf::Message* request,
-    ::google::protobuf::Message* response
-  );
-  const ::google::protobuf::Message& GetRequestPrototype(
-    const ::google::protobuf::MethodDescriptor* method
-  ) const;
-  const ::google::protobuf::Message& GetResponsePrototype(
-    const ::google::protobuf::MethodDescriptor* method
-  ) const;
+	const ::google::protobuf::ServiceDescriptor* GetDescriptor();
+	const ::protorpc::Error CallMethod(
+		const ::google::protobuf::MethodDescriptor* method,
+		const ::google::protobuf::Message* request,
+		::google::protobuf::Message* response
+	);
+	const ::google::protobuf::Message& GetRequestPrototype(
+		const ::google::protobuf::MethodDescriptor* method
+	) const;
+	const ::google::protobuf::Message& GetResponsePrototype(
+		const ::google::protobuf::MethodDescriptor* method
+	) const;
 
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService);
+private:
+	GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService);
 }; // EchoService
 
 class EchoService_Stub : public EchoService {
- public:
-  EchoService_Stub(::protorpc::Caller* client);
-  EchoService_Stub(::protorpc::Caller* client, bool client_ownership);
-  ~EchoService_Stub();
+public:
+	EchoService_Stub(::protorpc::Caller* client);
+	EchoService_Stub(::protorpc::Caller* client, bool client_ownership);
+	~EchoService_Stub();
 
-  // implements EchoService ------------------------------------------
+	// implements EchoService ------------------------------------------
 
-  const ::protorpc::Error Echo(
-    ::service::EchoRequest* request,
-    ::service::EchoResponse* response
-  );
-  const ::protorpc::Error EchoTwice(
-    ::service::EchoRequest* request,
-    ::service::EchoResponse* response
-  );
+	const ::protorpc::Error Echo(
+		::service::EchoRequest* request,
+		::service::EchoResponse* response
+	);
+	const ::protorpc::Error EchoTwice(
+		::service::EchoRequest* request,
+		::service::EchoResponse* response
+	);
 
- private:
-  ::protorpc::Caller* client_;
-  bool owns_client_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService_Stub);
+private:
+	::protorpc::Caller* client_;
+	bool owns_client_;
+	GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService_Stub);
 }; // EchoService_Stub
 
 class EchoService2_Stub;
 
 class EchoService2: public ::protorpc::Service {
- protected:
-  // This class should be treated as an abstract interface.
-  inline EchoService2() {}
- public:
-  virtual ~EchoService();
+protected:
+	// This class should be treated as an abstract interface.
+	inline EchoService2() {}
+public:
+	virtual ~EchoService();
 
-  typedef EchoService_Stub Stub;
+	typedef EchoService_Stub Stub;
 
-  static const ::google::protobuf::ServiceDescriptor* descriptor();
+	static const ::google::protobuf::ServiceDescriptor* descriptor();
 
-  virtual const ::protorpc::Error Echo(
-    ::service::EchoRequest* request,
-    ::service::EchoResponse* response
-  );
-  virtual const ::protorpc::Error EchoTwice(
-    ::service::EchoRequest* request,
-    ::service::EchoResponse* response
-  );
-  virtual const ::protorpc::Error Foo(
-    ::service::Message* request,
-    ::service::Message* response
-  );
+	virtual const ::protorpc::Error Echo(
+		::service::EchoRequest* request,
+		::service::EchoResponse* response
+	);
+	virtual const ::protorpc::Error EchoTwice(
+		::service::EchoRequest* request,
+		::service::EchoResponse* response
+	);
+	virtual const ::protorpc::Error Foo(
+		::service::Message* request,
+		::service::Message* response
+	);
 
-  // implements Service ----------------------------------------------
+	// implements Service ----------------------------------------------
 
-  const ::google::protobuf::ServiceDescriptor* GetDescriptor();
-  const ::protorpc::Error CallMethod(
-    const ::google::protobuf::MethodDescriptor* method,
-    const ::google::protobuf::Message* request,
-    ::google::protobuf::Message* response
-  );
-  const ::google::protobuf::Message& GetRequestPrototype(
-    const ::google::protobuf::MethodDescriptor* method
-  ) const;
-  const ::google::protobuf::Message& GetResponsePrototype(
-    const ::google::protobuf::MethodDescriptor* method
-  ) const;
+	const ::google::protobuf::ServiceDescriptor* GetDescriptor();
+	const ::protorpc::Error CallMethod(
+		const ::google::protobuf::MethodDescriptor* method,
+		const ::google::protobuf::Message* request,
+		::google::protobuf::Message* response
+	);
+	const ::google::protobuf::Message& GetRequestPrototype(
+		const ::google::protobuf::MethodDescriptor* method
+	) const;
+	const ::google::protobuf::Message& GetResponsePrototype(
+		const ::google::protobuf::MethodDescriptor* method
+	) const;
 
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService);
+private:
+	GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService);
 }; // EchoService2
 
 class EchoService2_Stub : public EchoService2 {
- public:
-  EchoService_Stub(::protorpc::Caller* client);
-  EchoService_Stub(::protorpc::Caller* client, bool client_ownership);
-  ~EchoService_Stub();
+public:
+	EchoService_Stub(::protorpc::Caller* client);
+	EchoService_Stub(::protorpc::Caller* client, bool client_ownership);
+	~EchoService_Stub();
 
-  // implements EchoService ------------------------------------------
+	// implements EchoService ------------------------------------------
 
-  const ::protorpc::Error Echo(
-    ::service::EchoRequest* request,
-    ::service::EchoResponse* response
-  );
-  const ::protorpc::Error EchoTwice(
-    ::service::EchoRequest* request,
-    ::service::EchoResponse* response
-  );
-  const ::protorpc::Error Foo(
-    ::service::Message* request,
-    ::service::Message* response
-  );
+	const ::protorpc::Error Echo(
+		::service::EchoRequest* request,
+		::service::EchoResponse* response
+	);
+	const ::protorpc::Error EchoTwice(
+		::service::EchoRequest* request,
+		::service::EchoResponse* response
+	);
+	const ::protorpc::Error Foo(
+		::service::Message* request,
+		::service::Message* response
+	);
 
- private:
-  ::protorpc::Caller* client_;
-  bool owns_client_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService2_Stub);
+private:
+	::protorpc::Caller* client_;
+	bool owns_client_;
+	GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService2_Stub);
 }; // EchoService2_Stub
 
 } // namespace service
