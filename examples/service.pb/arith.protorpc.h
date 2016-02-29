@@ -7,7 +7,8 @@
 
 #include "arith.pb.h"
 
-#include <protorpc/rpc_service.h>
+#include <protorpc/rpc_server.h>
+#include <protorpc/rpc_client.h>
 
 namespace service {
 

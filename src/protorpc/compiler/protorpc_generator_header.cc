@@ -44,7 +44,8 @@ std::string GetHeaderPrologue(const google::protobuf::FileDescriptor *file, cons
 }
 std::string GetHeaderIncludes(const google::protobuf::FileDescriptor *file, const Parameters &params) {
 	std::string temp = (
-		"#include <protorpc/rpc_service.h>\n"
+		"#include <protorpc/rpc_server.h>\n"
+		"#include <protorpc/rpc_client.h>\n"
 		"\n"
 	);
 	if (!file->package().empty()) {
