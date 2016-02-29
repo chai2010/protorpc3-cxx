@@ -38,7 +38,7 @@ service EchoService {
 }
 ```
 
-For C++, must ser `cc_generic_services` to `false`.
+For C++, must set `cc_generic_services` to `false`.
 
 Then use `protoc` and `protoc-gen-protorpc` plugin to generate "arith.proto.{h|cc}" file(include rpc stub):
 
