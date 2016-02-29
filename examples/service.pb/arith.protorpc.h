@@ -11,225 +11,85 @@
 
 namespace service {
 
-class ArithService GRPC_FINAL {
+class ArithService_Stub;
+
+class ArithService: public ::protorpc::Service {
+ protected:
+  // This class should be treated as an abstract interface.
+  inline ArithService() {}
  public:
-  class StubInterface {
-   public:
-    virtual ~StubInterface() {}
-    virtual ::grpc::Status add(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::service::ArithResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>> Asyncadd(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>>(AsyncaddRaw(context, request, cq));
-    }
-    virtual ::grpc::Status mul(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::service::ArithResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>> Asyncmul(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>>(AsyncmulRaw(context, request, cq));
-    }
-    virtual ::grpc::Status div(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::service::ArithResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>> Asyncdiv(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>>(AsyncdivRaw(context, request, cq));
-    }
-    virtual ::grpc::Status error(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::service::ArithResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>> Asyncerror(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>>(AsyncerrorRaw(context, request, cq));
-    }
-  private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>* AsyncaddRaw(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>* AsyncmulRaw(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>* AsyncdivRaw(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::service::ArithResponse>* AsyncerrorRaw(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) = 0;
-  };
-  class Stub GRPC_FINAL : public StubInterface {
-   public:
-    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    ::grpc::Status add(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::service::ArithResponse* response) GRPC_OVERRIDE;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>> Asyncadd(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>>(AsyncaddRaw(context, request, cq));
-    }
-    ::grpc::Status mul(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::service::ArithResponse* response) GRPC_OVERRIDE;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>> Asyncmul(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>>(AsyncmulRaw(context, request, cq));
-    }
-    ::grpc::Status div(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::service::ArithResponse* response) GRPC_OVERRIDE;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>> Asyncdiv(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>>(AsyncdivRaw(context, request, cq));
-    }
-    ::grpc::Status error(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::service::ArithResponse* response) GRPC_OVERRIDE;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>> Asyncerror(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>>(AsyncerrorRaw(context, request, cq));
-    }
+  virtual ~EchoService();
 
-   private:
-    std::shared_ptr< ::grpc::ChannelInterface> channel_;
-    ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>* AsyncaddRaw(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
-    ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>* AsyncmulRaw(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
-    ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>* AsyncdivRaw(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
-    ::grpc::ClientAsyncResponseReader< ::service::ArithResponse>* AsyncerrorRaw(::grpc::ClientContext* context, const ::service::ArithRequest& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
-    const ::grpc::RpcMethod rpcmethod_add_;
-    const ::grpc::RpcMethod rpcmethod_mul_;
-    const ::grpc::RpcMethod rpcmethod_div_;
-    const ::grpc::RpcMethod rpcmethod_error_;
-  };
-  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+  typedef EchoService_Stub Stub;
 
-  class Service : public ::grpc::Service {
-   public:
-    Service();
-    virtual ~Service();
-    virtual ::grpc::Status add(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response);
-    virtual ::grpc::Status mul(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response);
-    virtual ::grpc::Status div(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response);
-    virtual ::grpc::Status error(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response);
-  };
-  template <class BaseClass>
-  class WithAsyncMethod_add : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithAsyncMethod_add() {
-      ::grpc::Service::MarkMethodAsync(0);
-    }
-    ~WithAsyncMethod_add() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status add(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void Requestadd(::grpc::ServerContext* context, ::service::ArithRequest* request, ::grpc::ServerAsyncResponseWriter< ::service::ArithResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
-  class WithAsyncMethod_mul : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithAsyncMethod_mul() {
-      ::grpc::Service::MarkMethodAsync(1);
-    }
-    ~WithAsyncMethod_mul() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status mul(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void Requestmul(::grpc::ServerContext* context, ::service::ArithRequest* request, ::grpc::ServerAsyncResponseWriter< ::service::ArithResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
-  class WithAsyncMethod_div : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithAsyncMethod_div() {
-      ::grpc::Service::MarkMethodAsync(2);
-    }
-    ~WithAsyncMethod_div() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status div(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void Requestdiv(::grpc::ServerContext* context, ::service::ArithRequest* request, ::grpc::ServerAsyncResponseWriter< ::service::ArithResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
-  class WithAsyncMethod_error : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithAsyncMethod_error() {
-      ::grpc::Service::MarkMethodAsync(3);
-    }
-    ~WithAsyncMethod_error() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status error(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void Requesterror(::grpc::ServerContext* context, ::service::ArithRequest* request, ::grpc::ServerAsyncResponseWriter< ::service::ArithResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  typedef WithAsyncMethod_add<WithAsyncMethod_mul<WithAsyncMethod_div<WithAsyncMethod_error<Service > > > > AsyncService;
-  template <class BaseClass>
-  class WithGenericMethod_add : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithGenericMethod_add() {
-      ::grpc::Service::MarkMethodGeneric(0);
-    }
-    ~WithGenericMethod_add() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status add(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
-  template <class BaseClass>
-  class WithGenericMethod_mul : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithGenericMethod_mul() {
-      ::grpc::Service::MarkMethodGeneric(1);
-    }
-    ~WithGenericMethod_mul() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status mul(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
-  template <class BaseClass>
-  class WithGenericMethod_div : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithGenericMethod_div() {
-      ::grpc::Service::MarkMethodGeneric(2);
-    }
-    ~WithGenericMethod_div() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status div(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
-  template <class BaseClass>
-  class WithGenericMethod_error : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithGenericMethod_error() {
-      ::grpc::Service::MarkMethodGeneric(3);
-    }
-    ~WithGenericMethod_error() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status error(::grpc::ServerContext* context, const ::service::ArithRequest* request, ::service::ArithResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
-};
+  static const ::google::protobuf::ServiceDescriptor* descriptor();
+
+  virtual const ::protorpc::Error add(
+    ::service::ArithRequest* request,
+    ::service::ArithResponse* response
+  );
+  virtual const ::protorpc::Error mul(
+    ::service::ArithRequest* request,
+    ::service::ArithResponse* response
+  );
+  virtual const ::protorpc::Error div(
+    ::service::ArithRequest* request,
+    ::service::ArithResponse* response
+  );
+  virtual const ::protorpc::Error error(
+    ::service::ArithRequest* request,
+    ::service::ArithResponse* response
+  );
+
+  // implements Service ----------------------------------------------
+
+  const ::google::protobuf::ServiceDescriptor* GetDescriptor();
+  const ::protorpc::Error CallMethod(
+    const ::google::protobuf::MethodDescriptor* method,
+    const ::google::protobuf::Message* request,
+    ::google::protobuf::Message* response
+  );
+  const ::google::protobuf::Message& GetRequestPrototype(
+    const ::google::protobuf::MethodDescriptor* method
+  ) const;
+  const ::google::protobuf::Message& GetResponsePrototype(
+    const ::google::protobuf::MethodDescriptor* method
+  ) const;
+
+ private:
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService);
+}; // ArithService
+
+class ArithService_Stub : public ArithService {
+ public:
+  EchoService_Stub(::protorpc::Caller* client);
+  EchoService_Stub(::protorpc::Caller* client, bool client_ownership);
+  ~EchoService_Stub();
+
+  // implements EchoService ------------------------------------------
+
+  const ::protorpc::Error add(
+    ::service::ArithRequest* request,
+    ::service::ArithResponse* response
+  );
+  const ::protorpc::Error mul(
+    ::service::ArithRequest* request,
+    ::service::ArithResponse* response
+  );
+  const ::protorpc::Error div(
+    ::service::ArithRequest* request,
+    ::service::ArithResponse* response
+  );
+  const ::protorpc::Error error(
+    ::service::ArithRequest* request,
+    ::service::ArithResponse* response
+  );
+
+ private:
+  ::protorpc::Caller* client_;
+  bool owns_client_;
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ArithService_Stub);
+}; // ArithService_Stub
 
 } // namespace service
 

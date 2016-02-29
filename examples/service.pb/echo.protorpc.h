@@ -11,127 +11,69 @@
 
 namespace service {
 
-class EchoService GRPC_FINAL {
+class EchoService_Stub;
+
+class EchoService: public ::protorpc::Service {
+ protected:
+  // This class should be treated as an abstract interface.
+  inline EchoService() {}
  public:
-  class StubInterface {
-   public:
-    virtual ~StubInterface() {}
-    virtual ::grpc::Status Echo(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::service::EchoResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::EchoResponse>> AsyncEcho(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::EchoResponse>>(AsyncEchoRaw(context, request, cq));
-    }
-    virtual ::grpc::Status EchoTwice(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::service::EchoResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::EchoResponse>> AsyncEchoTwice(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::service::EchoResponse>>(AsyncEchoTwiceRaw(context, request, cq));
-    }
-  private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::service::EchoResponse>* AsyncEchoRaw(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::service::EchoResponse>* AsyncEchoTwiceRaw(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) = 0;
-  };
-  class Stub GRPC_FINAL : public StubInterface {
-   public:
-    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    ::grpc::Status Echo(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::service::EchoResponse* response) GRPC_OVERRIDE;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::EchoResponse>> AsyncEcho(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::EchoResponse>>(AsyncEchoRaw(context, request, cq));
-    }
-    ::grpc::Status EchoTwice(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::service::EchoResponse* response) GRPC_OVERRIDE;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::EchoResponse>> AsyncEchoTwice(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::service::EchoResponse>>(AsyncEchoTwiceRaw(context, request, cq));
-    }
+  virtual ~EchoService();
 
-   private:
-    std::shared_ptr< ::grpc::ChannelInterface> channel_;
-    ::grpc::ClientAsyncResponseReader< ::service::EchoResponse>* AsyncEchoRaw(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
-    ::grpc::ClientAsyncResponseReader< ::service::EchoResponse>* AsyncEchoTwiceRaw(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
-    const ::grpc::RpcMethod rpcmethod_Echo_;
-    const ::grpc::RpcMethod rpcmethod_EchoTwice_;
-  };
-  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+  typedef EchoService_Stub Stub;
 
-  class Service : public ::grpc::Service {
-   public:
-    Service();
-    virtual ~Service();
-    virtual ::grpc::Status Echo(::grpc::ServerContext* context, const ::service::EchoRequest* request, ::service::EchoResponse* response);
-    virtual ::grpc::Status EchoTwice(::grpc::ServerContext* context, const ::service::EchoRequest* request, ::service::EchoResponse* response);
-  };
-  template <class BaseClass>
-  class WithAsyncMethod_Echo : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithAsyncMethod_Echo() {
-      ::grpc::Service::MarkMethodAsync(0);
-    }
-    ~WithAsyncMethod_Echo() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Echo(::grpc::ServerContext* context, const ::service::EchoRequest* request, ::service::EchoResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestEcho(::grpc::ServerContext* context, ::service::EchoRequest* request, ::grpc::ServerAsyncResponseWriter< ::service::EchoResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
-  class WithAsyncMethod_EchoTwice : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithAsyncMethod_EchoTwice() {
-      ::grpc::Service::MarkMethodAsync(1);
-    }
-    ~WithAsyncMethod_EchoTwice() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status EchoTwice(::grpc::ServerContext* context, const ::service::EchoRequest* request, ::service::EchoResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestEchoTwice(::grpc::ServerContext* context, ::service::EchoRequest* request, ::grpc::ServerAsyncResponseWriter< ::service::EchoResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  typedef WithAsyncMethod_Echo<WithAsyncMethod_EchoTwice<Service > > AsyncService;
-  template <class BaseClass>
-  class WithGenericMethod_Echo : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithGenericMethod_Echo() {
-      ::grpc::Service::MarkMethodGeneric(0);
-    }
-    ~WithGenericMethod_Echo() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status Echo(::grpc::ServerContext* context, const ::service::EchoRequest* request, ::service::EchoResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
-  template <class BaseClass>
-  class WithGenericMethod_EchoTwice : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
-   public:
-    WithGenericMethod_EchoTwice() {
-      ::grpc::Service::MarkMethodGeneric(1);
-    }
-    ~WithGenericMethod_EchoTwice() GRPC_OVERRIDE {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status EchoTwice(::grpc::ServerContext* context, const ::service::EchoRequest* request, ::service::EchoResponse* response) GRPC_FINAL GRPC_OVERRIDE {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
-};
+  static const ::google::protobuf::ServiceDescriptor* descriptor();
+
+  virtual const ::protorpc::Error Echo(
+    ::service::EchoRequest* request,
+    ::service::EchoResponse* response
+  );
+  virtual const ::protorpc::Error EchoTwice(
+    ::service::EchoRequest* request,
+    ::service::EchoResponse* response
+  );
+
+  // implements Service ----------------------------------------------
+
+  const ::google::protobuf::ServiceDescriptor* GetDescriptor();
+  const ::protorpc::Error CallMethod(
+    const ::google::protobuf::MethodDescriptor* method,
+    const ::google::protobuf::Message* request,
+    ::google::protobuf::Message* response
+  );
+  const ::google::protobuf::Message& GetRequestPrototype(
+    const ::google::protobuf::MethodDescriptor* method
+  ) const;
+  const ::google::protobuf::Message& GetResponsePrototype(
+    const ::google::protobuf::MethodDescriptor* method
+  ) const;
+
+ private:
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService);
+}; // EchoService
+
+class EchoService_Stub : public EchoService {
+ public:
+  EchoService_Stub(::protorpc::Caller* client);
+  EchoService_Stub(::protorpc::Caller* client, bool client_ownership);
+  ~EchoService_Stub();
+
+  // implements EchoService ------------------------------------------
+
+  const ::protorpc::Error Echo(
+    ::service::EchoRequest* request,
+    ::service::EchoResponse* response
+  );
+  const ::protorpc::Error EchoTwice(
+    ::service::EchoRequest* request,
+    ::service::EchoResponse* response
+  );
+
+ private:
+  ::protorpc::Caller* client_;
+  bool owns_client_;
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService_Stub);
+}; // EchoService_Stub
 
 } // namespace service
 
