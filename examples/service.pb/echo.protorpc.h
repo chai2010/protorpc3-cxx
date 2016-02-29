@@ -133,7 +133,6 @@ class EchoService GRPC_FINAL {
   };
 };
 
-}  // namespace service
+} // namespace service
 
-
-#endif  // GRPC_echo_2eproto__INCLUDED
+#endif // PROTORPC_echo_2eproto__INCLUDED

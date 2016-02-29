@@ -231,7 +231,6 @@ class ArithService GRPC_FINAL {
   };
 };
 
-}  // namespace service
+} // namespace service
 
-
-#endif  // GRPC_arith_2eproto__INCLUDED
+#endif // PROTORPC_arith_2eproto__INCLUDED

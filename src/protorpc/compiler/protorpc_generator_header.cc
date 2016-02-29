@@ -7,7 +7,6 @@
 
 namespace protorpc_cpp_generator {
 
-
 std::string GetHeaderPrologue(const google::protobuf::FileDescriptor *file, const Parameters &params) {
 	std::string output;
 	{
@@ -32,14 +31,11 @@ std::string GetHeaderPrologue(const google::protobuf::FileDescriptor *file, cons
 	}
 	return output;
 }
-
-
 std::string GetHeaderIncludes(const google::protobuf::FileDescriptor *file, const Parameters &params) {
 	std::string temp = (
 		"#include <protorpc/rpc_service.h>\n"
 		"\n"
 	);
-
 	if (!file->package().empty()) {
 		auto parts = protorpc_generator::tokenize(file->package(), ".");
 		for (auto part = parts.begin(); part != parts.end(); part++) {
@@ -49,9 +45,36 @@ std::string GetHeaderIncludes(const google::protobuf::FileDescriptor *file, cons
 		}
 		temp.append("\n");
 	}
-
 	return temp;
 }
+std::string GetHeaderEpilogue(const google::protobuf::FileDescriptor *file, const Parameters &params) {
+	std::string output;
+	{
+		// Scope the output stream so it closes and finalizes output to the string.
+		google::protobuf::io::StringOutputStream output_stream(&output);
+		google::protobuf::io::Printer printer(&output_stream, '$');
+		std::map<std::string, std::string> vars;
+
+		vars["filename"] = file->name();
+		vars["filename_identifier"] = protorpc_generator::FilenameIdentifier(file->name());
+
+		if (!file->package().empty()) {
+			auto parts = protorpc_generator::tokenize(file->package(), ".");
+			for (auto part = parts.rbegin(); part != parts.rend(); part++) {
+				vars["part"] = *part;
+				printer.Print(vars, "} // namespace $part$\n");
+			}
+			printer.Print(vars, "\n");
+		} else {
+			printer.Print(vars, "\n");
+		}
+
+		printer.Print(vars, "#endif // PROTORPC_$filename_identifier$__INCLUDED\n");
+	}
+	return output;
+}
+
+
 
 
 void PrintHeaderClientMethodInterfaces(
@@ -702,34 +725,6 @@ std::string GetHeaderServices(const google::protobuf::FileDescriptor *file,
 }
 
 
-std::string GetHeaderEpilogue(const google::protobuf::FileDescriptor *file,
-							   const Parameters &params) {
-  std::string output;
-  {
-	// Scope the output stream so it closes and finalizes output to the string.
-	google::protobuf::io::StringOutputStream output_stream(&output);
-	google::protobuf::io::Printer printer(&output_stream, '$');
-	std::map<std::string, std::string> vars;
-
-	vars["filename"] = file->name();
-	vars["filename_identifier"] = protorpc_generator::FilenameIdentifier(file->name());
-
-	if (!file->package().empty()) {
-	  std::vector<std::string> parts =
-		  protorpc_generator::tokenize(file->package(), ".");
-
-	  for (auto part = parts.rbegin(); part != parts.rend(); part++) {
-		vars["part"] = *part;
-		printer.Print(vars, "}  // namespace $part$\n");
-	  }
-	  printer.Print(vars, "\n");
-	}
-
-	printer.Print(vars, "\n");
-	printer.Print(vars, "#endif  // GRPC_$filename_identifier$__INCLUDED\n");
-  }
-  return output;
-}
 
 }
 
