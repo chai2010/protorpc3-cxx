@@ -2,14 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "./service.pb/arith.pb.h"
-#include "./service.pb/echo.pb.h"
-
-#include "./service.pb/arith.protorpc.golden.h"
-#include "./service.pb/echo.protorpc.golden.h"
-
-#include <protorpc/rpc_server.h>
-#include <protorpc/rpc_client.h>
+#include "./service.pb/arith.protorpc.h"
+#include "./service.pb/echo.protorpc.h"
 
 int main() {
 	::protorpc::Client client("127.0.0.1", 1234);
@@ -23,7 +17,7 @@ int main() {
 	::service::EchoResponse echoReply;
 	::protorpc::Error err;
 
-	// EchoService.add
+	// ArithService.add
 	arithArgs.set_a(1);
 	arithArgs.set_b(2);
 	err = arithStub.add(&arithArgs, &arithReply);
@@ -36,7 +30,7 @@ int main() {
 		return -1;
 	}
 
-	// EchoService.mul
+	// ArithService.mul
 	arithArgs.set_a(3);
 	arithArgs.set_b(4);
 	err = arithStub.mul(&arithArgs, &arithReply);
@@ -49,7 +43,7 @@ int main() {
 		return -1;
 	}
 
-	// EchoService.div
+	// ArithService.div
 	arithArgs.set_a(13);
 	arithArgs.set_b(5);
 	err = arithStub.div(&arithArgs, &arithReply);
@@ -62,7 +56,7 @@ int main() {
 		return -1;
 	}
 
-	// EchoService.div: divide by zero
+	// ArithService.div: divide by zero
 	arithArgs.set_a(1);
 	arithArgs.set_b(0);
 	err = arithStub.div(&arithArgs, &arithReply);

@@ -4,14 +4,8 @@
 
 #include <stdio.h>
 
-#include <protorpc/rpc_server.h>
-#include <protorpc/rpc_client.h>
-
-#include "./service.pb/arith.pb.h"
-#include "./service.pb/echo.pb.h"
-
-#include "./service.pb/arith.protorpc.golden.h"
-#include "./service.pb/echo.protorpc.golden.h"
+#include "./service.pb/arith.protorpc.h"
+#include "./service.pb/echo.protorpc.h"
 
 struct ArithService: public service::ArithService {
 	inline ArithService() {}
