@@ -7,10 +7,10 @@
 #ifndef PROTORPC_COMPILER_CPP_GENERATOR_HELPERS_H
 #define PROTORPC_COMPILER_CPP_GENERATOR_HELPERS_H
 
-#include "protorpc/compiler/config.h"
 #include "protorpc/compiler/generator_helpers.h"
 
-#include <map>
+#include <google/protobuf/descriptor.h>
+#include <google/protobuf/descriptor.pb.h>
 
 namespace protorpc_cpp_generator {
 

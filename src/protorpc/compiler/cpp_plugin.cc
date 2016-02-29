@@ -6,8 +6,6 @@
 //
 
 #include "protorpc/compiler/cpp_plugin.h"
-
-#include "protorpc/compiler/config.h"
 #include "protorpc/compiler/cpp_generator_helpers.h"
 #include "protorpc/compiler/cpp_generator.h"
 

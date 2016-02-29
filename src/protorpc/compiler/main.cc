@@ -5,5 +5,5 @@
 #include "protorpc/compiler/cpp_plugin.h"
 
 int main(int argc, char *argv[]) {
-    return cpp_plugin_Main(argc, argv);
+	return cpp_plugin_Main(argc, argv);
 }
