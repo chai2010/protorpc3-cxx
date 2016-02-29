@@ -70,12 +70,22 @@ add_library(libprotorpc
 	${libprotobuf_lite_files}
 	${libprotobuf_files}
 )
+install(TARGETS libprotobuf_lite libprotobuf libprotoc libprotorpc
+	RUNTIME DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib
+)
 
 add_executable(protoc3
 	${protobuf_source_dir}/src/google/protobuf/compiler/main.cc
 )
 target_link_libraries(protoc3
 	libprotoc
+)
+install(TARGETS protoc3
+	RUNTIME DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
 add_executable(protoc-gen-protorpc
@@ -90,6 +100,11 @@ add_executable(protoc-gen-protorpc
 )
 target_link_libraries(protoc-gen-protorpc
 	libprotoc
+)
+install(TARGETS protoc-gen-protorpc
+	RUNTIME DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
 add_executable(protorpc-test
@@ -106,6 +121,11 @@ add_executable(protorpc-test
 target_link_libraries(protorpc-test
 	libprotorpc
 )
+install(TARGETS protorpc-test
+	RUNTIME DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib
+)
 
 add_executable(protorpc-server
 	./examples/rpcserver.cc
@@ -121,6 +141,11 @@ add_executable(protorpc-server
 target_link_libraries(protorpc-server
 	libprotorpc
 )
+install(TARGETS protorpc-server
+	RUNTIME DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib
+)
 
 add_executable(protorpc-client
 	./examples/rpcclient.cc
@@ -135,4 +160,9 @@ add_executable(protorpc-client
 )
 target_link_libraries(protorpc-client
 	libprotorpc
+)
+install(TARGETS protorpc-client
+	RUNTIME DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin
+	ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
