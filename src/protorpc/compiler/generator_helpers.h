@@ -11,6 +11,9 @@
 #include <google/protobuf/descriptor.pb.h>
 #include <google/protobuf/stubs/strutil.h>
 
+#include <map>
+#include <sstream>
+
 namespace protorpc_generator {
 
 template <class T>
@@ -141,6 +144,31 @@ inline MethodType GetMethodType(const google::protobuf::MethodDescriptor *method
 		} else {
 			return METHODTYPE_NO_STREAMING;
 		}
+	}
+}
+
+
+inline std::string DotsToColons(const std::string &name) {
+	return protorpc_generator::StringReplace(name, ".", "::");
+}
+
+inline std::string DotsToUnderscores(const std::string &name) {
+	return protorpc_generator::StringReplace(name, ".", "_");
+}
+
+inline std::string ClassName(const google::protobuf::Descriptor *descriptor, bool qualified) {
+	// Find "outer", the descriptor of the top-level message in which
+	// "descriptor" is embedded.
+	const google::protobuf::Descriptor *outer = descriptor;
+	while (outer->containing_type() != NULL) outer = outer->containing_type();
+
+	const std::string &outer_name = outer->full_name();
+	std::string inner_name = descriptor->full_name().substr(outer_name.size());
+
+	if (qualified) {
+		return "::" + DotsToColons(outer_name) + DotsToUnderscores(inner_name);
+	} else {
+		return outer->name() + DotsToUnderscores(inner_name);
 	}
 }
 

@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 #include "protorpc/compiler/cpp_generator.h"
-#include "protorpc/compiler/cpp_generator_helpers.h"
+#include "protorpc/compiler/generator_helpers.h"
 
 namespace protorpc_cpp_generator {
 
@@ -73,9 +73,9 @@ void PrintSourceClientMethod(google::protobuf::io::Printer *printer,
 							 std::map<std::string, std::string> *vars) {
   (*vars)["Method"] = method->name();
   (*vars)["Request"] =
-	  protorpc_cpp_generator::ClassName(method->input_type(), true);
+	  protorpc_generator::ClassName(method->input_type(), true);
   (*vars)["Response"] =
-	  protorpc_cpp_generator::ClassName(method->output_type(), true);
+	  protorpc_generator::ClassName(method->output_type(), true);
   if (protorpc_generator::NoStreaming(method)) {
 	printer->Print(*vars,
 				   "::grpc::Status $ns$$Service$::Stub::$Method$("
@@ -179,9 +179,9 @@ void PrintSourceServerMethod(google::protobuf::io::Printer *printer,
 							 std::map<std::string, std::string> *vars) {
   (*vars)["Method"] = method->name();
   (*vars)["Request"] =
-	  protorpc_cpp_generator::ClassName(method->input_type(), true);
+	  protorpc_generator::ClassName(method->input_type(), true);
   (*vars)["Response"] =
-	  protorpc_cpp_generator::ClassName(method->output_type(), true);
+	  protorpc_generator::ClassName(method->output_type(), true);
   if (protorpc_generator::NoStreaming(method)) {
 	printer->Print(*vars,
 				   "::grpc::Status $ns$$Service$::Service::$Method$("
@@ -298,9 +298,9 @@ void PrintSourceService(google::protobuf::io::Printer *printer,
 	(*vars)["Idx"] = protorpc_generator::as_string(i);
 	(*vars)["Method"] = method->name();
 	(*vars)["Request"] =
-		protorpc_cpp_generator::ClassName(method->input_type(), true);
+		protorpc_generator::ClassName(method->input_type(), true);
 	(*vars)["Response"] =
-		protorpc_cpp_generator::ClassName(method->output_type(), true);
+		protorpc_generator::ClassName(method->output_type(), true);
 	if (protorpc_generator::NoStreaming(method)) {
 	  printer->Print(
 		  *vars,

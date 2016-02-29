@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 #include "protorpc/compiler/cpp_generator.h"
-#include "protorpc/compiler/cpp_generator_helpers.h"
+#include "protorpc/compiler/generator_helpers.h"
 
 namespace protorpc_cpp_generator {
 
@@ -60,8 +60,8 @@ void PrintHeaderClientMethodInterfaces(
 	std::map<std::string, std::string> *vars, bool is_public
 ) {
 	(*vars)["Method"]   = method->name();
-	(*vars)["Request"]  = protorpc_cpp_generator::ClassName(method->input_type(), true);
-	(*vars)["Response"] = protorpc_cpp_generator::ClassName(method->output_type(), true);
+	(*vars)["Request"]  = protorpc_generator::ClassName(method->input_type(), true);
+	(*vars)["Response"] = protorpc_generator::ClassName(method->output_type(), true);
 
 	if (is_public) {
 		if (protorpc_generator::NoStreaming(method)) {
@@ -201,8 +201,8 @@ void PrintHeaderClientMethod(
 		bool is_public
 ) {
 	(*vars)["Method"]   = method->name();
-	(*vars)["Request"]  = protorpc_cpp_generator::ClassName(method->input_type(), true);
-	(*vars)["Response"] = protorpc_cpp_generator::ClassName(method->output_type(), true);
+	(*vars)["Request"]  = protorpc_generator::ClassName(method->input_type(), true);
+	(*vars)["Response"] = protorpc_generator::ClassName(method->output_type(), true);
 
 	if (is_public) {
 		if (protorpc_generator::NoStreaming(method)) {
@@ -348,9 +348,9 @@ void PrintHeaderServerMethodSync(google::protobuf::io::Printer *printer,
 								 std::map<std::string, std::string> *vars) {
   (*vars)["Method"] = method->name();
   (*vars)["Request"] =
-	  protorpc_cpp_generator::ClassName(method->input_type(), true);
+	  protorpc_generator::ClassName(method->input_type(), true);
   (*vars)["Response"] =
-	  protorpc_cpp_generator::ClassName(method->output_type(), true);
+	  protorpc_generator::ClassName(method->output_type(), true);
   if (protorpc_generator::NoStreaming(method)) {
 	printer->Print(*vars,
 				   "virtual ::grpc::Status $Method$("
@@ -384,9 +384,9 @@ void PrintHeaderServerMethodAsync(
 	std::map<std::string, std::string> *vars) {
   (*vars)["Method"] = method->name();
   (*vars)["Request"] =
-	  protorpc_cpp_generator::ClassName(method->input_type(), true);
+	  protorpc_generator::ClassName(method->input_type(), true);
   (*vars)["Response"] =
-	  protorpc_cpp_generator::ClassName(method->output_type(), true);
+	  protorpc_generator::ClassName(method->output_type(), true);
   printer->Print(*vars, "template <class BaseClass>\n");
   printer->Print(*vars,
 				 "class WithAsyncMethod_$Method$ : public BaseClass {\n");
@@ -504,9 +504,9 @@ void PrintHeaderServerMethodGeneric(
 	std::map<std::string, std::string> *vars) {
   (*vars)["Method"] = method->name();
   (*vars)["Request"] =
-	  protorpc_cpp_generator::ClassName(method->input_type(), true);
+	  protorpc_generator::ClassName(method->input_type(), true);
   (*vars)["Response"] =
-	  protorpc_cpp_generator::ClassName(method->output_type(), true);
+	  protorpc_generator::ClassName(method->output_type(), true);
   printer->Print(*vars, "template <class BaseClass>\n");
   printer->Print(*vars,
 				 "class WithGenericMethod_$Method$ : public BaseClass {\n");
