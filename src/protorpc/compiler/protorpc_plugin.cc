@@ -9,9 +9,9 @@
 #include "protorpc/compiler/protorpc_plugin_helpers.h"
 #include "protorpc/compiler/protorpc_generator.h"
 
-struct CppProtorpcGenerator: public google::protobuf::compiler::CodeGenerator {
-	CppProtorpcGenerator() {}
-	virtual ~CppProtorpcGenerator() {}
+struct ProtorpcGenerator: public google::protobuf::compiler::CodeGenerator {
+	ProtorpcGenerator() {}
+	virtual ~ProtorpcGenerator() {}
 
 	virtual bool Generate(
 		const google::protobuf::FileDescriptor *file,
@@ -28,7 +28,7 @@ struct CppProtorpcGenerator: public google::protobuf::compiler::CodeGenerator {
 			return false;
 		}
 
-		protorpc_cpp_generator::Parameters generator_parameters;
+		protorpc_generator::Parameters generator_parameters;
 
 		if (!parameter.empty()) {
 			auto parameters_list = protorpc_generator::tokenize(parameter, ",");
@@ -57,16 +57,16 @@ struct CppProtorpcGenerator: public google::protobuf::compiler::CodeGenerator {
 		);
 
 		std::string header_code = (
-			protorpc_cpp_generator::GetHeaderPrologue(file, generator_parameters) +
-			protorpc_cpp_generator::GetHeaderIncludes(file, generator_parameters) +
-			protorpc_cpp_generator::GetHeaderServices(file, generator_parameters) +
-			protorpc_cpp_generator::GetHeaderEpilogue(file, generator_parameters)
+			protorpc_generator::GetHeaderPrologue(file, generator_parameters) +
+			protorpc_generator::GetHeaderIncludes(file, generator_parameters) +
+			protorpc_generator::GetHeaderServices(file, generator_parameters) +
+			protorpc_generator::GetHeaderEpilogue(file, generator_parameters)
 		);
 		std::string source_code = (
-			protorpc_cpp_generator::GetSourcePrologue(file, generator_parameters) +
-			protorpc_cpp_generator::GetSourceIncludes(file, generator_parameters) +
-			protorpc_cpp_generator::GetSourceServices(file, generator_parameters) +
-			protorpc_cpp_generator::GetSourceEpilogue(file, generator_parameters)
+			protorpc_generator::GetSourcePrologue(file, generator_parameters) +
+			protorpc_generator::GetSourceIncludes(file, generator_parameters) +
+			protorpc_generator::GetSourceServices(file, generator_parameters) +
+			protorpc_generator::GetSourceEpilogue(file, generator_parameters)
 		);
 
 		google::protobuf::io::CodedOutputStream header_coded_out(
@@ -83,6 +83,6 @@ struct CppProtorpcGenerator: public google::protobuf::compiler::CodeGenerator {
 };
 
 int protorpc_plugin_Main(int argc, char* argv[]) {
-	CppProtorpcGenerator generator;
+	ProtorpcGenerator generator;
 	return google::protobuf::compiler::PluginMain(argc, argv, &generator);
 }

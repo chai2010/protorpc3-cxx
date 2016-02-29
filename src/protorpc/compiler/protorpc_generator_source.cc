@@ -5,7 +5,7 @@
 #include "protorpc/compiler/protorpc_generator.h"
 #include "protorpc/compiler/protorpc_plugin_helpers.h"
 
-namespace protorpc_cpp_generator {
+namespace protorpc_generator {
 
 
 std::string GetSourcePrologue(const google::protobuf::FileDescriptor *file,
@@ -404,4 +404,4 @@ std::string GetSourceEpilogue(
 	return temp;
 }
 
-}
+} // namespace protorpc_generator

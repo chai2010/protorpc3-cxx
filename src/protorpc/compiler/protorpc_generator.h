@@ -17,7 +17,7 @@
 #include <google/protobuf/compiler/code_generator.h>
 #include <google/protobuf/compiler/plugin.h>
 
-namespace protorpc_cpp_generator {
+namespace protorpc_generator {
 
 // Contains all the parameters that are parsed from the command line.
 struct Parameters {
@@ -79,6 +79,6 @@ std::string GetSourceEpilogue(
 
 // --------------------------------------------------------
 
-}  // namespace protorpc_cpp_generator
+}  // namespace protorpc_generator
 
 #endif  // PROTORPC_GENERATOR_H
