@@ -4,8 +4,8 @@
 
 #pragma once
 
-#ifndef PROTORPC_COMPILER_GENERATOR_HELPERS_H
-#define PROTORPC_COMPILER_GENERATOR_HELPERS_H
+#ifndef PROTORPC_PLUGIN_HELPERS_H
+#define PROTORPC_PLUGIN_HELPERS_H
 
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/descriptor.pb.h>
@@ -174,4 +174,4 @@ inline std::string ClassName(const google::protobuf::Descriptor *descriptor, boo
 
 }  // namespace protorpc_generator
 
-#endif  // PROTORPC_COMPILER_GENERATOR_HELPERS_H
+#endif  // PROTORPC_PLUGIN_HELPERS_H

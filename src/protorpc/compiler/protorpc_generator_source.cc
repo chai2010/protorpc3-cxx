@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "protorpc/compiler/cpp_generator.h"
-#include "protorpc/compiler/generator_helpers.h"
+#include "protorpc/compiler/protorpc_generator.h"
+#include "protorpc/compiler/protorpc_plugin_helpers.h"
 
 namespace protorpc_cpp_generator {
 

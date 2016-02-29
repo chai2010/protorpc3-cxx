@@ -4,8 +4,8 @@
 
 #pragma once
 
-#ifndef PROTORPC_COMPILER_CPP_GENERATOR_H
-#define PROTORPC_COMPILER_CPP_GENERATOR_H
+#ifndef PROTORPC_GENERATOR_H
+#define PROTORPC_GENERATOR_H
 
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/descriptor.pb.h>
@@ -25,6 +25,8 @@ struct Parameters {
 	std::string services_namespace;
 };
 
+// --------------------------------------------------------
+
 // Return the prologue of the generated header file.
 std::string GetHeaderPrologue(
 	const google::protobuf::FileDescriptor *file,
@@ -37,17 +39,19 @@ std::string GetHeaderIncludes(
 	const Parameters &params
 );
 
-// Return the includes needed for generated source file.
-std::string GetSourceIncludes(
-	const google::protobuf::FileDescriptor *file,
-	const Parameters &params
-);
-
 // Return the epilogue of the generated header file.
 std::string GetHeaderEpilogue(
 	const google::protobuf::FileDescriptor *file,
 	const Parameters &params
 );
+
+// Return the services for generated header file.
+std::string GetHeaderServices(
+	const google::protobuf::FileDescriptor *file,
+	const Parameters &params
+);
+
+// --------------------------------------------------------
 
 // Return the prologue of the generated source file.
 std::string GetSourcePrologue(
@@ -55,8 +59,8 @@ std::string GetSourcePrologue(
 	const Parameters &params
 );
 
-// Return the services for generated header file.
-std::string GetHeaderServices(
+// Return the includes needed for generated source file.
+std::string GetSourceIncludes(
 	const google::protobuf::FileDescriptor *file,
 	const Parameters &params
 );
@@ -73,6 +77,8 @@ std::string GetSourceEpilogue(
 	const Parameters &params
 );
 
+// --------------------------------------------------------
+
 }  // namespace protorpc_cpp_generator
 
-#endif  // PROTORPC_COMPILER_CPP_GENERATOR_H
+#endif  // PROTORPC_GENERATOR_H

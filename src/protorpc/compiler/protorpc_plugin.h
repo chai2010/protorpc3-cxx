@@ -4,16 +4,16 @@
 
 #pragma once
 
-#ifndef PROTORPC_COMPILER_CPP_PLUGIN_H
-#define PROTORPC_COMPILER_CPP_PLUGIN_H
+#ifndef PROTORPC_PLUGIN_H
+#define PROTORPC_PLUGIN_H
 
 #if defined(__cplusplus)
 extern "C" {
 #endif
 
-int cpp_plugin_Main(int argc, char* argv[]);
+int protorpc_plugin_Main(int argc, char* argv[]);
 
 #if defined(__cplusplus)
 }
 #endif
-#endif // PROTORPC_COMPILER_CPP_PLUGIN_H
+#endif // PROTORPC_PLUGIN_H

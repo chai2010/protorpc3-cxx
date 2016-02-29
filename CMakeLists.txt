@@ -89,12 +89,12 @@ install(TARGETS protoc3
 )
 
 add_executable(protoc-gen-protorpc
-	./src/protorpc/compiler/generator_helpers.h
-	./src/protorpc/compiler/cpp_generator.h
-	./src/protorpc/compiler/cpp_generator_header.cc
-	./src/protorpc/compiler/cpp_generator_source.cc
-	./src/protorpc/compiler/cpp_plugin.h
-	./src/protorpc/compiler/cpp_plugin.cc
+	./src/protorpc/compiler/protorpc_plugin_helpers.h
+	./src/protorpc/compiler/protorpc_plugin.h
+	./src/protorpc/compiler/protorpc_plugin.cc
+	./src/protorpc/compiler/protorpc_generator.h
+	./src/protorpc/compiler/protorpc_generator_header.cc
+	./src/protorpc/compiler/protorpc_generator_source.cc
 	./src/protorpc/compiler/main.cc
 )
 target_link_libraries(protoc-gen-protorpc

@@ -5,9 +5,9 @@
 // Generates cpp protorpc service interface out of Protobuf IDL.
 //
 
-#include "protorpc/compiler/cpp_plugin.h"
-#include "protorpc/compiler/cpp_generator_helpers.h"
-#include "protorpc/compiler/cpp_generator.h"
+#include "protorpc/compiler/protorpc_plugin.h"
+#include "protorpc/compiler/protorpc_plugin_helpers.h"
+#include "protorpc/compiler/protorpc_generator.h"
 
 struct CppProtorpcGenerator: public google::protobuf::compiler::CodeGenerator {
 	CppProtorpcGenerator() {}
@@ -82,7 +82,7 @@ struct CppProtorpcGenerator: public google::protobuf::compiler::CodeGenerator {
 	}
 };
 
-int cpp_plugin_Main(int argc, char* argv[]) {
+int protorpc_plugin_Main(int argc, char* argv[]) {
 	CppProtorpcGenerator generator;
 	return google::protobuf::compiler::PluginMain(argc, argv, &generator);
 }
