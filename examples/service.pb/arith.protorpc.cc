@@ -69,25 +69,25 @@ ArithService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& chann
 ArithService::Service::Service() {
   (void)ArithService_method_names;
   AddMethod(new ::grpc::RpcServiceMethod(
-      ArithService_method_names[0],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< ArithService::Service, ::service::ArithRequest, ::service::ArithResponse>(
-          std::mem_fn(&ArithService::Service::add), this)));
+  	ArithService_method_names[0],
+  	::grpc::RpcMethod::NORMAL_RPC,
+  	new ::grpc::RpcMethodHandler< ArithService::Service, ::service::ArithRequest, ::service::ArithResponse>(
+  		std::mem_fn(&ArithService::Service::add), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
-      ArithService_method_names[1],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< ArithService::Service, ::service::ArithRequest, ::service::ArithResponse>(
-          std::mem_fn(&ArithService::Service::mul), this)));
+  	ArithService_method_names[1],
+  	::grpc::RpcMethod::NORMAL_RPC,
+  	new ::grpc::RpcMethodHandler< ArithService::Service, ::service::ArithRequest, ::service::ArithResponse>(
+  		std::mem_fn(&ArithService::Service::mul), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
-      ArithService_method_names[2],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< ArithService::Service, ::service::ArithRequest, ::service::ArithResponse>(
-          std::mem_fn(&ArithService::Service::div), this)));
+  	ArithService_method_names[2],
+  	::grpc::RpcMethod::NORMAL_RPC,
+  	new ::grpc::RpcMethodHandler< ArithService::Service, ::service::ArithRequest, ::service::ArithResponse>(
+  		std::mem_fn(&ArithService::Service::div), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
-      ArithService_method_names[3],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< ArithService::Service, ::service::ArithRequest, ::service::ArithResponse>(
-          std::mem_fn(&ArithService::Service::error), this)));
+  	ArithService_method_names[3],
+  	::grpc::RpcMethod::NORMAL_RPC,
+  	new ::grpc::RpcMethodHandler< ArithService::Service, ::service::ArithRequest, ::service::ArithResponse>(
+  		std::mem_fn(&ArithService::Service::error), this)));
 }
 
 ArithService::Service::~Service() {

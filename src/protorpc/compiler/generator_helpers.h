@@ -13,6 +13,45 @@
 
 namespace protorpc_generator {
 
+template <class T>
+std::string as_string(T x) {
+	std::ostringstream out;
+	out << x;
+	return out.str();
+}
+
+inline bool NoStreaming(const google::protobuf::MethodDescriptor *method) {
+	return !method->client_streaming() && !method->server_streaming();
+}
+
+inline bool ClientOnlyStreaming(const google::protobuf::MethodDescriptor *method) {
+	return method->client_streaming() && !method->server_streaming();
+}
+
+inline bool ServerOnlyStreaming(const google::protobuf::MethodDescriptor *method) {
+	return !method->client_streaming() && method->server_streaming();
+}
+
+inline bool BidiStreaming(const google::protobuf::MethodDescriptor *method) {
+	return method->client_streaming() && method->server_streaming();
+}
+
+inline std::string FilenameIdentifier(const std::string &filename) {
+	std::string result;
+	for (unsigned i = 0; i < filename.size(); i++) {
+		char c = filename[i];
+		if (isalnum(c)) {
+			result.push_back(c);
+		} else {
+			static char hex[] = "0123456789abcdef";
+			result.push_back('_');
+			result.push_back(hex[(c >> 4) & 0xf]);
+			result.push_back(hex[c & 0xf]);
+		}
+	}
+	return result;
+}
+
 inline bool StripSuffix(std::string *filename, const std::string &suffix) {
 	if(google::protobuf::HasSuffixString(*filename, suffix)) {
 		*filename = google::protobuf::StripSuffixString(*filename, suffix);

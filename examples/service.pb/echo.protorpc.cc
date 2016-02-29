@@ -49,15 +49,15 @@ EchoService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
 EchoService::Service::Service() {
   (void)EchoService_method_names;
   AddMethod(new ::grpc::RpcServiceMethod(
-      EchoService_method_names[0],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< EchoService::Service, ::service::EchoRequest, ::service::EchoResponse>(
-          std::mem_fn(&EchoService::Service::Echo), this)));
+  	EchoService_method_names[0],
+  	::grpc::RpcMethod::NORMAL_RPC,
+  	new ::grpc::RpcMethodHandler< EchoService::Service, ::service::EchoRequest, ::service::EchoResponse>(
+  		std::mem_fn(&EchoService::Service::Echo), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
-      EchoService_method_names[1],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< EchoService::Service, ::service::EchoRequest, ::service::EchoResponse>(
-          std::mem_fn(&EchoService::Service::EchoTwice), this)));
+  	EchoService_method_names[1],
+  	::grpc::RpcMethod::NORMAL_RPC,
+  	new ::grpc::RpcMethodHandler< EchoService::Service, ::service::EchoRequest, ::service::EchoResponse>(
+  		std::mem_fn(&EchoService::Service::EchoTwice), this)));
 }
 
 EchoService::Service::~Service() {
