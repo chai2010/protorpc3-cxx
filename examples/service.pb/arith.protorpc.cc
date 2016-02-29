@@ -79,22 +79,22 @@ const ::protorpc::Error ArithService::CallMethod(
 	case 0:
 		return add(
 			::google::protobuf::down_cast<const ::service::ArithRequest*>(request),
-			::google::protobuf::down_cast<::service::ArithResponse*>(response)
+			::google::protobuf::down_cast< ::service::ArithResponse*>(response)
 		);
 	case 1:
 		return mul(
 			::google::protobuf::down_cast<const ::service::ArithRequest*>(request),
-			::google::protobuf::down_cast<::service::ArithResponse*>(response)
+			::google::protobuf::down_cast< ::service::ArithResponse*>(response)
 		);
 	case 2:
 		return div(
 			::google::protobuf::down_cast<const ::service::ArithRequest*>(request),
-			::google::protobuf::down_cast<::service::ArithResponse*>(response)
+			::google::protobuf::down_cast< ::service::ArithResponse*>(response)
 		);
 	case 3:
 		return error(
 			::google::protobuf::down_cast<const ::service::ArithRequest*>(request),
-			::google::protobuf::down_cast<::service::ArithResponse*>(response)
+			::google::protobuf::down_cast< ::service::ArithResponse*>(response)
 		);
 	default:
 		return ::protorpc::Error("Bad method index; this should never happen.");

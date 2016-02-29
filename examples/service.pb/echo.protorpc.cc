@@ -67,12 +67,12 @@ const ::protorpc::Error EchoService::CallMethod(
 	case 0:
 		return Echo(
 			::google::protobuf::down_cast<const ::service::EchoRequest*>(request),
-			::google::protobuf::down_cast<::service::EchoResponse*>(response)
+			::google::protobuf::down_cast< ::service::EchoResponse*>(response)
 		);
 	case 1:
 		return EchoTwice(
 			::google::protobuf::down_cast<const ::service::EchoRequest*>(request),
-			::google::protobuf::down_cast<::service::EchoResponse*>(response)
+			::google::protobuf::down_cast< ::service::EchoResponse*>(response)
 		);
 	default:
 		return ::protorpc::Error("Bad method index; this should never happen.");
@@ -174,17 +174,17 @@ const ::protorpc::Error EchoService2::CallMethod(
 	case 0:
 		return Echo(
 			::google::protobuf::down_cast<const ::service::EchoRequest*>(request),
-			::google::protobuf::down_cast<::service::EchoResponse*>(response)
+			::google::protobuf::down_cast< ::service::EchoResponse*>(response)
 		);
 	case 1:
 		return EchoTwice(
 			::google::protobuf::down_cast<const ::service::EchoRequest*>(request),
-			::google::protobuf::down_cast<::service::EchoResponse*>(response)
+			::google::protobuf::down_cast< ::service::EchoResponse*>(response)
 		);
 	case 2:
 		return Foo(
 			::google::protobuf::down_cast<const ::service::Message*>(request),
-			::google::protobuf::down_cast<::service::Message*>(response)
+			::google::protobuf::down_cast< ::service::Message*>(response)
 		);
 	default:
 		return ::protorpc::Error("Bad method index; this should never happen.");

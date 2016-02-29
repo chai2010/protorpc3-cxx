@@ -190,7 +190,7 @@ static void PrintSourceServiceImpl(
 		printer->Print(*vars, "$__$case $method_index$:\n");
 		printer->Print(*vars, "$__$$__$return $method_name$(\n");
 		printer->Print(*vars, "$__$$__$$__$::google::protobuf::down_cast<const $method_input_type$*>(request),\n");
-		printer->Print(*vars, "$__$$__$$__$::google::protobuf::down_cast<$method_output_type$*>(response)\n");
+		printer->Print(*vars, "$__$$__$$__$::google::protobuf::down_cast< $method_output_type$*>(response)\n");
 		printer->Print(*vars, "$__$$__$);\n");
 	}
 	printer->Print(*vars, "$__$default:\n");
