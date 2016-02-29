@@ -75,6 +75,78 @@ class EchoService_Stub : public EchoService {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService_Stub);
 }; // EchoService_Stub
 
+class EchoService2_Stub;
+
+class EchoService2: public ::protorpc::Service {
+ protected:
+  // This class should be treated as an abstract interface.
+  inline EchoService2() {}
+ public:
+  virtual ~EchoService();
+
+  typedef EchoService_Stub Stub;
+
+  static const ::google::protobuf::ServiceDescriptor* descriptor();
+
+  virtual const ::protorpc::Error Echo(
+    ::service::EchoRequest* request,
+    ::service::EchoResponse* response
+  );
+  virtual const ::protorpc::Error EchoTwice(
+    ::service::EchoRequest* request,
+    ::service::EchoResponse* response
+  );
+  virtual const ::protorpc::Error Foo(
+    ::service::Message* request,
+    ::service::Message* response
+  );
+
+  // implements Service ----------------------------------------------
+
+  const ::google::protobuf::ServiceDescriptor* GetDescriptor();
+  const ::protorpc::Error CallMethod(
+    const ::google::protobuf::MethodDescriptor* method,
+    const ::google::protobuf::Message* request,
+    ::google::protobuf::Message* response
+  );
+  const ::google::protobuf::Message& GetRequestPrototype(
+    const ::google::protobuf::MethodDescriptor* method
+  ) const;
+  const ::google::protobuf::Message& GetResponsePrototype(
+    const ::google::protobuf::MethodDescriptor* method
+  ) const;
+
+ private:
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService);
+}; // EchoService2
+
+class EchoService2_Stub : public EchoService2 {
+ public:
+  EchoService_Stub(::protorpc::Caller* client);
+  EchoService_Stub(::protorpc::Caller* client, bool client_ownership);
+  ~EchoService_Stub();
+
+  // implements EchoService ------------------------------------------
+
+  const ::protorpc::Error Echo(
+    ::service::EchoRequest* request,
+    ::service::EchoResponse* response
+  );
+  const ::protorpc::Error EchoTwice(
+    ::service::EchoRequest* request,
+    ::service::EchoResponse* response
+  );
+  const ::protorpc::Error Foo(
+    ::service::Message* request,
+    ::service::Message* response
+  );
+
+ private:
+  ::protorpc::Caller* client_;
+  bool owns_client_;
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EchoService2_Stub);
+}; // EchoService2_Stub
+
 } // namespace service
 
 #endif // PROTORPC_echo_2eproto__INCLUDED

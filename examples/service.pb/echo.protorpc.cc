@@ -78,5 +78,90 @@ EchoService::Service::~Service() {
 }
 
 
+static const char* EchoService2_method_names[] = {
+  "/service.EchoService2/Echo",
+  "/service.EchoService2/EchoTwice",
+  "/service.EchoService2/Foo",
+};
+
+std::unique_ptr< EchoService2::Stub> EchoService2::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+  std::unique_ptr< EchoService2::Stub> stub(new EchoService2::Stub(channel));
+  return stub;
+}
+
+EchoService2::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
+  : channel_(channel), rpcmethod_Echo_(EchoService2_method_names[0], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_EchoTwice_(EchoService2_method_names[1], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Foo_(EchoService2_method_names[2], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  {}
+
+::grpc::Status EchoService2::Stub::Echo(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::service::EchoResponse* response) {
+  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_Echo_, context, request, response);
+}
+
+::grpc::ClientAsyncResponseReader< ::service::EchoResponse>* EchoService2::Stub::AsyncEchoRaw(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) {
+  return new ::grpc::ClientAsyncResponseReader< ::service::EchoResponse>(channel_.get(), cq, rpcmethod_Echo_, context, request);
+}
+
+::grpc::Status EchoService2::Stub::EchoTwice(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::service::EchoResponse* response) {
+  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_EchoTwice_, context, request, response);
+}
+
+::grpc::ClientAsyncResponseReader< ::service::EchoResponse>* EchoService2::Stub::AsyncEchoTwiceRaw(::grpc::ClientContext* context, const ::service::EchoRequest& request, ::grpc::CompletionQueue* cq) {
+  return new ::grpc::ClientAsyncResponseReader< ::service::EchoResponse>(channel_.get(), cq, rpcmethod_EchoTwice_, context, request);
+}
+
+::grpc::Status EchoService2::Stub::Foo(::grpc::ClientContext* context, const ::service::Message& request, ::service::Message* response) {
+  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_Foo_, context, request, response);
+}
+
+::grpc::ClientAsyncResponseReader< ::service::Message>* EchoService2::Stub::AsyncFooRaw(::grpc::ClientContext* context, const ::service::Message& request, ::grpc::CompletionQueue* cq) {
+  return new ::grpc::ClientAsyncResponseReader< ::service::Message>(channel_.get(), cq, rpcmethod_Foo_, context, request);
+}
+
+EchoService2::Service::Service() {
+  (void)EchoService2_method_names;
+  AddMethod(new ::grpc::RpcServiceMethod(
+  	EchoService2_method_names[0],
+  	::grpc::RpcMethod::NORMAL_RPC,
+  	new ::grpc::RpcMethodHandler< EchoService2::Service, ::service::EchoRequest, ::service::EchoResponse>(
+  		std::mem_fn(&EchoService2::Service::Echo), this)));
+  AddMethod(new ::grpc::RpcServiceMethod(
+  	EchoService2_method_names[1],
+  	::grpc::RpcMethod::NORMAL_RPC,
+  	new ::grpc::RpcMethodHandler< EchoService2::Service, ::service::EchoRequest, ::service::EchoResponse>(
+  		std::mem_fn(&EchoService2::Service::EchoTwice), this)));
+  AddMethod(new ::grpc::RpcServiceMethod(
+  	EchoService2_method_names[2],
+  	::grpc::RpcMethod::NORMAL_RPC,
+  	new ::grpc::RpcMethodHandler< EchoService2::Service, ::service::Message, ::service::Message>(
+  		std::mem_fn(&EchoService2::Service::Foo), this)));
+}
+
+EchoService2::Service::~Service() {
+}
+
+::grpc::Status EchoService2::Service::Echo(::grpc::ServerContext* context, const ::service::EchoRequest* request, ::service::EchoResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status EchoService2::Service::EchoTwice(::grpc::ServerContext* context, const ::service::EchoRequest* request, ::service::EchoResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status EchoService2::Service::Foo(::grpc::ServerContext* context, const ::service::Message* request, ::service::Message* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+
 }  // namespace service
 

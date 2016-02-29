@@ -8,6 +8,10 @@ package service;
 
 option cc_generic_services = false;
 
+message Message {
+	string msg = 1;
+}
+
 message EchoRequest {
 	string msg = 1;
 }
@@ -19,4 +23,10 @@ message EchoResponse {
 service EchoService {
 	rpc Echo (EchoRequest) returns (EchoResponse);
 	rpc EchoTwice (EchoRequest) returns (EchoResponse);
+}
+
+service EchoService2 {
+	rpc Echo (EchoRequest) returns (EchoResponse);
+	rpc EchoTwice (EchoRequest) returns (EchoResponse);
+	rpc Foo (Message) returns (Message);
 }
