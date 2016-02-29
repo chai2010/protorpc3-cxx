@@ -14,7 +14,7 @@ namespace service {
 
 class ArithService_Stub;
 
-class ArithService : public ::google::protobuf::rpc::Service {
+class ArithService : public ::protorpc::Service {
  protected:
   // This class should be treated as an abstract interface.
   inline ArithService() {};
@@ -25,23 +25,23 @@ class ArithService : public ::google::protobuf::rpc::Service {
 
   static const ::google::protobuf::ServiceDescriptor* descriptor();
 
-  virtual const ::google::protobuf::rpc::Error add(
+  virtual const ::protorpc::Error add(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response);
-  virtual const ::google::protobuf::rpc::Error mul(
+  virtual const ::protorpc::Error mul(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response);
-  virtual const ::google::protobuf::rpc::Error div(
+  virtual const ::protorpc::Error div(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response);
-  virtual const ::google::protobuf::rpc::Error error(
+  virtual const ::protorpc::Error error(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response);
 
   // implements Service ----------------------------------------------
 
   const ::google::protobuf::ServiceDescriptor* GetDescriptor();
-  const ::google::protobuf::rpc::Error CallMethod(
+  const ::protorpc::Error CallMethod(
     const ::google::protobuf::MethodDescriptor* method,
     const ::google::protobuf::Message* request,
     ::google::protobuf::Message* response);
@@ -56,27 +56,27 @@ class ArithService : public ::google::protobuf::rpc::Service {
 
 class ArithService_Stub : public ArithService {
  public:
-  ArithService_Stub(::google::protobuf::rpc::Caller* client);
-  ArithService_Stub(::google::protobuf::rpc::Caller* client, bool client_ownership);
+  ArithService_Stub(::protorpc::Caller* client);
+  ArithService_Stub(::protorpc::Caller* client, bool client_ownership);
   ~ArithService_Stub();
 
   // implements ArithService ------------------------------------------
 
-  const ::google::protobuf::rpc::Error add(
+  const ::protorpc::Error add(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response);
-  const ::google::protobuf::rpc::Error mul(
+  const ::protorpc::Error mul(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response);
-  const ::google::protobuf::rpc::Error div(
+  const ::protorpc::Error div(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response);
-  const ::google::protobuf::rpc::Error error(
+  const ::protorpc::Error error(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response);
 
  private:
-  ::google::protobuf::rpc::Caller* client_;
+  ::protorpc::Caller* client_;
   bool owns_client_;
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ArithService_Stub);
 };

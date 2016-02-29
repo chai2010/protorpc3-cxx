@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -26,7 +27,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ArithResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ArithResponse_reflection_ = NULL;
-const ::google::protobuf::ServiceDescriptor* ArithService_descriptor_ = NULL;
 
 }  // namespace
 
@@ -43,32 +43,31 @@ void protobuf_AssignDesc_arith_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithRequest, b_),
   };
   ArithRequest_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       ArithRequest_descriptor_,
       ArithRequest::default_instance_,
       ArithRequest_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithRequest, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithRequest, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ArithRequest));
+      -1,
+      -1,
+      sizeof(ArithRequest),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithRequest, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithRequest, _is_default_instance_));
   ArithResponse_descriptor_ = file->message_type(1);
   static const int ArithResponse_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithResponse, c_),
   };
   ArithResponse_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       ArithResponse_descriptor_,
       ArithResponse::default_instance_,
       ArithResponse_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithResponse, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithResponse, _unknown_fields_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ArithResponse));
-  ArithService_descriptor_ = file->service(0);
+      -1,
+      -1,
+      sizeof(ArithResponse),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithResponse, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ArithResponse, _is_default_instance_));
 }
 
 namespace {
@@ -82,9 +81,9 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ArithRequest_descriptor_, &ArithRequest::default_instance());
+      ArithRequest_descriptor_, &ArithRequest::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ArithResponse_descriptor_, &ArithResponse::default_instance());
+      ArithResponse_descriptor_, &ArithResponse::default_instance());
 }
 
 }  // namespace
@@ -111,7 +110,7 @@ void protobuf_AddDesc_arith_2eproto() {
     "ArithResponse\0224\n\003div\022\025.service.ArithRequ"
     "est\032\026.service.ArithResponse\0226\n\005error\022\025.s"
     "ervice.ArithRequest\032\026.service.ArithRespo"
-    "nseB\003\200\001\001", 328);
+    "nseB\003\200\001\000b\006proto3", 336);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "arith.proto", &protobuf_RegisterTypes);
   ArithRequest::default_instance_ = new ArithRequest();
@@ -128,35 +127,50 @@ struct StaticDescriptorInitializer_arith_2eproto {
   }
 } static_descriptor_initializer_arith_2eproto_;
 
+namespace {
+
+static void MergeFromFail(int line) GOOGLE_ATTRIBUTE_COLD;
+static void MergeFromFail(int line) {
+  GOOGLE_CHECK(false) << __FILE__ << ":" << line;
+}
+
+}  // namespace
+
+
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ArithRequest::kAFieldNumber;
 const int ArithRequest::kBFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ArithRequest::ArithRequest()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:service.ArithRequest)
 }
 
 void ArithRequest::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 ArithRequest::ArithRequest(const ArithRequest& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:service.ArithRequest)
 }
 
 void ArithRequest::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   a_ = 0;
   b_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ArithRequest::~ArithRequest() {
+  // @@protoc_insertion_point(destructor:service.ArithRequest)
   SharedDtor();
 }
 
@@ -182,35 +196,49 @@ const ArithRequest& ArithRequest::default_instance() {
 
 ArithRequest* ArithRequest::default_instance_ = NULL;
 
-ArithRequest* ArithRequest::New() const {
-  return new ArithRequest;
+ArithRequest* ArithRequest::New(::google::protobuf::Arena* arena) const {
+  ArithRequest* n = new ArithRequest;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void ArithRequest::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    a_ = 0;
-    b_ = 0;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<ArithRequest*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(a_, b_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
 }
 
 bool ArithRequest::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:service.ArithRequest)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 a = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &a_)));
-          set_has_a();
+
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_b;
         break;
@@ -218,97 +246,90 @@ bool ArithRequest::MergePartialFromCodedStream(
 
       // optional int32 b = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_b:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &b_)));
-          set_has_b();
+
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:service.ArithRequest)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:service.ArithRequest)
+  return false;
 #undef DO_
 }
 
 void ArithRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:service.ArithRequest)
   // optional int32 a = 1;
-  if (has_a()) {
+  if (this->a() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->a(), output);
   }
 
   // optional int32 b = 2;
-  if (has_b()) {
+  if (this->b() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->b(), output);
   }
 
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
+  // @@protoc_insertion_point(serialize_end:service.ArithRequest)
 }
 
 ::google::protobuf::uint8* ArithRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:service.ArithRequest)
   // optional int32 a = 1;
-  if (has_a()) {
+  if (this->a() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->a(), target);
   }
 
   // optional int32 b = 2;
-  if (has_b()) {
+  if (this->b() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->b(), target);
   }
 
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
+  // @@protoc_insertion_point(serialize_to_array_end:service.ArithRequest)
   return target;
 }
 
 int ArithRequest::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional int32 a = 1;
-    if (has_a()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->a());
-    }
-
-    // optional int32 b = 2;
-    if (has_b()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->b());
-    }
-
+  // optional int32 a = 1;
+  if (this->a() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->a());
   }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional int32 b = 2;
+  if (this->b() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->b());
   }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -316,10 +337,10 @@ int ArithRequest::ByteSize() const {
 }
 
 void ArithRequest::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const ArithRequest* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ArithRequest*>(
-      &from);
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const ArithRequest* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const ArithRequest>(
+          &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
@@ -328,16 +349,13 @@ void ArithRequest::MergeFrom(const ::google::protobuf::Message& from) {
 }
 
 void ArithRequest::MergeFrom(const ArithRequest& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_a()) {
-      set_a(from.a());
-    }
-    if (from.has_b()) {
-      set_b(from.b());
-    }
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from.a() != 0) {
+    set_a(from.a());
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.b() != 0) {
+    set_b(from.b());
+  }
 }
 
 void ArithRequest::CopyFrom(const ::google::protobuf::Message& from) {
@@ -358,13 +376,14 @@ bool ArithRequest::IsInitialized() const {
 }
 
 void ArithRequest::Swap(ArithRequest* other) {
-  if (other != this) {
-    std::swap(a_, other->a_);
-    std::swap(b_, other->b_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ArithRequest::InternalSwap(ArithRequest* other) {
+  std::swap(a_, other->a_);
+  std::swap(b_, other->b_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata ArithRequest::GetMetadata() const {
@@ -375,34 +394,71 @@ void ArithRequest::Swap(ArithRequest* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// ArithRequest
+
+// optional int32 a = 1;
+void ArithRequest::clear_a() {
+  a_ = 0;
+}
+ ::google::protobuf::int32 ArithRequest::a() const {
+  // @@protoc_insertion_point(field_get:service.ArithRequest.a)
+  return a_;
+}
+ void ArithRequest::set_a(::google::protobuf::int32 value) {
+  
+  a_ = value;
+  // @@protoc_insertion_point(field_set:service.ArithRequest.a)
+}
+
+// optional int32 b = 2;
+void ArithRequest::clear_b() {
+  b_ = 0;
+}
+ ::google::protobuf::int32 ArithRequest::b() const {
+  // @@protoc_insertion_point(field_get:service.ArithRequest.b)
+  return b_;
+}
+ void ArithRequest::set_b(::google::protobuf::int32 value) {
+  
+  b_ = value;
+  // @@protoc_insertion_point(field_set:service.ArithRequest.b)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ArithResponse::kCFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ArithResponse::ArithResponse()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:service.ArithResponse)
 }
 
 void ArithResponse::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 ArithResponse::ArithResponse(const ArithResponse& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:service.ArithResponse)
 }
 
 void ArithResponse::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   c_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ArithResponse::~ArithResponse() {
+  // @@protoc_insertion_point(destructor:service.ArithResponse)
   SharedDtor();
 }
 
@@ -428,99 +484,96 @@ const ArithResponse& ArithResponse::default_instance() {
 
 ArithResponse* ArithResponse::default_instance_ = NULL;
 
-ArithResponse* ArithResponse::New() const {
-  return new ArithResponse;
+ArithResponse* ArithResponse::New(::google::protobuf::Arena* arena) const {
+  ArithResponse* n = new ArithResponse;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void ArithResponse::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    c_ = 0;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  c_ = 0;
 }
 
 bool ArithResponse::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:service.ArithResponse)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 c = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &c_)));
-          set_has_c();
+
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:service.ArithResponse)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:service.ArithResponse)
+  return false;
 #undef DO_
 }
 
 void ArithResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:service.ArithResponse)
   // optional int32 c = 1;
-  if (has_c()) {
+  if (this->c() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->c(), output);
   }
 
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
+  // @@protoc_insertion_point(serialize_end:service.ArithResponse)
 }
 
 ::google::protobuf::uint8* ArithResponse::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:service.ArithResponse)
   // optional int32 c = 1;
-  if (has_c()) {
+  if (this->c() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->c(), target);
   }
 
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
+  // @@protoc_insertion_point(serialize_to_array_end:service.ArithResponse)
   return target;
 }
 
 int ArithResponse::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional int32 c = 1;
-    if (has_c()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->c());
-    }
+  // optional int32 c = 1;
+  if (this->c() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->c());
+  }
 
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -528,10 +581,10 @@ int ArithResponse::ByteSize() const {
 }
 
 void ArithResponse::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const ArithResponse* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ArithResponse*>(
-      &from);
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const ArithResponse* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const ArithResponse>(
+          &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
@@ -540,13 +593,10 @@ void ArithResponse::MergeFrom(const ::google::protobuf::Message& from) {
 }
 
 void ArithResponse::MergeFrom(const ArithResponse& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_c()) {
-      set_c(from.c());
-    }
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from.c() != 0) {
+    set_c(from.c());
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
 void ArithResponse::CopyFrom(const ::google::protobuf::Message& from) {
@@ -567,12 +617,13 @@ bool ArithResponse::IsInitialized() const {
 }
 
 void ArithResponse::Swap(ArithResponse* other) {
-  if (other != this) {
-    std::swap(c_, other->c_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ArithResponse::InternalSwap(ArithResponse* other) {
+  std::swap(c_, other->c_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata ArithResponse::GetMetadata() const {
@@ -583,138 +634,24 @@ void ArithResponse::Swap(ArithResponse* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// ArithResponse
 
-// ===================================================================
-
-ArithService::~ArithService() {}
-
-const ::google::protobuf::ServiceDescriptor* ArithService::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return ArithService_descriptor_;
+// optional int32 c = 1;
+void ArithResponse::clear_c() {
+  c_ = 0;
 }
-
-const ::google::protobuf::ServiceDescriptor* ArithService::GetDescriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return ArithService_descriptor_;
+ ::google::protobuf::int32 ArithResponse::c() const {
+  // @@protoc_insertion_point(field_get:service.ArithResponse.c)
+  return c_;
 }
-
-const ::google::protobuf::rpc::Error ArithService::add(
-  const ::service::ArithRequest*,
-  ::service::ArithResponse*) {
-  return ::google::protobuf::rpc::Error("Method ArithService::add() not implemented.");
+ void ArithResponse::set_c(::google::protobuf::int32 value) {
+  
+  c_ = value;
+  // @@protoc_insertion_point(field_set:service.ArithResponse.c)
 }
 
-const ::google::protobuf::rpc::Error ArithService::mul(
-  const ::service::ArithRequest*,
-  ::service::ArithResponse*) {
-  return ::google::protobuf::rpc::Error("Method ArithService::mul() not implemented.");
-}
-
-const ::google::protobuf::rpc::Error ArithService::div(
-  const ::service::ArithRequest*,
-  ::service::ArithResponse*) {
-  return ::google::protobuf::rpc::Error("Method ArithService::div() not implemented.");
-}
-
-const ::google::protobuf::rpc::Error ArithService::error(
-  const ::service::ArithRequest*,
-  ::service::ArithResponse*) {
-  return ::google::protobuf::rpc::Error("Method ArithService::error() not implemented.");
-}
-
-const ::google::protobuf::rpc::Error ArithService::CallMethod(
-  const ::google::protobuf::MethodDescriptor* method,
-  const ::google::protobuf::Message* request,
-  ::google::protobuf::Message* response) {
-  GOOGLE_DCHECK_EQ(method->service(), ArithService_descriptor_);
-  switch(method->index()) {
-    case 0:
-      return add(
-        ::google::protobuf::down_cast<const ::service::ArithRequest*>(request),
-        ::google::protobuf::down_cast< ::service::ArithResponse*>(response));
-    case 1:
-      return mul(
-        ::google::protobuf::down_cast<const ::service::ArithRequest*>(request),
-        ::google::protobuf::down_cast< ::service::ArithResponse*>(response));
-    case 2:
-      return div(
-        ::google::protobuf::down_cast<const ::service::ArithRequest*>(request),
-        ::google::protobuf::down_cast< ::service::ArithResponse*>(response));
-    case 3:
-      return error(
-        ::google::protobuf::down_cast<const ::service::ArithRequest*>(request),
-        ::google::protobuf::down_cast< ::service::ArithResponse*>(response));
-    default:
-      return ::google::protobuf::rpc::Error("Bad method index; this should never happen.");
-  }
-}
-
-const ::google::protobuf::Message& ArithService::GetRequestPrototype(
-    const ::google::protobuf::MethodDescriptor* method) const {
-  GOOGLE_DCHECK_EQ(method->service(), descriptor());
-  switch(method->index()) {
-    case 0:
-      return ::service::ArithRequest::default_instance();
-    case 1:
-      return ::service::ArithRequest::default_instance();
-    case 2:
-      return ::service::ArithRequest::default_instance();
-    case 3:
-      return ::service::ArithRequest::default_instance();
-    default:
-      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      return *reinterpret_cast< ::google::protobuf::Message*>(NULL);
-  }
-}
-
-const ::google::protobuf::Message& ArithService::GetResponsePrototype(
-    const ::google::protobuf::MethodDescriptor* method) const {
-  GOOGLE_DCHECK_EQ(method->service(), descriptor());
-  switch(method->index()) {
-    case 0:
-      return ::service::ArithResponse::default_instance();
-    case 1:
-      return ::service::ArithResponse::default_instance();
-    case 2:
-      return ::service::ArithResponse::default_instance();
-    case 3:
-      return ::service::ArithResponse::default_instance();
-    default:
-      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      return *reinterpret_cast< ::google::protobuf::Message*>(NULL);
-  }
-}
-
-ArithService_Stub::ArithService_Stub(::google::protobuf::rpc::Caller* client)
-  : client_(client), owns_client_(false) {}
-ArithService_Stub::ArithService_Stub(
-    ::google::protobuf::rpc::Caller* client, bool client_ownership)
-  : client_(client),
-    owns_client_(client_ownership) {}
-ArithService_Stub::~ArithService_Stub() {
-  if (owns_client_) delete client_;
-}
-
-const ::google::protobuf::rpc::Error ArithService_Stub::add(
-  const ::service::ArithRequest* request,
-  ::service::ArithResponse* response) {
-  return client_->CallMethod(descriptor()->method(0), request, response);
-}
-const ::google::protobuf::rpc::Error ArithService_Stub::mul(
-  const ::service::ArithRequest* request,
-  ::service::ArithResponse* response) {
-  return client_->CallMethod(descriptor()->method(1), request, response);
-}
-const ::google::protobuf::rpc::Error ArithService_Stub::div(
-  const ::service::ArithRequest* request,
-  ::service::ArithResponse* response) {
-  return client_->CallMethod(descriptor()->method(2), request, response);
-}
-const ::google::protobuf::rpc::Error ArithService_Stub::error(
-  const ::service::ArithRequest* request,
-  ::service::ArithResponse* response) {
-  return client_->CallMethod(descriptor()->method(3), request, response);
-}
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

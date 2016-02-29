@@ -9,6 +9,8 @@
 
 #include "./service.pb/arith.pb.h"
 #include "./service.pb/echo.pb.h"
+
+#include "./service.pb/arith.protorpc.golden.h"
 #include "./service.pb/echo.protorpc.golden.h"
 
 class ArithService: public service::ArithService {

@@ -5,6 +5,9 @@
 #include "./service.pb/arith.pb.h"
 #include "./service.pb/echo.pb.h"
 
+#include "./service.pb/arith.protorpc.golden.h"
+#include "./service.pb/echo.protorpc.golden.h"
+
 #include <protorpc/rpc_server.h>
 #include <protorpc/rpc_client.h>
 

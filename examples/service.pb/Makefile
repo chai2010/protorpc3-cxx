@@ -4,4 +4,4 @@
 
 default:
 	../../bin/protoc3  --cpp_out=. arith.proto echo.proto
-	../../bin/protoc3  --protorpc_out=. --plugin=protoc-gen-protorpc=../../bin/protoc-gen-protorpc arith.proto echo.proto
+	../../bin/protoc3  --protorpc_out=. --plugin=protoc-gen-protorpc=../../bin/protoc-gen-protorpc.exe arith.proto echo.proto

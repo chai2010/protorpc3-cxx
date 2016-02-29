@@ -5,11 +5,14 @@
 #include "./service.pb/arith.pb.h"
 #include "./service.pb/echo.pb.h"
 
+#include "./service.pb/arith.protorpc.golden.h"
+#include "./service.pb/echo.protorpc.golden.h"
+
 #include <protorpc/rpc_server.h>
 #include <protorpc/rpc_client.h>
 
 int main() {
-  ::google::protorpc::Client client("127.0.0.1", 1234);
+  ::protorpc::Client client("127.0.0.1", 1234);
 
   service::ArithService::Stub arithStub(&client);
   service::EchoService::Stub echoStub(&client);
