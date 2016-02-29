@@ -19,7 +19,10 @@ struct ProtorpcGenerator: public google::protobuf::compiler::CodeGenerator {
 		google::protobuf::compiler::GeneratorContext *context,
 		std::string *error
 	) const {
-		if (file->options().cc_generic_services()) {
+		if(file->service_count() == 0) {
+			return true;
+		}
+		if(file->options().cc_generic_services()) {
 			*error = (
 				"cpp protorpc compiler plugin does not work with generic "
 				"services. To generate cpp protorpc APIs, please set \""
