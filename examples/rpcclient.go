@@ -9,9 +9,9 @@ import (
 	"log"
 	"net/rpc"
 
-	"code.google.com/p/protorpc"
-	"code.google.com/p/protorpc/service.pb"
-	"code.google.com/p/goprotobuf/proto"
+	"github.com/chai2010/protorpc"
+
+	service "./service.pb/gopkg.pb"
 )
 
 func main() {
@@ -28,61 +28,65 @@ func main() {
 	echoStub := &service.EchoServiceClient{client}
 
 	var arithArgs service.ArithRequest
-	var arithReply service.ArithResponse
 	var echoArgs service.EchoRequest
-	var echoReply service.EchoResponse
 
 	// Add
-	arithArgs.A = proto.Int32(1)
-	arithArgs.B = proto.Int32(2)
-	if err = arithStub.Add(&arithArgs, &arithReply); err != nil {
+	arithArgs.A = 1
+	arithArgs.B = 2
+	arithReply, err := arithStub.Add(&arithArgs)
+	if err != nil {
 		log.Fatalf(`arith.Add: %v`, err)
 	}
-	if arithReply.GetC() != 3 {
-		log.Fatalf(`arith.Add: expected = %d, got = %d`, 3, arithReply.GetC())
+	if arithReply.C != 3 {
+		log.Fatalf(`arith.Add: expected = %d, got = %d`, 3, arithReply.C)
 	}
 
 	// Mul
-	arithArgs.A = proto.Int32(2)
-	arithArgs.B = proto.Int32(3)
-	if err = arithStub.Mul(&arithArgs, &arithReply); err != nil {
+	arithArgs.A = 2
+	arithArgs.B = 3
+	arithReply, err = arithStub.Mul(&arithArgs)
+	if err != nil {
 		log.Fatalf(`arith.Mul: %v`, err)
 	}
-	if arithReply.GetC() != 6 {
-		log.Fatalf(`arith.Mul: expected = %d, got = %d`, 6, arithReply.GetC())
+	if arithReply.C != 6 {
+		log.Fatalf(`arith.Mul: expected = %d, got = %d`, 6, arithReply.C)
 	}
 
 	// Div
-	arithArgs.A = proto.Int32(13)
-	arithArgs.B = proto.Int32(5)
-	if err = arithStub.Div(&arithArgs, &arithReply); err != nil {
+	arithArgs.A = 13
+	arithArgs.B = 5
+	arithReply, err = arithStub.Div(&arithArgs)
+	if err != nil {
 		log.Fatalf(`arith.Div: %v`, err)
 	}
-	if arithReply.GetC() != 2 {
-		log.Fatalf(`arith.Div: expected = %d, got = %d`, 2, arithReply.GetC())
+	if arithReply.C != 2 {
+		log.Fatalf(`arith.Div: expected = %d, got = %d`, 2, arithReply.C)
 	}
 
 	// Div zero
-	arithArgs.A = proto.Int32(1)
-	arithArgs.B = proto.Int32(0)
-	if err = arithStub.Div(&arithArgs, &arithReply); err.Error() != "divide by zero" {
+	arithArgs.A = 1
+	arithArgs.B = 0
+	arithReply, err = arithStub.Div(&arithArgs)
+	if err.Error() != "divide by zero" {
 		log.Fatalf(`arith.Div: expected = "%s", got = "%s"`, "divide by zero", err.Error())
 	}
 
 	// Error
-	arithArgs.A = proto.Int32(1)
-	arithArgs.B = proto.Int32(2)
-	if err = arithStub.Error(&arithArgs, &arithReply); err.Error() != "ArithError" {
+	arithArgs.A = 1
+	arithArgs.B = 2
+	arithReply, err = arithStub.Error(&arithArgs)
+	if err.Error() != "ArithError" {
 		log.Fatalf(`arith.Error: expected = "%s", got = "%s"`, "ArithError", err.Error())
 	}
 
 	// EchoService.Echo
-	echoArgs.Msg = proto.String("Hello, Protobuf-RPC")
-	if err = echoStub.Echo(&echoArgs, &echoReply); err != nil {
+	echoArgs.Msg = "Hello, Protobuf-RPC"
+	echoReply, err := echoStub.Echo(&echoArgs)
+	if err != nil {
 		log.Fatalf(`echoStub.Echo: %v`, err)
 	}
-	if echoArgs.GetMsg() != echoReply.GetMsg() {
-		log.Fatalf(`echoStub.Echo: expected = "%s", got = "%s"`, echoArgs.GetMsg(), echoReply.GetMsg())
+	if echoArgs.Msg != echoReply.Msg {
+		log.Fatalf(`echoStub.Echo: expected = "%s", got = "%s"`, echoArgs.Msg, echoReply.Msg)
 	}
 
 	fmt.Printf("Done\n")

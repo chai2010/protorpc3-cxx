@@ -94,7 +94,7 @@ const ::google::protobuf::Message& EchoService::GetRequestPrototype(
 	}
 }
 
-const ::google::protobuf::Message& EchoService::GetRequestPrototype(
+const ::google::protobuf::Message& EchoService::GetResponsePrototype(
 	const ::google::protobuf::MethodDescriptor* method
 ) const {
 	GOOGLE_DCHECK_EQ(method->service(), descriptor());
@@ -208,7 +208,7 @@ const ::google::protobuf::Message& EchoService2::GetRequestPrototype(
 	}
 }
 
-const ::google::protobuf::Message& EchoService2::GetRequestPrototype(
+const ::google::protobuf::Message& EchoService2::GetResponsePrototype(
 	const ::google::protobuf::MethodDescriptor* method
 ) const {
 	GOOGLE_DCHECK_EQ(method->service(), descriptor());

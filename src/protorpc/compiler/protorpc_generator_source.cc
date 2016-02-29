@@ -220,7 +220,7 @@ static void PrintSourceServiceImpl(
 	printer->Print(*vars, "}\n");
 	printer->Print(*vars, "\n");
 
-	printer->Print(*vars, "const ::google::protobuf::Message& $service_name$::GetRequestPrototype(\n");
+	printer->Print(*vars, "const ::google::protobuf::Message& $service_name$::GetResponsePrototype(\n");
 	printer->Print(*vars, "$__$const ::google::protobuf::MethodDescriptor* method\n");
 	printer->Print(*vars, ") const {\n");
 	printer->Print(*vars, "$__$GOOGLE_DCHECK_EQ(method->service(), descriptor());\n");

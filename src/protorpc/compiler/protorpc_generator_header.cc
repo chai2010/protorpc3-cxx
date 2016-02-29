@@ -136,7 +136,7 @@ static void PrintHeaderServiceInterface(
 		(*vars)["method_output_type"] = protorpc_generator::ClassName(service->method(i)->output_type(), true);
 
 		printer->Print(*vars, "$__$virtual const ::protorpc::Error $method_name$(\n");
-		printer->Print(*vars, "$__$$__$$method_input_type$* request,\n");
+		printer->Print(*vars, "$__$$__$const $method_input_type$* request,\n");
 		printer->Print(*vars, "$__$$__$$method_output_type$* response\n");
 		printer->Print(*vars, "$__$);\n");
 	}
@@ -187,7 +187,7 @@ static void PrintHeaderServiceStub(
 		(*vars)["method_output_type"] = protorpc_generator::ClassName(service->method(i)->output_type(), true);
 
 		printer->Print(*vars, "$__$const ::protorpc::Error $method_name$(\n");
-		printer->Print(*vars, "$__$$__$$method_input_type$* request,\n");
+		printer->Print(*vars, "$__$$__$const $method_input_type$* request,\n");
 		printer->Print(*vars, "$__$$__$$method_output_type$* response\n");
 		printer->Print(*vars, "$__$);\n");
 	}

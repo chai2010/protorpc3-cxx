@@ -10,32 +10,32 @@ import (
 	"net"
 	"net/rpc"
 
-	"code.google.com/p/protorpc"
-	"code.google.com/p/protorpc/service.pb"
-	"code.google.com/p/goprotobuf/proto"
+	"github.com/chai2010/protorpc"
+
+	service "./service.pb/gopkg.pb"
 )
 
 type Arith int
 
 func (t *Arith) Add(args *service.ArithRequest, reply *service.ArithResponse) (err error) {
-	reply.C = proto.Int32(args.GetA() + args.GetB())
+	reply.C = args.A + args.B
 	log.Printf("Arith.Add: args = %v, reply = %v, err = %v\n", args, reply, err)
 	return
 }
 
 func (t *Arith) Mul(args *service.ArithRequest, reply *service.ArithResponse) (err error) {
-	reply.C = proto.Int32(args.GetA() * args.GetB())
+	reply.C = args.A * args.B
 	log.Printf("Arith.Mul: args = %v, reply = %v, err = %v\n", args, reply, err)
 	return
 }
 
 func (t *Arith) Div(args *service.ArithRequest, reply *service.ArithResponse) (err error) {
-	if args.GetB() == 0 {
+	if args.B == 0 {
 		err = errors.New("divide by zero")
 		log.Printf("Arith.Div: args = %v, reply = %v, err = %v\n", args, reply, err)
 		return
 	}
-	reply.C = proto.Int32(args.GetA() / args.GetB())
+	reply.C = args.A / args.B
 	log.Printf("Arith.Div: args = %v, reply = %v, err = %v\n", args, reply, err)
 	return
 }
@@ -54,7 +54,7 @@ func (t *Echo) Echo(args *service.EchoRequest, reply *service.EchoResponse) (err
 	return
 }
 func (t *Echo) EchoTwice(args *service.EchoRequest, reply *service.EchoResponse) (err error) {
-	reply.Msg = proto.String(args.GetMsg() + args.GetMsg())
+	reply.Msg = args.Msg + args.Msg
 	log.Printf("Echo.Echo: args = %v, reply = %v, err = %v\n", args, reply, err)
 	return
 }

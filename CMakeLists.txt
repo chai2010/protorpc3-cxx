@@ -150,12 +150,12 @@ add_executable(protorpc-client
 	./examples/rpcclient.cc
 	./examples/service.pb/arith.pb.h
 	./examples/service.pb/arith.pb.cc
-	./examples/service.pb/arith.protorpc.golden.h
-	./examples/service.pb/arith.protorpc.golden.cc
+	./examples/service.pb/arith.protorpc.h
+	./examples/service.pb/arith.protorpc.cc
 	./examples/service.pb/echo.pb.h
 	./examples/service.pb/echo.pb.cc
-	./examples/service.pb/echo.protorpc.golden.h
-	./examples/service.pb/echo.protorpc.golden.cc
+	./examples/service.pb/echo.protorpc.h
+	./examples/service.pb/echo.protorpc.cc
 )
 target_link_libraries(protorpc-client
 	libprotorpc

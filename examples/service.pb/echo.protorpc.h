@@ -27,11 +27,11 @@ public:
 	static const ::google::protobuf::ServiceDescriptor* descriptor();
 
 	virtual const ::protorpc::Error Echo(
-		::service::EchoRequest* request,
+		const ::service::EchoRequest* request,
 		::service::EchoResponse* response
 	);
 	virtual const ::protorpc::Error EchoTwice(
-		::service::EchoRequest* request,
+		const ::service::EchoRequest* request,
 		::service::EchoResponse* response
 	);
 
@@ -63,11 +63,11 @@ public:
 	// implements EchoService ------------------------------------------
 
 	const ::protorpc::Error Echo(
-		::service::EchoRequest* request,
+		const ::service::EchoRequest* request,
 		::service::EchoResponse* response
 	);
 	const ::protorpc::Error EchoTwice(
-		::service::EchoRequest* request,
+		const ::service::EchoRequest* request,
 		::service::EchoResponse* response
 	);
 
@@ -91,15 +91,15 @@ public:
 	static const ::google::protobuf::ServiceDescriptor* descriptor();
 
 	virtual const ::protorpc::Error Echo(
-		::service::EchoRequest* request,
+		const ::service::EchoRequest* request,
 		::service::EchoResponse* response
 	);
 	virtual const ::protorpc::Error EchoTwice(
-		::service::EchoRequest* request,
+		const ::service::EchoRequest* request,
 		::service::EchoResponse* response
 	);
 	virtual const ::protorpc::Error Foo(
-		::service::Message* request,
+		const ::service::Message* request,
 		::service::Message* response
 	);
 
@@ -131,15 +131,15 @@ public:
 	// implements EchoService2 ------------------------------------------
 
 	const ::protorpc::Error Echo(
-		::service::EchoRequest* request,
+		const ::service::EchoRequest* request,
 		::service::EchoResponse* response
 	);
 	const ::protorpc::Error EchoTwice(
-		::service::EchoRequest* request,
+		const ::service::EchoRequest* request,
 		::service::EchoResponse* response
 	);
 	const ::protorpc::Error Foo(
-		::service::Message* request,
+		const ::service::Message* request,
 		::service::Message* response
 	);
 

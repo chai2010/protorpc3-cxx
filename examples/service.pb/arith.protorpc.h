@@ -27,19 +27,19 @@ public:
 	static const ::google::protobuf::ServiceDescriptor* descriptor();
 
 	virtual const ::protorpc::Error add(
-		::service::ArithRequest* request,
+		const ::service::ArithRequest* request,
 		::service::ArithResponse* response
 	);
 	virtual const ::protorpc::Error mul(
-		::service::ArithRequest* request,
+		const ::service::ArithRequest* request,
 		::service::ArithResponse* response
 	);
 	virtual const ::protorpc::Error div(
-		::service::ArithRequest* request,
+		const ::service::ArithRequest* request,
 		::service::ArithResponse* response
 	);
 	virtual const ::protorpc::Error error(
-		::service::ArithRequest* request,
+		const ::service::ArithRequest* request,
 		::service::ArithResponse* response
 	);
 
@@ -71,19 +71,19 @@ public:
 	// implements ArithService ------------------------------------------
 
 	const ::protorpc::Error add(
-		::service::ArithRequest* request,
+		const ::service::ArithRequest* request,
 		::service::ArithResponse* response
 	);
 	const ::protorpc::Error mul(
-		::service::ArithRequest* request,
+		const ::service::ArithRequest* request,
 		::service::ArithResponse* response
 	);
 	const ::protorpc::Error div(
-		::service::ArithRequest* request,
+		const ::service::ArithRequest* request,
 		::service::ArithResponse* response
 	);
 	const ::protorpc::Error error(
-		::service::ArithRequest* request,
+		const ::service::ArithRequest* request,
 		::service::ArithResponse* response
 	);
 

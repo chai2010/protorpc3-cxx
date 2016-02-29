@@ -120,7 +120,7 @@ const ::google::protobuf::Message& ArithService::GetRequestPrototype(
 	}
 }
 
-const ::google::protobuf::Message& ArithService::GetRequestPrototype(
+const ::google::protobuf::Message& ArithService::GetResponsePrototype(
 	const ::google::protobuf::MethodDescriptor* method
 ) const {
 	GOOGLE_DCHECK_EQ(method->service(), descriptor());
