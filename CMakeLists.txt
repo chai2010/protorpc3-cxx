@@ -4,104 +4,131 @@
 
 project(PROTORPC)
 
-if (NOT WIN32)
-    add_definitions(-DHAVE_PTHREAD)
+if(NOT WIN32)
+	add_definitions(-DHAVE_PTHREAD)
 endif()
 
 set(protobuf_source_dir
-    ${CMAKE_CURRENT_SOURCE_DIR}/protobuf/protobuf-3.0.0-beta-2
+	${CMAKE_CURRENT_SOURCE_DIR}/protobuf/protobuf-3.0.0-beta-2
 )
-
 include_directories(AFTER
-    ${protobuf_source_dir}/src
-    ./src
+	${protobuf_source_dir}/src
+	./src
 )
 
 include(libprotobuf-lite.cmake)
 include(libprotobuf.cmake)
 include(libprotoc.cmake)
 
-# snappy
-set(SNAPPY_HDR
-    ./src/protorpc/snappy/protorpc-snappy.h
-)
-set(SNAPPY_SRC
-    ./src/protorpc/snappy/protorpc-snappy.cc
-    ./src/protorpc/snappy/protorpc-snappy-sinksource.cc
-    ./src/protorpc/snappy/protorpc-snappy-stubs-internal.cc
-)
+set(PROTORPC_HDR
+	./src/protorpc/wire.pb/wire.pb.h
+	./src/protorpc/rpc_service.h
+	./src/protorpc/rpc_server.h
+	./src/protorpc/rpc_server_conn.h
+	./src/protorpc/rpc_client.h
+	./src/protorpc/rpc_wire.h
+	./src/protorpc/rpc_conn.h
 
-# rpc
-set(PB_RPC_HDR
-    ./src/protorpc/wire.pb/wire.pb.h
-    ./src/protorpc/rpc_service.h
-    ./src/protorpc/rpc_server.h
-    ./src/protorpc/rpc_server_conn.h
-    ./src/protorpc/rpc_client.h
-    ./src/protorpc/rpc_wire.h
-    ./src/protorpc/rpc_conn.h
+	./src/protorpc/rpc_env.h
+	./src/protorpc/rpc_crc32.h
 
-    ./src/protorpc/rpc_env.h
-    ./src/protorpc/rpc_crc32.h
+	./src/protorpc/snappy/protorpc-snappy.h
 )
-set(PB_RPC_SRC
-    ./src/protorpc/wire.pb/wire.pb.cc
-    ./src/protorpc/rpc_service.cc
-    ./src/protorpc/rpc_server.cc
-    ./src/protorpc/rpc_server_conn.cc
-    ./src/protorpc/rpc_client.cc
-    ./src/protorpc/rpc_wire.cc
-    ./src/protorpc/rpc_conn.cc
+set(PROTORPC_SRC
+	./src/protorpc/wire.pb/wire.pb.cc
+	./src/protorpc/rpc_service.cc
+	./src/protorpc/rpc_server.cc
+	./src/protorpc/rpc_server_conn.cc
+	./src/protorpc/rpc_client.cc
+	./src/protorpc/rpc_wire.cc
+	./src/protorpc/rpc_conn.cc
 
-    ./src/protorpc/rpc_env.cc
-    ./src/protorpc/rpc_crc32.cc
+	./src/protorpc/rpc_env.cc
+	./src/protorpc/rpc_crc32.cc
+
+	./src/protorpc/snappy/protorpc-snappy.cc
+	./src/protorpc/snappy/protorpc-snappy-sinksource.cc
+	./src/protorpc/snappy/protorpc-snappy-stubs-internal.cc
 )
 
-add_library(protorpclib
-	${PB_RPC_SRC}
-    ${PB_RPC_HDR}
-
-    ${SNAPPY_SRC}
-    ${SNAPPY_HDR}
-
+add_library(libprotobuf_lite
 	${libprotobuf_lite_files}
-    ${libprotobuf_files}
 )
-
-add_executable(protoc3
-    ${protobuf_source_dir}/src/google/protobuf/compiler/main.cc
-
-    ${libprotobuf_lite_files}
-    ${libprotobuf_files}
-    ${libprotoc_files}
-)
-
-add_executable(protoc-gen-protorpc
-    ./src/protorpc/compiler/config.h
-    ./src/protorpc/compiler/generator_helpers.h
-	./src/protorpc/compiler/cpp_generator_helpers.h
-	./src/protorpc/compiler/cpp_generator.cc
-	./src/protorpc/compiler/cpp_generator.h
-    ./src/protorpc/compiler/cpp_plugin.h
-    ./src/protorpc/compiler/cpp_plugin.cc
-    ./src/protorpc/compiler/main.cc
-
+add_library(libprotobuf
 	${libprotobuf_lite_files}
-    ${libprotobuf_files}
+	${libprotobuf_files}
+)
+add_library(libprotoc
+	${libprotobuf_lite_files}
+	${libprotobuf_files}
 	${libprotoc_files}
 )
-
-add_executable(hiuis3hello
-	./examples/hello.cc
-    ./examples/service.pb/echo.pb.h
-    ./examples/service.pb/echo.pb.cc
-    ./examples/service.pb/echo.protorpc.golden.h
-    ./examples/service.pb/echo.protorpc.golden.cc
+add_library(libprotorpc
+	${PROTORPC_SRC}
+	${PROTORPC_HDR}
 
 	${libprotobuf_lite_files}
 	${libprotobuf_files}
 )
 
-target_link_libraries(hiuis3hello
-	protorpclib
+add_executable(protoc3
+	${protobuf_source_dir}/src/google/protobuf/compiler/main.cc
+)
+target_link_libraries(protoc3
+	libprotoc
+)
+
+add_executable(protoc-gen-protorpc
+	./src/protorpc/compiler/config.h
+	./src/protorpc/compiler/generator_helpers.h
+	./src/protorpc/compiler/cpp_generator_helpers.h
+	./src/protorpc/compiler/cpp_generator.cc
+	./src/protorpc/compiler/cpp_generator.h
+	./src/protorpc/compiler/cpp_plugin.h
+	./src/protorpc/compiler/cpp_plugin.cc
+	./src/protorpc/compiler/main.cc
+)
+target_link_libraries(protoc-gen-protorpc
+	libprotoc
+)
+
+add_executable(protorpc-test
+	./examples/rpctest.cc
+	./examples/service.pb/arith.pb.h
+	./examples/service.pb/arith.pb.cc
+	./examples/service.pb/echo.pb.h
+	./examples/service.pb/echo.pb.cc
+	./examples/service.pb/echo.protorpc.golden.h
+	./examples/service.pb/echo.protorpc.golden.cc
+)
+target_link_libraries(protorpc-test
+	libprotorpc
+)
+
+add_executable(protorpc-server
+	./examples/rpcserver.cc
+	./examples/service.pb/arith.pb.h
+	./examples/service.pb/arith.pb.cc
+	./examples/service.pb/echo.pb.h
+	./examples/service.pb/echo.pb.cc
+	./examples/service.pb/echo.protorpc.golden.h
+	./examples/service.pb/echo.protorpc.golden.cc
+)
+target_link_libraries(protorpc-server
+	libprotorpc
+)
+
+add_executable(protorpc-client
+	./examples/rpcclient.cc
+	./examples/service.pb/arith.pb.h
+	./examples/service.pb/arith.pb.cc
+	./examples/service.pb/arith.protorpc.golden.h
+	./examples/service.pb/arith.protorpc.golden.cc
+	./examples/service.pb/echo.pb.h
+	./examples/service.pb/echo.pb.cc
+	./examples/service.pb/echo.protorpc.golden.h
+	./examples/service.pb/echo.protorpc.golden.cc
+)
+target_link_libraries(protorpc-client
+	libprotorpc
 )

@@ -4,46 +4,47 @@
 
 #include <stdio.h>
 
-#include <google/protobuf/rpc/rpc_server.h>
-#include <google/protobuf/rpc/rpc_client.h>
+#include <protorpc/rpc_server.h>
+#include <protorpc/rpc_client.h>
 
 #include "./service.pb/arith.pb.h"
 #include "./service.pb/echo.pb.h"
+#include "./service.pb/echo.protorpc.golden.h"
 
 class ArithService: public service::ArithService {
  public:
   inline ArithService() {}
   virtual ~ArithService() {}
 
-  virtual const ::google::protobuf::rpc::Error add(
+  virtual const ::protorpc::Error add(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response
   ) {
     response->set_c(request->a() + request->b());
-    return ::google::protobuf::rpc::Error::Nil();
+    return ::protorpc::Error::Nil();
   }
-  virtual const ::google::protobuf::rpc::Error mul(
+  virtual const ::protorpc::Error mul(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response
   ) {
     response->set_c(request->a() * request->b());
-    return ::google::protobuf::rpc::Error::Nil();
+    return ::protorpc::Error::Nil();
   }
-  virtual const ::google::protobuf::rpc::Error div(
+  virtual const ::protorpc::Error div(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response
   ) {
     if(request->b() == 0) {
-      return ::google::protobuf::rpc::Error::New("divide by zero");
+      return ::protorpc::Error::New("divide by zero");
     }
     response->set_c(request->a() / request->b());
-    return ::google::protobuf::rpc::Error::Nil();
+    return ::protorpc::Error::Nil();
   }
-  virtual const ::google::protobuf::rpc::Error error(
+  virtual const ::protorpc::Error error(
     const ::service::ArithRequest* request,
     ::service::ArithResponse* response
   ) {
-    return ::google::protobuf::rpc::Error::New("ArithError");
+    return ::protorpc::Error::New("ArithError");
   }
 };
 
@@ -52,17 +53,17 @@ class EchoService: public service::EchoService {
   inline EchoService() {}
   virtual ~EchoService() {}
 
-  virtual const ::google::protobuf::rpc::Error Echo(
+  virtual const ::protorpc::Error Echo(
     const ::service::EchoRequest* request,
     ::service::EchoResponse* response
   ) {
     response->set_msg(request->msg());
-    return ::google::protobuf::rpc::Error::Nil();
+    return ::protorpc::Error::Nil();
   }
 };
 
 int main(int argc, char* argv[]) {
-  ::google::protobuf::rpc::Server client;
+  ::protorpc::Server client;
 
   client.AddService(new ArithService, true);
   client.AddService(new EchoService, true);
@@ -74,7 +75,7 @@ int main(int argc, char* argv[]) {
   ::service::ArithResponse arithReply;
   ::service::EchoRequest echoArgs;
   ::service::EchoResponse echoReply;
-  ::google::protobuf::rpc::Error err;
+  ::protorpc::Error err;
 
   // Test CamelCase
   struct { const char *in, *out; } methods[] = {
@@ -84,7 +85,7 @@ int main(int argc, char* argv[]) {
     { "", "" },
   };
   for(int i = 0; i < sizeof(methods)/sizeof(methods[0]); i++) {
-    auto s = ::google::protobuf::rpc::Service::CamelCase(methods[i].in);
+    auto s = ::protorpc::Service::CamelCase(methods[i].in);
     if(s != methods[i].out) {
       fprintf(stderr, "Service::CamelCase: expected = \"%s\", got = \"%s\"\n",
         methods[i].out, s.c_str()

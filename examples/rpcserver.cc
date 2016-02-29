@@ -5,15 +5,15 @@
 #include "./service.pb/arith.pb.h"
 #include "./service.pb/echo.pb.h"
 
-#include <google/protobuf/rpc/rpc_server.h>
-#include <google/protobuf/rpc/rpc_client.h>
+#include <protorpc/rpc_server.h>
+#include <protorpc/rpc_client.h>
 
 class ArithService: public service::ArithService {
  public:
   inline ArithService() {}
   virtual ~ArithService() {}
 
-  virtual const ::google::protobuf::rpc::Error add(
+  virtual const ::protorpc::Error add(
     const ::service::ArithRequest* args,
     ::service::ArithResponse* reply
   ) {
@@ -21,9 +21,9 @@ class ArithService: public service::ArithService {
     printf("ArithService.Add: args = a:%d b:%d, reply = c:%d, err = \"%s\"\n",
       args->a(), args->b(), reply->c(), ""
     );
-    return ::google::protobuf::rpc::Error::Nil();
+    return ::protorpc::Error::Nil();
   }
-  virtual const ::google::protobuf::rpc::Error mul(
+  virtual const ::protorpc::Error mul(
     const ::service::ArithRequest* args,
     ::service::ArithResponse* reply
   ) {
@@ -31,9 +31,9 @@ class ArithService: public service::ArithService {
     printf("ArithService.Mul: args = a:%d b:%d, reply = c:%d, err = \"%s\"\n",
       args->a(), args->b(), reply->c(), ""
     );
-    return ::google::protobuf::rpc::Error::Nil();
+    return ::protorpc::Error::Nil();
   }
-  virtual const ::google::protobuf::rpc::Error div(
+  virtual const ::protorpc::Error div(
     const ::service::ArithRequest* args,
     ::service::ArithResponse* reply
   ) {
@@ -41,22 +41,22 @@ class ArithService: public service::ArithService {
       printf("ArithService.Div: args = a:%d b:%d, reply = c:%d, err = \"%s\"\n",
         args->a(), args->b(), reply->c(), "divide by zero"
       );
-      return ::google::protobuf::rpc::Error::New("divide by zero");
+      return ::protorpc::Error::New("divide by zero");
     }
     reply->set_c(args->a() / args->b());
     printf("ArithService.Div: args = a:%d b:%d, reply = c:%d, err = \"%s\"\n",
       args->a(), args->b(), reply->c(), ""
     );
-    return ::google::protobuf::rpc::Error::Nil();
+    return ::protorpc::Error::Nil();
   }
-  virtual const ::google::protobuf::rpc::Error error(
+  virtual const ::protorpc::Error error(
     const ::service::ArithRequest* args,
     ::service::ArithResponse* reply
   ) {
     printf("ArithService.Error: args = a:%d b:%d, reply = c:%d, err = \"%s\"\n",
       args->a(), args->b(), reply->c(), "ArithError"
     );
-    return ::google::protobuf::rpc::Error::New("ArithError");
+    return ::protorpc::Error::New("ArithError");
   }
 };
 
@@ -65,7 +65,7 @@ class EchoService: public service::EchoService {
   inline EchoService() {}
   virtual ~EchoService() {}
 
-  virtual const ::google::protobuf::rpc::Error Echo(
+  virtual const ::protorpc::Error Echo(
     const ::service::EchoRequest* args,
     ::service::EchoResponse* reply
   ) {
@@ -73,9 +73,9 @@ class EchoService: public service::EchoService {
     printf("EchoService.Echo: args = msg:\"%s\", reply = msg:\"%s\", err = \"%s\"\n",
       args->msg().c_str(), reply->msg().c_str(), ""
     );
-    return ::google::protobuf::rpc::Error::Nil();
+    return ::protorpc::Error::Nil();
   }
-  virtual const ::google::protobuf::rpc::Error EchoTwice(
+  virtual const ::protorpc::Error EchoTwice(
     const ::service::EchoRequest* args,
     ::service::EchoResponse* reply
   ) {
@@ -83,12 +83,12 @@ class EchoService: public service::EchoService {
     printf("EchoService.EchoTwice: args = msg:\"%s\", reply = msg:\"%s\", err = \"%s\"\n",
       args->msg().c_str(), reply->msg().c_str(), ""
     );
-    return ::google::protobuf::rpc::Error::Nil();
+    return ::protorpc::Error::Nil();
   }
 };
 
 int main() {
-  ::google::protobuf::rpc::Server server;
+  ::protorpc::Server server;
 
   server.AddService(new ArithService, true);
   server.AddService(new EchoService, true);

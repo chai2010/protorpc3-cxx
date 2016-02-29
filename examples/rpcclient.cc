@@ -5,11 +5,11 @@
 #include "./service.pb/arith.pb.h"
 #include "./service.pb/echo.pb.h"
 
-#include <google/protobuf/rpc/rpc_server.h>
-#include <google/protobuf/rpc/rpc_client.h>
+#include <protorpc/rpc_server.h>
+#include <protorpc/rpc_client.h>
 
 int main() {
-  ::google::protobuf::rpc::Client client("127.0.0.1", 1234);
+  ::google::protorpc::Client client("127.0.0.1", 1234);
 
   service::ArithService::Stub arithStub(&client);
   service::EchoService::Stub echoStub(&client);
@@ -18,7 +18,7 @@ int main() {
   ::service::ArithResponse arithReply;
   ::service::EchoRequest echoArgs;
   ::service::EchoResponse echoReply;
-  ::google::protobuf::rpc::Error err;
+  ::protorpc::Error err;
 
   // EchoService.add
   arithArgs.set_a(1);

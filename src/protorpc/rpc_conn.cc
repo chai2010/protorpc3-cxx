@@ -74,7 +74,7 @@ bool Conn::ReadProto(::google::protobuf::Message* pb) {
     return false;
   }
   if(size != 0) {
-    std::string buf(uint(size), '\0');
+    std::string buf(size_t(size), '\0');
     if(!Read(&buf[0], int(size))) {
       return false;
     }
@@ -112,7 +112,7 @@ bool Conn::RecvFrame(::std::string* data) {
     return false;
   }
   if(size != 0) {
-    data->resize(uint(size));
+    data->resize(size_t(size));
     if(!Read((void*)data->data(), int(size))) {
       data->clear();
       return false;
