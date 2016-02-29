@@ -11,27 +11,25 @@ namespace service {
 namespace {
 
 const ::google::protobuf::ServiceDescriptor* EchoService_descriptor_ = NULL;
-
-}  // namespace
-
-void protorpc_AssignDesc_echo_2eproto() {
-  protobuf_AddDesc_echo_2eproto();
-  const ::google::protobuf::FileDescriptor* file =
-    ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
-      "echo.proto");
-  GOOGLE_CHECK(file != NULL);
-  EchoService_descriptor_ = file->service(0);
-}
-
-namespace {
+const ::google::protobuf::ServiceDescriptor* EchoService2_descriptor_ = NULL;
 
 GOOGLE_PROTOBUF_DECLARE_ONCE(protorpc_AssignDescriptors_once_);
+
+void protorpc_AssignDesc_echo_2eproto() {
+	protobuf_AddDesc_echo_2eproto();
+	auto file = ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName("echo.proto");
+	GOOGLE_CHECK(file != NULL);
+	EchoService_descriptor_ = file->service(0);
+	EchoService2_descriptor_ = file->service(1);
+}
 inline void protorpc_AssignDescriptorsOnce() {
-  ::google::protobuf::GoogleOnceInit(&protorpc_AssignDescriptors_once_,
-                 &protorpc_AssignDesc_echo_2eproto);
+	::google::protobuf::GoogleOnceInit(
+		&protorpc_AssignDescriptors_once_,
+		&protorpc_AssignDesc_echo_2eproto
+	);
 }
 
-}
+} // namespace {
 
 EchoService::~EchoService() {}
 
