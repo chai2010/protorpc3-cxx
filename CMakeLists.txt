@@ -110,12 +110,12 @@ add_executable(protorpc-test
 	./examples/rpctest.cc
 	./examples/service.pb/arith.pb.h
 	./examples/service.pb/arith.pb.cc
-	./examples/service.pb/arith.protorpc.golden.h
-	./examples/service.pb/arith.protorpc.golden.cc
+	./examples/service.pb/arith.protorpc.h
+	./examples/service.pb/arith.protorpc.cc
 	./examples/service.pb/echo.pb.h
 	./examples/service.pb/echo.pb.cc
-	./examples/service.pb/echo.protorpc.golden.h
-	./examples/service.pb/echo.protorpc.golden.cc
+	./examples/service.pb/echo.protorpc.h
+	./examples/service.pb/echo.protorpc.cc
 )
 target_link_libraries(protorpc-test
 	libprotorpc
@@ -130,12 +130,12 @@ add_executable(protorpc-server
 	./examples/rpcserver.cc
 	./examples/service.pb/arith.pb.h
 	./examples/service.pb/arith.pb.cc
-	./examples/service.pb/arith.protorpc.golden.h
-	./examples/service.pb/arith.protorpc.golden.cc
+	./examples/service.pb/arith.protorpc.h
+	./examples/service.pb/arith.protorpc.cc
 	./examples/service.pb/echo.pb.h
 	./examples/service.pb/echo.pb.cc
-	./examples/service.pb/echo.protorpc.golden.h
-	./examples/service.pb/echo.protorpc.golden.cc
+	./examples/service.pb/echo.protorpc.h
+	./examples/service.pb/echo.protorpc.cc
 )
 target_link_libraries(protorpc-server
 	libprotorpc
