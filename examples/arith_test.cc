@@ -48,29 +48,29 @@ static std::thread* tArithServer     = NULL;
 static int          tArithServerPort = 2016;
 
 static void tStartArithServerCallback() {
-    protorpc::Server server;
-    server.AddService(new tArithService, true);
-    server.BindAndServe(tArithServerPort);
+	protorpc::Server server;
+	server.AddService(new tArithService, true);
+	server.BindAndServe(tArithServerPort);
 }
 
 void tStartArithServer() {
 	if(tArithServer != NULL) {
 		return;
 	}
-    tArithServer = new std::thread(tStartArithServerCallback);
+	tArithServer = new std::thread(tStartArithServerCallback);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	return;
 }
 
 INIT(protorpc, StartArithServer) {
-    tStartArithServer();
+	tStartArithServer();
 }
 EXIT(protorpc, StopArithServer) {
 	// do some clean work
 }
 
 TEST(protorpc, ArithService) {
-    protorpc::Client client("127.0.0.1", tArithServerPort);
+	protorpc::Client client("127.0.0.1", tArithServerPort);
 	service::ArithService::Stub stub(&client);
 
 	service::ArithRequest args;

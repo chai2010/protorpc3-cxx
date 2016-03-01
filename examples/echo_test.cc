@@ -32,29 +32,29 @@ static std::thread* tEchoServer     = NULL;
 static int          tEchoServerPort = 9527;
 
 static void tStartEchoServerCallback() {
-    protorpc::Server server;
-    server.AddService(new tEchoService, true);
-    server.BindAndServe(tEchoServerPort);
+	protorpc::Server server;
+	server.AddService(new tEchoService, true);
+	server.BindAndServe(tEchoServerPort);
 }
 
 void tStartEchoServer() {
 	if(tEchoServer != NULL) {
 		return;
 	}
-    tEchoServer = new std::thread(tStartEchoServerCallback);
+	tEchoServer = new std::thread(tStartEchoServerCallback);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	return;
 }
 
 INIT(protorpc, StartEchoServer) {
-    tStartEchoServer();
+	tStartEchoServer();
 }
 EXIT(protorpc, StopEchoServer) {
 	// do some clean work
 }
 
 TEST(protorpc, EchoService) {
-    protorpc::Client client("127.0.0.1", tEchoServerPort);
+	protorpc::Client client("127.0.0.1", tEchoServerPort);
 	service::EchoService::Stub echoStub(&client);
 
 	service::EchoRequest echoArgs;
