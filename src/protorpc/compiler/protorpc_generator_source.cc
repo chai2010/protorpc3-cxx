@@ -264,12 +264,13 @@ static void PrintSourceServiceStubImpl(
 		(*vars)["method_name"]        = service->method(i)->name();
 		(*vars)["method_input_type"]  = protorpc_generator::ClassName(service->method(i)->input_type(), true);
 		(*vars)["method_output_type"] = protorpc_generator::ClassName(service->method(i)->output_type(), true);
+		(*vars)["method_index"]       = protorpc_generator::as_string(service->method(i)->index());
 
 		printer->Print(*vars, "const ::protorpc::Error $service_name$_Stub::$method_name$(\n");
 		printer->Print(*vars, "$__$const $method_input_type$* request,\n");
 		printer->Print(*vars, "$__$$method_output_type$* response\n");
 		printer->Print(*vars, ") {\n");
-		printer->Print(*vars, "$__$return client_->CallMethod(descriptor()->method(0), request, response);\n");
+		printer->Print(*vars, "$__$return client_->CallMethod(descriptor()->method($method_index$), request, response);\n");
 		printer->Print(*vars, "}\n");
 		printer->Print(*vars, "\n");
 	}

@@ -128,7 +128,7 @@ const ::protorpc::Error EchoService_Stub::EchoTwice(
 	const ::service::EchoRequest* request,
 	::service::EchoResponse* response
 ) {
-	return client_->CallMethod(descriptor()->method(0), request, response);
+	return client_->CallMethod(descriptor()->method(1), request, response);
 }
 
 EchoService2::~EchoService2() {}
@@ -244,14 +244,14 @@ const ::protorpc::Error EchoService2_Stub::EchoTwice(
 	const ::service::EchoRequest* request,
 	::service::EchoResponse* response
 ) {
-	return client_->CallMethod(descriptor()->method(0), request, response);
+	return client_->CallMethod(descriptor()->method(1), request, response);
 }
 
 const ::protorpc::Error EchoService2_Stub::Foo(
 	const ::service::Message* request,
 	::service::Message* response
 ) {
-	return client_->CallMethod(descriptor()->method(0), request, response);
+	return client_->CallMethod(descriptor()->method(2), request, response);
 }
 
 }  // namespace service

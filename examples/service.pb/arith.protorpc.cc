@@ -158,21 +158,21 @@ const ::protorpc::Error ArithService_Stub::mul(
 	const ::service::ArithRequest* request,
 	::service::ArithResponse* response
 ) {
-	return client_->CallMethod(descriptor()->method(0), request, response);
+	return client_->CallMethod(descriptor()->method(1), request, response);
 }
 
 const ::protorpc::Error ArithService_Stub::div(
 	const ::service::ArithRequest* request,
 	::service::ArithResponse* response
 ) {
-	return client_->CallMethod(descriptor()->method(0), request, response);
+	return client_->CallMethod(descriptor()->method(2), request, response);
 }
 
 const ::protorpc::Error ArithService_Stub::error(
 	const ::service::ArithRequest* request,
 	::service::ArithResponse* response
 ) {
-	return client_->CallMethod(descriptor()->method(0), request, response);
+	return client_->CallMethod(descriptor()->method(3), request, response);
 }
 
 }  // namespace service
