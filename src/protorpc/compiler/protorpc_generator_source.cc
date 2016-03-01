@@ -211,7 +211,7 @@ static void PrintSourceServiceImpl(
 		(*vars)["method_index"]       = protorpc_generator::as_string(service->method(i)->index());
 
 		printer->Print(*vars, "$__$case $method_index$:\n");
-		printer->Print(*vars, "$__$$__$return $method_output_type$::default_instance();\n");
+		printer->Print(*vars, "$__$$__$return $method_input_type$::default_instance();\n");
 	}
 	printer->Print(*vars, "$__$default:\n");
 	printer->Print(*vars, "$__$$__$GOOGLE_LOG(FATAL) << \"Bad method index; this should never happen.\";\n");
@@ -232,7 +232,7 @@ static void PrintSourceServiceImpl(
 		(*vars)["method_index"]       = protorpc_generator::as_string(service->method(i)->index());
 
 		printer->Print(*vars, "$__$case $method_index$:\n");
-		printer->Print(*vars, "$__$$__$return $method_input_type$::default_instance();\n");
+		printer->Print(*vars, "$__$$__$return $method_output_type$::default_instance();\n");
 	}
 	printer->Print(*vars, "$__$default:\n");
 	printer->Print(*vars, "$__$$__$GOOGLE_LOG(FATAL) << \"Bad method index; this should never happen.\";\n");

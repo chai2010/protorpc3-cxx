@@ -85,9 +85,9 @@ const ::google::protobuf::Message& EchoService::GetRequestPrototype(
 	GOOGLE_DCHECK_EQ(method->service(), descriptor());
 	switch(method->index()) {
 	case 0:
-		return ::service::EchoResponse::default_instance();
+		return ::service::EchoRequest::default_instance();
 	case 1:
-		return ::service::EchoResponse::default_instance();
+		return ::service::EchoRequest::default_instance();
 	default:
 		GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
 		return *reinterpret_cast< ::google::protobuf::Message*>(NULL);
@@ -100,9 +100,9 @@ const ::google::protobuf::Message& EchoService::GetResponsePrototype(
 	GOOGLE_DCHECK_EQ(method->service(), descriptor());
 	switch(method->index()) {
 	case 0:
-		return ::service::EchoRequest::default_instance();
+		return ::service::EchoResponse::default_instance();
 	case 1:
-		return ::service::EchoRequest::default_instance();
+		return ::service::EchoResponse::default_instance();
 	default:
 		GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
 		return *reinterpret_cast< ::google::protobuf::Message*>(NULL);
@@ -197,9 +197,9 @@ const ::google::protobuf::Message& EchoService2::GetRequestPrototype(
 	GOOGLE_DCHECK_EQ(method->service(), descriptor());
 	switch(method->index()) {
 	case 0:
-		return ::service::EchoResponse::default_instance();
+		return ::service::EchoRequest::default_instance();
 	case 1:
-		return ::service::EchoResponse::default_instance();
+		return ::service::EchoRequest::default_instance();
 	case 2:
 		return ::service::Message::default_instance();
 	default:
@@ -214,9 +214,9 @@ const ::google::protobuf::Message& EchoService2::GetResponsePrototype(
 	GOOGLE_DCHECK_EQ(method->service(), descriptor());
 	switch(method->index()) {
 	case 0:
-		return ::service::EchoRequest::default_instance();
+		return ::service::EchoResponse::default_instance();
 	case 1:
-		return ::service::EchoRequest::default_instance();
+		return ::service::EchoResponse::default_instance();
 	case 2:
 		return ::service::Message::default_instance();
 	default:

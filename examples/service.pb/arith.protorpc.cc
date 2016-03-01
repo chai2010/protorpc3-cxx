@@ -107,13 +107,13 @@ const ::google::protobuf::Message& ArithService::GetRequestPrototype(
 	GOOGLE_DCHECK_EQ(method->service(), descriptor());
 	switch(method->index()) {
 	case 0:
-		return ::service::ArithResponse::default_instance();
+		return ::service::ArithRequest::default_instance();
 	case 1:
-		return ::service::ArithResponse::default_instance();
+		return ::service::ArithRequest::default_instance();
 	case 2:
-		return ::service::ArithResponse::default_instance();
+		return ::service::ArithRequest::default_instance();
 	case 3:
-		return ::service::ArithResponse::default_instance();
+		return ::service::ArithRequest::default_instance();
 	default:
 		GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
 		return *reinterpret_cast< ::google::protobuf::Message*>(NULL);
@@ -126,13 +126,13 @@ const ::google::protobuf::Message& ArithService::GetResponsePrototype(
 	GOOGLE_DCHECK_EQ(method->service(), descriptor());
 	switch(method->index()) {
 	case 0:
-		return ::service::ArithRequest::default_instance();
+		return ::service::ArithResponse::default_instance();
 	case 1:
-		return ::service::ArithRequest::default_instance();
+		return ::service::ArithResponse::default_instance();
 	case 2:
-		return ::service::ArithRequest::default_instance();
+		return ::service::ArithResponse::default_instance();
 	case 3:
-		return ::service::ArithRequest::default_instance();
+		return ::service::ArithResponse::default_instance();
 	default:
 		GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
 		return *reinterpret_cast< ::google::protobuf::Message*>(NULL);
