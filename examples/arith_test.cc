@@ -47,23 +47,16 @@ struct tArithService: public service::ArithService {
 static std::thread* tArithServer     = NULL;
 static int          tArithServerPort = 2016;
 
-static void tStartArithServerCallback() {
+static void tStartArithServer() {
 	protorpc::Server server;
 	server.AddService(new tArithService, true);
 	server.BindAndServe(tArithServerPort);
 }
 
-void tStartArithServer() {
-	if(tArithServer != NULL) {
-		return;
-	}
-	tArithServer = new std::thread(tStartArithServerCallback);
+INIT(protorpc, StartArithServer) {
+	tArithServer = new std::thread(tStartArithServer);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	return;
-}
-
-INIT(protorpc, StartArithServer) {
-	tStartArithServer();
 }
 EXIT(protorpc, StopArithServer) {
 	// do some clean work
@@ -104,4 +97,3 @@ TEST(protorpc, ArithService) {
 	err = stub.div(&args, &reply);
 	ASSERT_STREQ("divide by zero", err.String().c_str());
 }
-
