@@ -14,6 +14,8 @@ set(protobuf_source_dir
 include_directories(AFTER
 	${protobuf_source_dir}/src
 	./src
+
+	./test
 )
 
 include(libprotobuf-lite.cmake)
@@ -107,7 +109,9 @@ install(TARGETS protoc-gen-protorpc
 )
 
 add_executable(protorpc-test
-	./examples/rpctest.cc
+	./examples/arith_test.cc
+	./examples/echo_test.cc
+
 	./examples/service.pb/arith.pb.h
 	./examples/service.pb/arith.pb.cc
 	./examples/service.pb/arith.protorpc.h
@@ -116,6 +120,9 @@ add_executable(protorpc-test
 	./examples/service.pb/echo.pb.cc
 	./examples/service.pb/echo.protorpc.h
 	./examples/service.pb/echo.protorpc.cc
+
+	./test/test.h
+	./test/test.cc
 )
 target_link_libraries(protorpc-test
 	libprotorpc
