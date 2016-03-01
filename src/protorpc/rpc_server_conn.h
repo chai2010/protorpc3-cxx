@@ -16,30 +16,31 @@ namespace protorpc {
 class Server;
 
 class ServerConn {
- public:
-  static void Serve(Server* server, Conn* conn, Env* env);
+public:
+	static void Serve(Server* server, Conn* conn, Env* env);
 
- private:
-  ServerConn(Server* server, Conn* conn, Env* env);
-  ~ServerConn();
+private:
+	ServerConn(Server* server, Conn* conn, Env* env);
+	~ServerConn();
 
-  static void ServeProc(void* p);
-  Error ProcessOneCall(Conn* receiver);
+	static void ServeProc(void* p);
+	Error ProcessOneCall(Conn* receiver);
 
-  const ::protorpc::Error callMethod(
-    const std::string& method,
-    const ::google::protobuf::Message* request,
-    ::google::protobuf::Message* response);
+	const ::protorpc::Error callMethod(
+		const std::string& method,
+		const ::google::protobuf::Message* request,
+		::google::protobuf::Message* response
+	);
 
-  Server* server_;
-  Conn* conn_;
-  Env* env_;
+	Server* server_;
+	Conn* conn_;
+	Env* env_;
 
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ServerConn);
+private:
+	GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ServerConn);
 };
 
-}  // namespace protorpc
+} // namespace protorpc
 
-#endif  // PROTORPC_SERVER_CONN_H__
+#endif // PROTORPC_SERVER_CONN_H__
 

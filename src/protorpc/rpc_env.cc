@@ -5,18 +5,18 @@
 #include "protorpc/rpc_env.h"
 
 #if (defined(_WIN32) || defined(_WIN64))
-#  include "protorpc/rpc_env_windows.cc"
+#	include "protorpc/rpc_env_windows.cc"
 #else
-#  include "protorpc/rpc_env_posix.cc"
+#	include "protorpc/rpc_env_posix.cc"
 #endif
 
 namespace protorpc {
 
 void Env::Logf(const char* fmt, ...) {
-  va_list ap;
-  va_start(ap, fmt);
-  Logv(fmt, ap);
-  va_end(ap);
+	va_list ap;
+	va_start(ap, fmt);
+	Logv(fmt, ap);
+	va_end(ap);
 }
 
-}  // namespace protorpc
+} // namespace protorpc

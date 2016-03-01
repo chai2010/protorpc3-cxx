@@ -21,35 +21,34 @@ bool InitSocket();
 
 // Stream-oriented network connection.
 class Conn {
- public:
+public:
+	Conn(int fd=0, Env* env=NULL): sock_(fd), env_(env) { InitSocket(); }
+	~Conn() {}
 
-  Conn(int fd=0, Env* env=NULL): sock_(fd), env_(env) { InitSocket(); }
-  ~Conn() {}
+	bool IsValid() const;
+	bool DialTCP(const char* host, int port);
+	bool ListenTCP(int port, int backlog=5);
+	void Close();
 
-  bool IsValid() const;
-  bool DialTCP(const char* host, int port);
-  bool ListenTCP(int port, int backlog=5);
-  void Close();
+	Conn* Accept();
 
-  Conn* Accept();
+	bool Read(void* buf, int len);
+	bool Write(void* buf, int len);
 
-  bool Read(void* buf, int len);
-  bool Write(void* buf, int len);
+	bool ReadUvarint(uint64_t* x);
+	bool WriteUvarint(uint64_t x);
 
-  bool ReadUvarint(uint64_t* x);
-  bool WriteUvarint(uint64_t x);
+	bool ReadProto(::google::protobuf::Message* pb);
+	bool WritePorto(const ::google::protobuf::Message* pb);
 
-  bool ReadProto(::google::protobuf::Message* pb);
-  bool WritePorto(const ::google::protobuf::Message* pb);
+	bool RecvFrame(::std::string* data);
+	bool SendFrame(const ::std::string* data);
 
-  bool RecvFrame(::std::string* data);
-  bool SendFrame(const ::std::string* data);
+private:
+	void logf(const char* fmt, ...);
 
- private:
-  void logf(const char* fmt, ...);
-
-  int sock_;
-  Env* env_;
+	int sock_;
+	Env* env_;
 };
 
 }  // namespace protorpc

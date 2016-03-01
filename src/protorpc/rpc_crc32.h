@@ -15,7 +15,7 @@ namespace protorpc {
 // Return the crc32c of data[0,n-1]
 uint32_t HashCRC32(const char* data, size_t n);
 
-}  // namespace protorpc
+} // namespace protorpc
 
 #endif // PROTORPC_CRC32_H__
 
