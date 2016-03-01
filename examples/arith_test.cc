@@ -44,30 +44,33 @@ struct tArithService: public service::ArithService {
 	}
 };
 
-static std::thread* tArithServer = NULL;
+static std::thread* tArithServer     = NULL;
+static int          tArithServerPort = 2016;
 
-void tStartArithServer(int port) {
+static void tStartArithServerCallback() {
+    protorpc::Server server;
+    server.AddService(new tArithService, true);
+    server.BindAndServe(tArithServerPort);
+}
+
+void tStartArithServer() {
 	if(tArithServer != NULL) {
 		return;
 	}
-	tArithServer = new std::thread([&](int port){
-		protorpc::Server server;
-		server.AddService(new tArithService, true);
-		server.BindAndServe(port);
-	}, port);
+    tArithServer = new std::thread(tStartArithServerCallback);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	return;
 }
 
-INIT(StartArithServer, port2016) {
-	tStartArithServer(2016);
+INIT(protorpc3, StartArithServer) {
+    tStartArithServer();
 }
 EXIT(StopArithServer, exit) {
 	// do some clean work
 }
 
-TEST(protorpc3, ArithService) {
-	protorpc::Client client("127.0.0.1", 2016);
+TEST(protorpc, ArithService) {
+    protorpc::Client client("127.0.0.1", tArithServerPort);
 	service::ArithService::Stub stub(&client);
 
 	service::ArithRequest args;

@@ -28,3 +28,4 @@
 *.app
 
 zz_build*
+CMakeLists.txt.user

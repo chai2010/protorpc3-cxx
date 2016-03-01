@@ -28,30 +28,33 @@ struct tEchoService: public service::EchoService {
 	}
 };
 
-static std::thread* tEchoServer = NULL;
+static std::thread* tEchoServer     = NULL;
+static int          tEchoServerPort = 9527;
 
-void tStartEchoServer(int port) {
+static void tStartEchoServerCallback() {
+    protorpc::Server server;
+    server.AddService(new tEchoService, true);
+    server.BindAndServe(tEchoServerPort);
+}
+
+void tStartEchoServer() {
 	if(tEchoServer != NULL) {
 		return;
 	}
-	tEchoServer = new std::thread([&](int port){
-		protorpc::Server server;
-		server.AddService(new tEchoService, true);
-		server.BindAndServe(port);
-	}, port);
+    tEchoServer = new std::thread(tStartEchoServerCallback);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	return;
 }
 
-INIT(StartEchoServer, port9527) {
-	tStartEchoServer(9527);
+INIT(protorpc, StartEchoServer) {
+    tStartEchoServer();
 }
 EXIT(StopEchoServer, exit) {
 	// do some clean work
 }
 
-TEST(protorpc3, EchoService) {
-	protorpc::Client client("127.0.0.1", 9527);
+TEST(protorpc, EchoService) {
+    protorpc::Client client("127.0.0.1", tEchoServerPort);
 	service::EchoService::Stub echoStub(&client);
 
 	service::EchoRequest echoArgs;
