@@ -62,10 +62,10 @@ void tStartArithServer() {
 	return;
 }
 
-INIT(protorpc3, StartArithServer) {
+INIT(protorpc, StartArithServer) {
     tStartArithServer();
 }
-EXIT(StopArithServer, exit) {
+EXIT(protorpc, StopArithServer) {
 	// do some clean work
 }
 

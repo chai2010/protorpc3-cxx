@@ -49,7 +49,7 @@ void tStartEchoServer() {
 INIT(protorpc, StartEchoServer) {
     tStartEchoServer();
 }
-EXIT(StopEchoServer, exit) {
+EXIT(protorpc, StopEchoServer) {
 	// do some clean work
 }
 
