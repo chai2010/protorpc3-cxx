@@ -15,7 +15,7 @@ Talks: [Go/C++语言Protobuf-RPC简介](http://go-talks.appspot.com/github.com/c
 
 C++ use the same protocol as Go, so we can communication with C++ and Go with `Protobuf-RPC`.
 
-Here is a simple proto file(`${protorpc_root}/examples/service.pb/echo.proto`):
+Here is a simple [examples/service.pb/echo.proto](./examples/service.pb/echo.proto) file:
 
 ```proto
 syntax = "proto3";
@@ -40,7 +40,7 @@ service EchoService {
 
 For C++, must set `cc_generic_services` to `false`.
 
-Then use `protoc` and `protoc-gen-protorpc` plugin to generate "arith.proto.{h|cc}" file(include rpc stub):
+Then use `protoc` and `protoc-gen-protorpc` plugin to generate [echo.protorpc.h](./examples/service.pb/echo.protorpc.h) and [echo.protorpc.cc](./examples/service.pb/echo.protorpc.cc) file:
 
 	protoc3 --protorpc_out=. --plugin=protoc-gen-protorpc=../../bin/protoc-gen-protorpc.exe echo.proto
 
