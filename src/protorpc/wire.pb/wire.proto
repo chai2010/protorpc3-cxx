@@ -7,27 +7,27 @@ syntax = "proto3";
 package protorpc.wire;
 
 //
-// protorpc wire format wrapper
+//	protorpc wire format wrapper
 //
-// 0. Frame Format
-// len : uvarint64
-// data: byte[len]
+//	0. Frame Format
+//	len : uvarint64
+//	data: byte[len]
 //
-// 1. Client Send Request
-// Send RequestHeader: sendFrame(zsock, hdr, len(hdr))
-// Send Request: sendFrame(zsock, body, hdr.snappy_compressed_request_len)
+//	1. Client Send Request
+//	Send RequestHeader: sendFrame(zsock, hdr, len(hdr))
+//	Send Request: sendFrame(zsock, body, hdr.snappy_compressed_request_len)
 //
-// 2. Server Recv Request
-// Recv RequestHeader: recvFrame(zsock, hdr, max_hdr_len, 0)
-// Recv Request: recvFrame(zsock, body, hdr.snappy_compressed_request_len, 0)
+//	2. Server Recv Request
+//	Recv RequestHeader: recvFrame(zsock, hdr, max_hdr_len, 0)
+//	Recv Request: recvFrame(zsock, body, hdr.snappy_compressed_request_len, 0)
 //
-// 3. Server Send Response
-// Send ResponseHeader: sendFrame(zsock, hdr, len(hdr))
-// Send Response: sendFrame(zsock, body, hdr.snappy_compressed_response_len)
+//	3. Server Send Response
+//	Send ResponseHeader: sendFrame(zsock, hdr, len(hdr))
+//	Send Response: sendFrame(zsock, body, hdr.snappy_compressed_response_len)
 //
-// 4. Client Recv Response
-// Recv ResponseHeader: recvFrame(zsock, hdr, max_hdr_len, 0)
-// Recv Response: recvFrame(zsock, body, hdr.snappy_compressed_response_len, 0)
+//	4. Client Recv Response
+//	Recv ResponseHeader: recvFrame(zsock, hdr, max_hdr_len, 0)
+//	Recv Response: recvFrame(zsock, body, hdr.snappy_compressed_response_len, 0)
 //
 
 message RequestHeader {
