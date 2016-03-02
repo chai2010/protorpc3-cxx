@@ -25,7 +25,9 @@ public:
 	~Error(){}
 
 	static Error Nil() { return Error(); }
-	static Error New(const std::string& err) { return Error(err); }
+	static Error New(int code) { return Error(code); }
+	static Error New(const std::string& text) { return Error(text); }
+	static Error New(int code, const std::string& text) { return Error(code, text); }
 
 	bool IsNil()const { return err_code_ == 0 && err_text_.empty(); }
 	const std::string& String()const { return err_text_; }
