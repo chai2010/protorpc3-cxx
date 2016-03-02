@@ -31,14 +31,12 @@ struct tEchoService: public service::EchoService {
 static std::thread* tEchoServer     = NULL;
 static int          tEchoServerPort = 9527;
 
-static void tStartEchoServer() {
-	protorpc::Server server;
-	server.AddService(new tEchoService, true);
-	server.BindAndServe(tEchoServerPort);
-}
-
 INIT(protorpc, StartEchoServer) {
-    tEchoServer = new std::thread(tStartEchoServer);
+    tEchoServer = new std::thread([]{
+    	protorpc::Server server;
+		server.AddService(new tEchoService, true);
+		server.BindAndServe(tEchoServerPort);
+    });
     std::this_thread::sleep_for(std::chrono::seconds(1));
     return;
 }

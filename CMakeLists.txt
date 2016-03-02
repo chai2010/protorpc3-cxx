@@ -8,6 +8,10 @@ if(NOT WIN32)
 	add_definitions(-DHAVE_PTHREAD)
 endif()
 
+if(NOT MSVC)
+	set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+endif()
+
 set(protobuf_source_dir
 	${CMAKE_CURRENT_SOURCE_DIR}/protobuf/protobuf-3.0.0-beta-2
 )

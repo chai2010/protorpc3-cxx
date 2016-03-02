@@ -47,14 +47,12 @@ struct tArithService: public service::ArithService {
 static std::thread* tArithServer     = NULL;
 static int          tArithServerPort = 2016;
 
-static void tStartArithServer() {
-	protorpc::Server server;
-	server.AddService(new tArithService, true);
-	server.BindAndServe(tArithServerPort);
-}
-
 INIT(protorpc, StartArithServer) {
-	tArithServer = new std::thread(tStartArithServer);
+	tArithServer = new std::thread([]{
+		protorpc::Server server;
+		server.AddService(new tArithService, true);
+		server.BindAndServe(tArithServerPort);
+	});
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	return;
 }
