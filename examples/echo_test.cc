@@ -32,13 +32,13 @@ static std::thread* tEchoServer     = NULL;
 static int          tEchoServerPort = 9527;
 
 INIT(protorpc, StartEchoServer) {
-    tEchoServer = new std::thread([]{
-    	protorpc::Server server;
+	tEchoServer = new std::thread([]{
+		protorpc::Server server;
 		server.AddService(new tEchoService, true);
 		server.BindAndServe(tEchoServerPort);
-    });
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    return;
+	});
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	return;
 }
 EXIT(protorpc, StopEchoServer) {
 	// do some clean work
