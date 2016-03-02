@@ -31,7 +31,7 @@ struct tArithService: public service::ArithService {
 		::service::ArithResponse* reply
 	) {
 		if(args->b() == 0) {
-			return ::protorpc::Error::New("divide by zero");
+			return ::protorpc::Error::New(404, "divide by zero");
 		}
 		reply->set_c(args->a() / args->b());
 		return ::protorpc::Error::Nil();
@@ -94,4 +94,5 @@ TEST(protorpc, ArithService) {
 	args.set_b(0);
 	err = stub.div(&args, &reply);
 	ASSERT_STREQ("divide by zero", err.String().c_str());
+	ASSERT_EQ(404, err.Code());
 }

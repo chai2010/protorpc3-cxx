@@ -48,7 +48,7 @@ Error ServerConn::ProcessOneCall(Conn* receiver) {
 	auto method = server_->FindMethodDescriptor(reqHeader.method());
 	if(method == NULL) {
 		wire::SendResponse(receiver, reqHeader.id(),
-			"protorpc.ServerConn.ProcessOneCall: Can't find ServiceMethod: " + reqHeader.method(),
+			0, "protorpc.ServerConn.ProcessOneCall: Can't find ServiceMethod: " + reqHeader.method(),
 			 NULL
 		);
 		return Error::Nil();
@@ -56,7 +56,7 @@ Error ServerConn::ProcessOneCall(Conn* receiver) {
 	auto service = server_->FindService(reqHeader.method());
 	if(service == NULL) {
 		wire::SendResponse(receiver, reqHeader.id(),
-			"protorpc.ServerConn.ProcessOneCall: Can't find ServiceMethod: " + reqHeader.method(),
+			0, "protorpc.ServerConn.ProcessOneCall: Can't find ServiceMethod: " + reqHeader.method(),
 			 NULL
 		);
 		return Error::Nil();
@@ -82,7 +82,7 @@ Error ServerConn::ProcessOneCall(Conn* receiver) {
 	auto rv = service->CallMethod(method, request, response);
 
 	// 6. send response
-	err = wire::SendResponse(receiver, reqHeader.id(), rv.String(), response);
+	err = wire::SendResponse(receiver, reqHeader.id(), rv.Code(), rv.Text(), response);
 	if(!err.IsNil()) {
 		delete request;
 		delete response;

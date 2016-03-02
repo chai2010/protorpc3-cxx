@@ -113,7 +113,7 @@ Error RecvRequestBody(Conn* conn,
 }
 
 Error SendResponse(Conn* conn,
-	uint64_t id, const std::string& error,
+	uint64_t id, int err_code, const std::string& err_text,
 	const ::google::protobuf::Message* response
 ) {
 	// marshal response
@@ -132,7 +132,8 @@ Error SendResponse(Conn* conn,
 	ResponseHeader header;
 
 	header.set_id(id);
-	header.set_error(error);
+	header.set_error_code(err_code);
+	header.set_error(err_text);
 
 	header.set_raw_response_len(pbResponse.size());
 	header.set_snappy_compressed_response_len(compressedPbResponse.size());
