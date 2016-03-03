@@ -58,13 +58,12 @@ void protobuf_AssignDesc_wire_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestHeader, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestHeader, _is_default_instance_));
   ResponseHeader_descriptor_ = file->message_type(1);
-  static const int ResponseHeader_offsets_[6] = {
+  static const int ResponseHeader_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ResponseHeader, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ResponseHeader, error_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ResponseHeader, raw_response_len_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ResponseHeader, snappy_compressed_response_len_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ResponseHeader, checksum_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ResponseHeader, error_code_),
   };
   ResponseHeader_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -114,11 +113,11 @@ void protobuf_AddDesc_wire_2eproto() {
     "\n\nwire.proto\022\rprotorpc.wire\"}\n\rRequestHe"
     "ader\022\n\n\002id\030\001 \001(\004\022\016\n\006method\030\002 \001(\t\022\027\n\017raw_"
     "request_len\030\003 \001(\r\022%\n\035snappy_compressed_r"
-    "equest_len\030\004 \001(\r\022\020\n\010checksum\030\005 \001(\r\"\223\001\n\016R"
-    "esponseHeader\022\n\n\002id\030\001 \001(\004\022\r\n\005error\030\002 \001(\t"
-    "\022\030\n\020raw_response_len\030\003 \001(\r\022&\n\036snappy_com"
-    "pressed_response_len\030\004 \001(\r\022\020\n\010checksum\030\005"
-    " \001(\r\022\022\n\nerror_code\030\006 \001(\005b\006proto3", 312);
+    "equest_len\030\004 \001(\r\022\020\n\010checksum\030\005 \001(\r\"\177\n\016Re"
+    "sponseHeader\022\n\n\002id\030\001 \001(\004\022\r\n\005error\030\002 \001(\t\022"
+    "\030\n\020raw_response_len\030\003 \001(\r\022&\n\036snappy_comp"
+    "ressed_response_len\030\004 \001(\r\022\020\n\010checksum\030\005 "
+    "\001(\rb\006proto3", 291);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "wire.proto", &protobuf_RegisterTypes);
   RequestHeader::default_instance_ = new RequestHeader();
@@ -646,7 +645,6 @@ const int ResponseHeader::kErrorFieldNumber;
 const int ResponseHeader::kRawResponseLenFieldNumber;
 const int ResponseHeader::kSnappyCompressedResponseLenFieldNumber;
 const int ResponseHeader::kChecksumFieldNumber;
-const int ResponseHeader::kErrorCodeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ResponseHeader::ResponseHeader()
@@ -676,7 +674,6 @@ void ResponseHeader::SharedCtor() {
   raw_response_len_ = 0u;
   snappy_compressed_response_len_ = 0u;
   checksum_ = 0u;
-  error_code_ = 0;
 }
 
 ResponseHeader::~ResponseHeader() {
@@ -724,7 +721,7 @@ void ResponseHeader::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(raw_response_len_, error_code_);
+  ZR_(raw_response_len_, checksum_);
   id_ = GOOGLE_ULONGLONG(0);
   error_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
@@ -815,21 +812,6 @@ bool ResponseHeader::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(48)) goto parse_error_code;
-        break;
-      }
-
-      // optional int32 error_code = 6;
-      case 6: {
-        if (tag == 48) {
-         parse_error_code:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &error_code_)));
-
-        } else {
-          goto handle_unusual;
-        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -888,11 +870,6 @@ void ResponseHeader::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->checksum(), output);
   }
 
-  // optional int32 error_code = 6;
-  if (this->error_code() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->error_code(), output);
-  }
-
   // @@protoc_insertion_point(serialize_end:protorpc.wire.ResponseHeader)
 }
 
@@ -928,11 +905,6 @@ void ResponseHeader::SerializeWithCachedSizes(
   // optional uint32 checksum = 5;
   if (this->checksum() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(5, this->checksum(), target);
-  }
-
-  // optional int32 error_code = 6;
-  if (this->error_code() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->error_code(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:protorpc.wire.ResponseHeader)
@@ -977,13 +949,6 @@ int ResponseHeader::ByteSize() const {
         this->checksum());
   }
 
-  // optional int32 error_code = 6;
-  if (this->error_code() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->error_code());
-  }
-
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -1020,9 +985,6 @@ void ResponseHeader::MergeFrom(const ResponseHeader& from) {
   if (from.checksum() != 0) {
     set_checksum(from.checksum());
   }
-  if (from.error_code() != 0) {
-    set_error_code(from.error_code());
-  }
 }
 
 void ResponseHeader::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1052,7 +1014,6 @@ void ResponseHeader::InternalSwap(ResponseHeader* other) {
   std::swap(raw_response_len_, other->raw_response_len_);
   std::swap(snappy_compressed_response_len_, other->snappy_compressed_response_len_);
   std::swap(checksum_, other->checksum_);
-  std::swap(error_code_, other->error_code_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1165,20 +1126,6 @@ void ResponseHeader::clear_checksum() {
   
   checksum_ = value;
   // @@protoc_insertion_point(field_set:protorpc.wire.ResponseHeader.checksum)
-}
-
-// optional int32 error_code = 6;
-void ResponseHeader::clear_error_code() {
-  error_code_ = 0;
-}
- ::google::protobuf::int32 ResponseHeader::error_code() const {
-  // @@protoc_insertion_point(field_get:protorpc.wire.ResponseHeader.error_code)
-  return error_code_;
-}
- void ResponseHeader::set_error_code(::google::protobuf::int32 value) {
-  
-  error_code_ = value;
-  // @@protoc_insertion_point(field_set:protorpc.wire.ResponseHeader.error_code)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

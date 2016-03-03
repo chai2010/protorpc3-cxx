@@ -31,7 +31,7 @@ Error RecvRequestBody(Conn* conn,
 );
 
 Error SendResponse(Conn* conn,
-	uint64_t id, int err_code, const std::string& err_text,
+	uint64_t id, const std::string& error,
 	const ::google::protobuf::Message* response
 );
 Error RecvResponseHeader(Conn* conn,

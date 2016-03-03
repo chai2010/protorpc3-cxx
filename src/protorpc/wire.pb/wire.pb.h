@@ -244,12 +244,6 @@ class ResponseHeader : public ::google::protobuf::Message {
   ::google::protobuf::uint32 checksum() const;
   void set_checksum(::google::protobuf::uint32 value);
 
-  // optional int32 error_code = 6;
-  void clear_error_code();
-  static const int kErrorCodeFieldNumber = 6;
-  ::google::protobuf::int32 error_code() const;
-  void set_error_code(::google::protobuf::int32 value);
-
   // @@protoc_insertion_point(class_scope:protorpc.wire.ResponseHeader)
  private:
 
@@ -260,7 +254,6 @@ class ResponseHeader : public ::google::protobuf::Message {
   ::google::protobuf::uint32 raw_response_len_;
   ::google::protobuf::uint32 snappy_compressed_response_len_;
   ::google::protobuf::uint32 checksum_;
-  ::google::protobuf::int32 error_code_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_wire_2eproto();
   friend void protobuf_AssignDesc_wire_2eproto();
@@ -477,20 +470,6 @@ inline void ResponseHeader::set_checksum(::google::protobuf::uint32 value) {
   
   checksum_ = value;
   // @@protoc_insertion_point(field_set:protorpc.wire.ResponseHeader.checksum)
-}
-
-// optional int32 error_code = 6;
-inline void ResponseHeader::clear_error_code() {
-  error_code_ = 0;
-}
-inline ::google::protobuf::int32 ResponseHeader::error_code() const {
-  // @@protoc_insertion_point(field_get:protorpc.wire.ResponseHeader.error_code)
-  return error_code_;
-}
-inline void ResponseHeader::set_error_code(::google::protobuf::int32 value) {
-  
-  error_code_ = value;
-  // @@protoc_insertion_point(field_set:protorpc.wire.ResponseHeader.error_code)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS

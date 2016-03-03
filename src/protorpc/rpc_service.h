@@ -17,26 +17,18 @@ namespace protorpc {
 // Error
 class LIBPROTOBUF_EXPORT Error {
 public:
-	Error(): err_code_(0) {}
-	Error(int code): err_code_(code) {}
-	Error(const std::string& text): err_code_(0), err_text_(text) {}
-	Error(int code, const std::string& text): err_code_(code), err_text_(text) {}
-	Error(const Error& err): err_code_(err.err_code_), err_text_(err.err_text_) {}
+	Error(){}
+	Error(const std::string& err): err_text_(err) {}
+	Error(const Error& err): err_text_(err.err_text_) {}
 	~Error(){}
 
 	static Error Nil() { return Error(); }
-	static Error New(int code) { return Error(code); }
-	static Error New(const std::string& text) { return Error(text); }
-	static Error New(int code, const std::string& text) { return Error(code, text); }
+	static Error New(const std::string& err) { return Error(err); }
 
-	bool IsNil()const { return err_code_ == 0 && err_text_.empty(); }
+	bool IsNil()const { return err_text_.empty(); }
 	const std::string& String()const { return err_text_; }
-	
-	const int Code()const { return err_code_; }
-	const std::string& Text()const { return err_text_; }
 
 private:
-	int         err_code_;
 	std::string err_text_;
 };
 

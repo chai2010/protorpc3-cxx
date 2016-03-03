@@ -86,8 +86,8 @@ const ::protorpc::Error Client::callMethod(
 	if(respHeader.id() != id) {
 		return Error::New("protorpc.Client.callMethod: unexpected call id.");
 	}
-	if(!respHeader.error().empty() || respHeader.error_code() != 0) {
-		return Error::New(respHeader.error_code(), respHeader.error());
+	if(!respHeader.error().empty()) {
+		return Error::New(respHeader.error());
 	}
 
 	return Error::Nil();
