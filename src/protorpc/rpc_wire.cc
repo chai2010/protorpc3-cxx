@@ -41,7 +41,7 @@ Error SendRequest(Conn* conn,
 	if(!header.SerializeToString(&pbHeader)) {
 		return Error::New("protorpc.SendRequest: SerializeToString failed.");
 	}
-	if(pbHeader.size() > kMaxHeaderLen) {
+	if(pbHeader.size() > ::protorpc::wire::MAX_REQUEST_HEADER_LEN) {
 		return Error::New("protorpc.SendRequest: header larger than max_header_len.");
 	}
 
@@ -66,7 +66,7 @@ Error RecvRequestHeader(Conn* conn,
 	if(!conn->RecvFrame(&pbHeader)) {
 		return Error::New("protorpc.RecvRequestHeader: RecvFrame failed.");
 	}
-	if(pbHeader.size() > kMaxHeaderLen) {
+	if(pbHeader.size() > ::protorpc::wire::MAX_REQUEST_HEADER_LEN) {
 		return Error::New("protorpc.RecvRequestHeader: RecvFrame larger than max_header_len.");
 	}
 
@@ -143,9 +143,7 @@ Error SendResponse(Conn* conn,
 	if(!header.SerializeToString(&pbHeader)) {
 		return Error::New("protorpc.SendResponse: SerializeToString failed.");
 	}
-	if(pbHeader.size() > kMaxHeaderLen) {
-		return Error::New("protorpc.SendResponse: header larger than max_header_len.");
-	}
+
 
 	// send header
 	if(!conn->SendFrame(&pbHeader)) {
@@ -167,9 +165,6 @@ Error RecvResponseHeader(Conn* conn,
 	std::string pbHeader;
 	if(!conn->RecvFrame(&pbHeader)) {
 		return Error::New("protorpc.RecvResponseHeader: RecvFrame failed.");
-	}
-	if(pbHeader.size() > kMaxHeaderLen) {
-		return Error::New("protorpc.RecvResponseHeader: RecvFrame larger than max_header_len.");
 	}
 
 	// Marshal Header

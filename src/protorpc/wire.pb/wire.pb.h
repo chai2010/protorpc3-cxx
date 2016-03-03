@@ -26,6 +26,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
@@ -40,6 +41,27 @@ void protobuf_ShutdownFile_wire_2eproto();
 class RequestHeader;
 class ResponseHeader;
 
+enum Const {
+  ZERO = 0,
+  MAX_REQUEST_HEADER_LEN = 1024,
+  Const_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  Const_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool Const_IsValid(int value);
+const Const Const_MIN = ZERO;
+const Const Const_MAX = MAX_REQUEST_HEADER_LEN;
+const int Const_ARRAYSIZE = Const_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* Const_descriptor();
+inline const ::std::string& Const_Name(Const value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    Const_descriptor(), value);
+}
+inline bool Const_Parse(
+    const ::std::string& name, Const* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Const>(
+    Const_descriptor(), name, value);
+}
 // ===================================================================
 
 class RequestHeader : public ::google::protobuf::Message {
@@ -480,6 +502,20 @@ inline void ResponseHeader::set_checksum(::google::protobuf::uint32 value) {
 
 }  // namespace wire
 }  // namespace protorpc
+
+#ifndef SWIG
+namespace google {
+namespace protobuf {
+
+template <> struct is_proto_enum< ::protorpc::wire::Const> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::protorpc::wire::Const>() {
+  return ::protorpc::wire::Const_descriptor();
+}
+
+}  // namespace protobuf
+}  // namespace google
+#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

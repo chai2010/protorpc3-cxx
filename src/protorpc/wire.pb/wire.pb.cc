@@ -28,6 +28,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ResponseHeader_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ResponseHeader_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* Const_descriptor_ = NULL;
 
 }  // namespace
 
@@ -76,6 +77,7 @@ void protobuf_AssignDesc_wire_2eproto() {
       sizeof(ResponseHeader),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ResponseHeader, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ResponseHeader, _is_default_instance_));
+  Const_descriptor_ = file->enum_type(0);
 }
 
 namespace {
@@ -117,7 +119,8 @@ void protobuf_AddDesc_wire_2eproto() {
     "sponseHeader\022\n\n\002id\030\001 \001(\004\022\r\n\005error\030\002 \001(\t\022"
     "\030\n\020raw_response_len\030\003 \001(\r\022&\n\036snappy_comp"
     "ressed_response_len\030\004 \001(\r\022\020\n\010checksum\030\005 "
-    "\001(\rb\006proto3", 291);
+    "\001(\r*.\n\005Const\022\010\n\004ZERO\020\000\022\033\n\026MAX_REQUEST_HE"
+    "ADER_LEN\020\200\010b\006proto3", 339);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "wire.proto", &protobuf_RegisterTypes);
   RequestHeader::default_instance_ = new RequestHeader();
@@ -133,6 +136,20 @@ struct StaticDescriptorInitializer_wire_2eproto {
     protobuf_AddDesc_wire_2eproto();
   }
 } static_descriptor_initializer_wire_2eproto_;
+const ::google::protobuf::EnumDescriptor* Const_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Const_descriptor_;
+}
+bool Const_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1024:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 namespace {
 

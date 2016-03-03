@@ -16,8 +16,6 @@
 namespace protorpc {
 namespace wire {
 
-static const int kMaxHeaderLen = 1024;
-
 Error SendRequest(Conn* conn,
 	uint64_t id, const std::string& serviceMethod,
 	const ::google::protobuf::Message* request
