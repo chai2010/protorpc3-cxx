@@ -15,26 +15,24 @@ if(NOT MSVC)
 endif()
 
 # -----------------------------------------------------------------------------
+# 3rdparty
 
-set(CC_TEST_ROOT ${PROJECT_SOURCE_DIR}/3rdparty/cc-mini-test)
-include_directories(AFTER ${CC_TEST_ROOT})
-add_subdirectory(${CC_TEST_ROOT})
+# Protobuf
+set(PROTOBUF_ROOT ${PROJECT_SOURCE_DIR}/3rdparty/protobuf)
+include_directories(AFTER ${PROTOBUF_ROOT}/protobuf-3.0.0-beta-2/src)
+add_subdirectory(${PROTOBUF_ROOT})
+
+# cc-mini-test
+set(CC_MINI_TEST_ROOT ${PROJECT_SOURCE_DIR}/3rdparty/cc-mini-test)
+include_directories(AFTER ${CC_MINI_TEST_ROOT})
+add_subdirectory(${CC_MINI_TEST_ROOT})
 
 # -----------------------------------------------------------------------------
+# protorpc
 
-set(protobuf_source_dir
-	${PROJECT_SOURCE_DIR}/3rdparty/protobuf-3.0.0-beta-2
-)
 include_directories(AFTER
-	${protobuf_source_dir}/src
 	./src
-
-	./test
 )
-
-include(libprotobuf-lite.cmake)
-include(libprotobuf.cmake)
-include(libprotoc.cmake)
 
 set(PROTORPC_HDR
 	./src/protorpc/wire.pb/wire.pb.h
@@ -67,38 +65,14 @@ set(PROTORPC_SRC
 	./src/protorpc/snappy/protorpc-snappy-stubs-internal.cc
 )
 
-add_library(libprotobuf_lite
-	${libprotobuf_lite_files}
-)
-add_library(libprotobuf
-	${libprotobuf_lite_files}
-	${libprotobuf_files}
-)
-add_library(libprotoc
-	${libprotobuf_lite_files}
-	${libprotobuf_files}
-	${libprotoc_files}
-)
 add_library(libprotorpc
 	${PROTORPC_SRC}
 	${PROTORPC_HDR}
-
-	${libprotobuf_lite_files}
-	${libprotobuf_files}
 )
-install(TARGETS libprotobuf_lite libprotobuf libprotoc libprotorpc
-	RUNTIME DESTINATION ${PROJECT_SOURCE_DIR}/bin
-	LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/bin
-	ARCHIVE DESTINATION ${PROJECT_SOURCE_DIR}/lib
+target_link_libraries(libprotorpc
+	libprotobuf
 )
-
-add_executable(protoc3
-	${protobuf_source_dir}/src/google/protobuf/compiler/main.cc
-)
-target_link_libraries(protoc3
-	libprotoc
-)
-install(TARGETS protoc3
+install(TARGETS libprotorpc
 	RUNTIME DESTINATION ${PROJECT_SOURCE_DIR}/bin
 	LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/bin
 	ARCHIVE DESTINATION ${PROJECT_SOURCE_DIR}/lib
@@ -121,6 +95,8 @@ install(TARGETS protoc-gen-protorpc
 	LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/bin
 	ARCHIVE DESTINATION ${PROJECT_SOURCE_DIR}/lib
 )
+
+# -----------------------------------------------------------------------------
 
 add_executable(protorpc-test
 	./examples/arith_test.cc
@@ -184,3 +160,6 @@ install(TARGETS protorpc-client
 	LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/bin
 	ARCHIVE DESTINATION ${PROJECT_SOURCE_DIR}/lib
 )
+
+# -----------------------------------------------------------------------------
+
