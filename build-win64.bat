@@ -9,10 +9,17 @@ cd %~dp0
 :: ----------------------------------------------------------------------------
 :: Setup MSVC
 
-:: VS2010
-if not "x%VS100COMNTOOLS%" == "x" (
-	echo Setup VS2010 Win64 ...
-	call "%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
+:: VS2015
+if not "x%VS140COMNTOOLS%" == "x" (
+	echo Setup VS2015 Win64 ...
+	call "%VS140COMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
+	goto build
+)
+
+:: VS2013
+if not "x%VS120COMNTOOLS%" == "x" (
+	echo Setup VS2013 Win64 ...
+	call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
 	goto build
 )
 
@@ -23,10 +30,10 @@ if not "x%VS110COMNTOOLS%" == "x" (
 	goto build
 )
 
-:: VS2013
-if not "x%VS120COMNTOOLS%" == "x" (
-	echo Setup VS2013 Win64 ...
-	call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
+:: VS2010
+if not "x%VS100COMNTOOLS%" == "x" (
+	echo Setup VS2010 Win64 ...
+	call "%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
 	goto build
 )
 
