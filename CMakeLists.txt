@@ -4,6 +4,8 @@
 
 project(PROTORPC)
 
+# -----------------------------------------------------------------------------
+
 if(NOT WIN32)
 	add_definitions(-DHAVE_PTHREAD)
 endif()
@@ -11,6 +13,14 @@ endif()
 if(NOT MSVC)
 	set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 endif()
+
+# -----------------------------------------------------------------------------
+
+set(CC_TEST_ROOT ${PROJECT_SOURCE_DIR}/3rdparty/cc-mini-test)
+include_directories(AFTER ${CC_TEST_ROOT})
+add_subdirectory(${CC_TEST_ROOT})
+
+# -----------------------------------------------------------------------------
 
 set(protobuf_source_dir
 	${PROJECT_SOURCE_DIR}/3rdparty/protobuf-3.0.0-beta-2
@@ -124,12 +134,10 @@ add_executable(protorpc-test
 	./examples/service.pb/echo.pb.cc
 	./examples/service.pb/echo.protorpc.h
 	./examples/service.pb/echo.protorpc.cc
-
-	./test/test.h
-	./test/test.cc
 )
 target_link_libraries(protorpc-test
 	libprotorpc
+	cc-mini-test
 )
 install(TARGETS protorpc-test
 	RUNTIME DESTINATION ${PROJECT_SOURCE_DIR}/bin
